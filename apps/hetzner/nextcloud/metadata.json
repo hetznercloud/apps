@@ -1,0 +1,31 @@
+{
+  "description_de": "Nextcloud ist eine selbst gehostete Produktivit\u00e4tsplattform, mit der Sie die Kontrolle behalten. Nextcloud-Produkte wurden unter Ber\u00fccksichtigung der Compliance entwickelt und bieten umfassende Funktionen f\u00fcr die Durchsetzung von Datenrichtlinien, Verschl\u00fcsselung, Benutzerverwaltung und Auditierung. Nextcloud hat es sich zur Aufgabe gemacht, Technologien bereitzustellen, die perfekt zu Ihrem Unternehmen passen.",
+  "description_en": "Nextcloud is a  self-hosted productivity platform that keeps you in control. Nextcloud products are designed with compliance in mind, providing extensive data policy enforcement, encryption, user management and auditing capabilities. Nextcloud is committed to provide technology that is a perfect fit for your organization.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/nextcloud",
+  "name": "Nextcloud",
+  "os_id": 15512617,
+  "packages": [
+    {
+      "license": "AGPLv3",
+      "name": "Nextcloud"
+    },
+    {
+      "license": "GPL",
+      "name": "MySQL"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Apache"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Certbot"
+    },
+    {
+      "license": "GPL (Expat)",
+      "name": "PHP"
+    }
+  ],
+  "recommended_server_type": 23,
+  "version": "21.0.0"
+}

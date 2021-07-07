@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon-16x16.png"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Hetzner Cloud</title>
+  </head>
+  <body>
+    <header class="hc-top-bar">
+      <div class="hc-top-bar__container hc-top-bar__container--left">
+        <div class="hc-logo__link">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 172 21"
+            class="hc-logo__icon ng-star-inserted"
+          >
+            <title>Hetzner Logo</title>
+            <g class="logo-text">
+              <path
+                d="M164.3,13.3c1.6-0.3,3-0.9,4.3-1.9l0,0c1.2-1.2,1.7-2.8,1.6-4.5c0-1.4-0.4-2.7-1.1-3.8c-1-1.8-2.9-2.9-5-3
+                h-1L160.6,0h-10.9c-0.7,0-0.9,0.3-0.9,0.9V20c0,0.7,0.3,0.9,0.9,0.9h2.8c0.7,0,0.9-0.3,0.9-0.9v-6.3h3.5c0.8,0,1.5,0.3,2,0.9
+                l5.5,5.5c0.5,0.5,1.2,0.8,1.9,0.9h4.2c0.7,0,0.8-0.4,0.4-0.9L164.3,13.3z M163.6,9.3h-10.1V4.5h10.1c1,0.1,1.8,1,1.8,2v0.7
+                C165.3,8.3,164.6,9.1,163.6,9.3L163.6,9.3z"
+              ></path>
+              <path
+                d="M144.4,16.5h-15.6v-3.9h12.4c0.7,0,0.9-0.3,0.9-0.9V9.4c0-0.7-0.3-0.9-0.9-0.9h-12.5V4.5h15.6
+                c0.7,0,0.9-0.3,0.9-0.9V0.9c0-0.7-0.3-0.9-0.9-0.9h-19.5c-0.7,0-0.9,0.3-0.9,0.9V20c0,0.7,0.3,0.9,0.9,0.9h19.5
+                c0.7,0,0.9-0.3,0.9-0.9v-2.6C145.3,16.8,145,16.5,144.4,16.5z"
+              ></path>
+              <path
+                d="M120.6,6.9c0-1.3-0.4-2.6-1.1-3.8c-1.1-1.8-3-3-5.1-3.1h-14.3c-0.7,0-0.9,0.3-0.9,0.9V20
+                c0,0.7,0.3,0.9,0.9,0.9h3.1c0.7,0,0.9-0.3,0.9-0.9V4.5h8.3c1.8,0,3.5,1.2,3.5,2.9V20c0,0.7,0.3,0.9,0.9,0.9h2.8
+                c0.7,0,0.9-0.3,0.9-0.9L120.6,6.9z"
+              ></path>
+              <path
+                d="M94.8,16.4H81.4L94.9,4.6c0.5-0.4,0.9-1.1,0.9-1.7V0.9c0-0.7-0.3-0.9-0.9-0.9H75.3c-0.7,0-0.9,0.3-0.9,0.9
+                v2.6c0,0.7,0.3,0.9,0.9,0.9h12.5L75.3,16.3c-0.5,0.4-0.9,1.1-0.9,1.7v2c0,0.7,0.3,0.9,0.9,0.9h19.5c0.7,0,0.9-0.3,0.9-0.9v-2.7
+                C95.8,16.7,95.5,16.4,94.8,16.4z"
+              ></path>
+              <path
+                d="M70,0H50.5c-0.7,0-0.9,0.3-0.9,0.9v2.6c0,0.7,0.3,0.9,0.9,0.9h7.3V20c0,0.7,0.3,0.9,0.9,0.9h3.1
+                c0.7,0,0.9-0.3,0.9-0.9V4.5H70c0.7,0,0.9-0.3,0.9-0.9V0.9C71,0.3,70.7,0,70,0z"
+              ></path>
+              <path
+                d="M45.2,16.5H29.6v-3.9h12.4c0.7,0,0.9-0.3,0.9-0.9V9.4c0-0.7-0.3-0.9-0.9-0.9H29.6V4.5h15.6
+                c0.7,0,0.9-0.3,0.9-0.9V0.9c0-0.7-0.3-0.9-0.9-0.9H25.8c-0.7,0-0.9,0.3-0.9,0.9V20c0,0.7,0.3,0.9,0.9,0.9h19.4
+                c0.7,0,0.9-0.3,0.9-0.9v-2.6C46.2,16.8,45.9,16.5,45.2,16.5z"
+              ></path>
+              <path
+                d="M20.4,0h-2.9c-0.7,0-0.9,0.3-0.9,0.9v7.4H4.8V0.9C4.8,0.3,4.6,0,3.9,0h-3C0.3,0,0,0.3,0,0.9v19.1
+                C0,20.7,0.3,21,0.9,21h3c0.7,0,0.9-0.3,0.9-0.9v-7.6h11.7v7.6c0,0.7,0.3,0.9,0.9,0.9h2.9c0.7,0,0.9-0.3,0.9-0.9V0.9
+                C21.3,0.3,21.1,0,20.4,0z"
+              ></path>
+            </g>
+          </svg>
+          <span class="hc-logo__cp-name ng-star-inserted">Cloud</span
+          ><!----><!---->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 37 34"
+            class="hc-logo__responsive"
+          >
+            <path
+              d="M31.1,0 C30,0 29.2,0.9 29.2,1.9 L29.2,13 L7.8,13 L7.8,1.9 C7.8,0.9 6.901,0 5.9,0 L2,0 C0.9,0 -0.001,0.9 -0.001,1.9 L-0.001,31.9 C-0.001,33 0.9,33.9 2,33.9 L5.9,33.9 C7,33.9 7.8,33 7.8,32 L7.8,20.7 L29.2,20.7 L29.2,32 C29.2,33.1 30.099,33.9 31.1,33.9 L35,33.9 C36.099,33.9 36.9,33 36.9,32 L36.9,2 C36.9,0.9 36.099,0 35,0 L31.1,0 Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <!---->
+    </header>
+
+    <main class="content">
+      <div class="container">
+        <div class="static-page__content">
+          <div class="static-page__icon-container">
+            <img class="static-page__app-logo" src="./assets/logo_full.svg" />
+          </div>
+          <div class="static-page__headline">
+            Your Wordpress installation is almost done.
+          </div>
+          <div class="static-page__text">
+            Please log into your server with SSH to configure the Wordpress
+            installation. If you want to use Let's Encrypt, please go ahead and
+            make sure the Domain exists before continuing.
+          </div>
+          <a
+            href="https://docs.hetzner.com/cloud/apps/list/wordpress"
+            class="static-page__button"
+            >Learn more</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <footer class="hc-legal-footer">
+      <div data-test="legal-footer">
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          class="hc-legal-footer__link"
+          href="https://www.hetzner.com/rechtliches/impressum"
+          >Legal Notice</a
+        >
+        <span class="hc-legal-footer__divider">·</span>
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          class="hc-legal-footer__link"
+          href="https://www.hetzner.com/rechtliches/datenschutz/"
+          >Data Privacy</a
+        >
+        <span class="hc-legal-footer__divider">·</span>
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          class="hc-legal-footer__link"
+          href="https://www.hetzner.com/rechtliches/system-policies/"
+          >System Policies</a
+        >
+        <span class="hc-legal-footer__divider">·</span>
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          class="hc-legal-footer__link"
+          href="https://www.hetzner.com/rechtliches/agb/"
+          >Terms and Conditions</a
+        >
+      </div>
+      <!---->
+    </footer>
+  </body>
+</html>

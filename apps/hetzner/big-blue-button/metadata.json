@@ -1,0 +1,63 @@
+{
+  "description_de": "BigBlueButton wurde von Lehrern f\u00fcr Lehrer entwickelt und ist die einzige Plattform, die von Grund auf als virtuelles Klassenzimmer aufgebaut wurde. Es stehen 65 Sprachen zur Verf\u00fcgung und Lehrer aus der ganzen Welt haben zu dem Webkonferenzsystem beigetragen.",
+  "description_en": "BigBlueButton is a global teaching platform that can be used for web conferences. It was developed in a school and is the only virtual classroom built from the ground up, just for teachers. It\u2019s available in 65 languages and teachers all over the world have contributed to its design.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/big-blue-button",
+  "name": "Big Blue Button",
+  "os_id": 168855,
+  "packages": [
+    {
+      "license": "LGPL",
+      "name": "BigBlueButton"
+    },
+    {
+      "license": "GPL (BSD)",
+      "name": "Nginx"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Certbot"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Docker CE"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Containerd"
+    },
+    {
+      "license": "GPL",
+      "name": "Haveged"
+    },
+    {
+      "license": "GPL",
+      "name": "openJDK8"
+    },
+    {
+      "license": "GPL",
+      "name": "MongoDB"
+    },
+    {
+      "license": "GPL (Expat)",
+      "name": "NodeJS"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Kurento Media Server"
+    },
+    {
+      "license": "GPL",
+      "name": "FFmpeg"
+    },
+    {
+      "license": "LGPL (MPL-2.0)",
+      "name": "Libreoffice"
+    },
+    {
+      "license": "PostgreSQL (BSD)",
+      "name": "PostgreSQL"
+    }
+  ],
+  "recommended_server_type": 25,
+  "version": "2.3.0"
+}

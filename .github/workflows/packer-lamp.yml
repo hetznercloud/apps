@@ -1,0 +1,47 @@
+---
+name: hetzner/lamp
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "apps/hetzner/lamp/**"
+      - ".github/workflows/packer-lamp.yml"
+      - "apps/shared/**"
+
+jobs:
+  packer:
+    runs-on: [self-hosted, Linux, X64]
+    name: packer
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: apps/hetzner/lamp/
+
+      # build artifact
+      - name: Build Lamp
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: apps/hetzner/lamp/
+        env:
+          HCLOUD_API_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}
+
+  cleanup:
+    runs-on: [self-hosted, Linux, X64]
+    needs: packer
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./.github/cleanup.sh lamp
+        env:
+          HCLOUD_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}

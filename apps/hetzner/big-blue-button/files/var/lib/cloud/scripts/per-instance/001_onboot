@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Generate passwords
+greenlight_postgres_pass=$(openssl rand -hex 24)
+
+# Save the passwords
+cat > /root/.hcloud_password <<EOM
+greenlight_postgres_pass="${greenlight_postgres_pass}"
+EOM
+
+# Don't enable BigBlueButton until first login (set hetzner static page)
+rm /etc/nginx/sites-enabled/bigbluebutton
+ln -s /etc/nginx/sites-available/hetzner /etc/nginx/sites-enabled/hetzner
+systemctl restart nginx
+
+cat >> /root/.bashrc <<EOM
+chmod +x /opt/hcloud/bbb_setup.sh
+/opt/hcloud/bbb_setup.sh
+EOM
+
+# Populate BBB Config with IP Address.
+host_ip_address=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
+
+sed -i -E "/proxy_pass/{s/[0-9]{1,3}(\.[0-9]{1,3}){3}/$host_ip_address/g;T;:a;n;ba}" /etc/bigbluebutton/nginx/sip.nginx
+sed -i -E "/local_ip_v4/{s/[0-9]{1,3}(\.[0-9]{1,3}){3}/$host_ip_address/g;T;:a;n;ba}" /opt/freeswitch/conf/vars.xml
+yq w -i /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml freeswitch.sip_ip "$host_ip_address"
+yq w -i /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml freeswitch.ip "$host_ip_address"
+yq w -i /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml localIpAddress "$host_ip_address"
+yq w -i /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml kurento[0].ip "$host_ip_address"
+yq w -i /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml kurento[0].url "ws://127.0.0.1:8888/kurento"
+
+# Set up SSL
+yq w -i /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml public.media.sipjsHackViaWs true
+sed -i "s/https/http/g"  /etc/bigbluebutton/nginx/sip.nginx
+sed -i "s/7443/5066/g"  /etc/bigbluebutton/nginx/sip.nginx
+yq w -i /usr/local/bigbluebutton/core/scripts/bigbluebutton.yml playback_protocol https
+xmlstarlet edit --inplace --update '//param[@name="ws-binding"]/@value' --value "$host_ip_address:5066" /opt/freeswitch/conf/sip_profiles/external.xml
+
+# Set permissions
+chown bigbluebutton:bigbluebutton /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml
+chmod 644 /usr/local/bigbluebutton/core/scripts/bigbluebutton.yml

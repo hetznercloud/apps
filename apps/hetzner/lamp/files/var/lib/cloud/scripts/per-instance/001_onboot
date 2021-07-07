@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Generate passwords
+mysql_root_pass=$(openssl rand -hex 24)
+debian_sys_maint_mysql_pass=$(openssl rand -hex 24)
+
+cat >> /root/.bashrc <<EOM
+chmod +x /opt/hcloud/lamp_setup.sh
+/opt/hcloud/lamp_setup.sh
+EOM
+
+# Save the passwords
+cat > /root/.hcloud_password <<EOM
+mysql_root_pass="${mysql_root_pass}"
+EOM
+
+
+mysqladmin -u root -h localhost password ${mysql_root_pass}
+
+mysql -uroot -p${mysql_root_pass} \
+      -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '${mysql_root_pass}'"
+
+mysql -uroot -p${mysql_root_pass} \
+      -e "FLUSH PRIVILEGES"
+
+MYSQL_ROOT_PASSWORD=${mysql_root_pass}
+
+SECURE_MYSQL=$(expect -c "
+set timeout 10
+spawn mysql_secure_installation
+expect \"Enter current password for root (enter for none):\"
+send \"$MYSQL_ROOT_PASSWORD\r\"
+expect \"Change the root password?\"
+send \"n\r\"
+expect \"Remove anonymous users?\"
+send \"y\r\"
+expect \"Disallow root login remotely?\"
+send \"y\r\"
+expect \"Remove test database and access to it?\"
+send \"y\r\"
+expect \"Reload privilege tables now?\"
+send \"y\r\"
+expect eof
+")
+
+cat > /etc/mysql/debian.cnf <<EOM
+# Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = ${debian_sys_maint_mysql_pass}
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = localhost
+user     = debian-sys-maint
+password = ${debian_sys_maint_mysql_pass}
+socket   = /var/run/mysqld/mysqld.sock
+EOM

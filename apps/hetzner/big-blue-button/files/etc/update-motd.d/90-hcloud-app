@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cat <<EOF
+
+Welcome to the Hetzner Cloud App.
+
+Checkout the documentation at https://docs.hetzner.com
+
+Generated passwords can be found at /root/.hcloud_password
+
+To delete this message of the day: rm -rf $(readlink -f ${0})
+
+EOF

@@ -1,0 +1,47 @@
+---
+name: hetzner/gitlab
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "apps/hetzner/gitlab/**"
+      - ".github/workflows/packer-gitlab.yml"
+      - "apps/shared/**"
+
+jobs:
+  packer:
+    runs-on: [self-hosted, Linux, X64]
+    name: packer
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: apps/hetzner/gitlab/
+
+      # build artifact
+      - name: Build Gitlab
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: apps/hetzner/gitlab/
+        env:
+          HCLOUD_API_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}
+
+  cleanup:
+    runs-on: [self-hosted, Linux, X64]
+    needs: packer
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./.github/cleanup.sh gitlab
+        env:
+          HCLOUD_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}

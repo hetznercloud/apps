@@ -1,0 +1,31 @@
+name: languagetool
+on: [pull_request]
+jobs:
+  spellcheck-de:
+    name: spellcheck-de
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-languagetool@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: debug
+          disabled_categories: ""
+          disabled_rules: ""
+          language: de-DE
+          patterns: "**/*.de.md"
+  spellcheck-en:
+    name: spellcheck-en
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-languagetool@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: debug
+          disabled_categories: ""
+          disabled_rules: ""
+          language: en-US
+          patterns: "**/*.md !**/*.de.md"

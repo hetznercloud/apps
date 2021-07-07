@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cat >> /root/.bashrc <<EOM
+chmod +x /opt/hcloud/jitsi_setup.sh
+/opt/hcloud/jitsi_setup.sh
+EOM

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Generate passwords
+gitlab_initial_pass=$(openssl rand -hex 24)
+
+# Don't enable Gitlab until first login
+cat >> /root/.bashrc <<EOM
+chmod +x /opt/hcloud/gitlab_setup.sh
+/opt/hcloud/gitlab_setup.sh
+EOM
+
+# Save the passwords
+cat > /root/.hcloud_password <<EOM
+gitlab_initial_pass="${gitlab_initial_pass}"
+EOM
+
+
+sed -i "s/\$initial_password/$gitlab_initial_pass/g"  /etc/gitlab/gitlab.rb
