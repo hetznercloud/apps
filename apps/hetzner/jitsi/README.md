@@ -5,7 +5,7 @@
 This app contains a ready to use Jitsi installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
-[Jitsi](https://jitsi.org/) is a set of open-source projects that allows you to easily build and deploy secure video conferencing solutions. At the heart of Jitsi are Jitsi Videobridge and Jitsi Meet, which let you have conferences on the internet.
+[Jitsi](https://jitsi.org/) is a set of open source projects that allows you to easily build and deploy secure video conferencing solutions. At the heart of Jitsi are Jitsi Videobridge and Jitsi Meet, which let you have conferences on the internet.
 
 ## Getting started
 
