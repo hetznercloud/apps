@@ -4,7 +4,7 @@ name: hetzner/lamp
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "apps/hetzner/lamp/**"
       - ".github/workflows/packer-lamp.yml"
