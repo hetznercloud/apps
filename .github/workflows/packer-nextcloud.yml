@@ -4,7 +4,7 @@ name: hetzner/nextcloud
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "apps/hetzner/nextcloud/**"
       - ".github/workflows/packer-nextcloud.yml"

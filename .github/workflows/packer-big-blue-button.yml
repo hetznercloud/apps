@@ -4,7 +4,7 @@ name: hetzner/big-blue-button
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "apps/hetzner/big-blue-button/**"
       - ".github/workflows/packer-big-blue-button.yml"

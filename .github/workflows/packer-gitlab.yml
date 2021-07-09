@@ -4,7 +4,7 @@ name: hetzner/gitlab
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "apps/hetzner/gitlab/**"
       - ".github/workflows/packer-gitlab.yml"
