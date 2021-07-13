@@ -7,11 +7,8 @@ Our apps provide you easy access to often used software such as Docker, Wordpres
 
 ## Contributions
 
-At the moment we do not support contributions via Pull Request or other requests via Issues.
-
-We want to improve the existing apps by focusing on bug reports.
-
-If you see anything that does not work, feel free to open up one and let us know. Although it is possible to write us about other topics via the issues, we will not prioritize anything other than bugs and might even close issues we cannot tackle in a foreseeable future.
+We welcome your suggestions and comments about improving our apps and do our best to address every feedback, bug report and small fixes.
+Please note, however, that **we cannot accept large refactors or suggestions for new apps as of now**. But we will let you know when this changes.
 
 ## How it works
 
