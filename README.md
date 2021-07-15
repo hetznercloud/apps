@@ -12,7 +12,7 @@ Please note, however, that **we cannot accept large refactors or suggestions for
 
 ## How it works
 
-We use a combination of [Packer](https://www.packer.io/) and [cloud-init](https://cloud-init.io/) to build a static image with all the required software in our cloud, create a snapshot, store it and if this image later will be deployed to your cloud instance, we will generate the dynamic information like passwords on demand directly in your server.
+We use a combination of [Packer](https://www.packer.io/) and [cloud-init](https://cloud-init.io/) to build a static image with all the required software in our cloud, create a snapshot, store it and if this image later will be deployed to your cloud instance, we will generate dynamic information like passwords on demand directly on your server.
 
 This results in as much transparency to the actual content as possible and allows you to reproduce what ends up in the app you deploy to your server by looking at the files in this repository.
 
@@ -23,7 +23,7 @@ Each app will live in its own folder and have a dedicated `.github/workflows` fi
 
 ### Readme
 
-Each app will have both a `README.md` and a `README.de.md` file which will give you a short oversight about the implementation of the software in our apps.
+Each app will have both a `README.md` and a `README.de.md` file which will give you a short overview about the implementation of the software in our apps.
 This will include what we have installed in this image, where you can find passwords if we have generated any and what you might need to configure by yourself.
 
 These files will also be used to provide the documentation on https://docs.hetzner.com.
