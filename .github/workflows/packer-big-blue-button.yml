@@ -2,6 +2,7 @@
 name: hetzner/big-blue-button
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
