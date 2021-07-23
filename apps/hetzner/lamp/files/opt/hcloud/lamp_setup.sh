@@ -39,7 +39,7 @@ echo -en "\n"
 echo "Setting up Crontab for Let's Encrypt."
 crontab -l > certbot
 echo "30 2 * * 1 /usr/bin/certbot renew >> /var/log/le-renew.log" >> certbot
-echo "35 2 * * 1 systemctl reload nginx" >> certbot
+echo "35 2 * * 1 systemctl reload apache2" >> certbot
 crontab certbot
 rm certbot
 
