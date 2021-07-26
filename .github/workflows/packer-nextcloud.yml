@@ -2,6 +2,7 @@
 name: hetzner/nextcloud
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main

@@ -2,6 +2,7 @@
 name: hetzner/docker-ce
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
