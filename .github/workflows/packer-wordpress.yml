@@ -34,7 +34,7 @@ jobs:
           arguments: "-color=false -on-error=abort"
           target: apps/hetzner/wordpress/
         env:
-          HCLOUD_API_TOKEN: ${{ github.ref == 'refs/heads/main' ? secrets.HCLOUD_API_TOKEN : secrets.HCLOUD_API_TOKEN_STAGING }}
+          HCLOUD_API_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
 
   cleanup:
     runs-on: [self-hosted, Linux, X64]
