@@ -115,14 +115,14 @@ echo -en "\n\n"
 
 # set redirects for www domain
 if [[ $domain_is_www = true ]] && [[ $domain_use_https = true ]]; then
-    cat << EOF >> /var/www/html/.htaccess
+    cat << EOF >> /var/www/$domain/.htaccess
   RewriteEngine on
   RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} !^www\. [NC]
   RewriteRule (.*) https://$domain%{REQUEST_URI} [R=301,L]
 EOF
 elif [[ $domain_is_www = true ]] && [[ $domain_use_https = false ]]; then
-    cat << EOF >> /var/www/html/.htaccess
+    cat << EOF >> /var/www/$domain/.htaccess
   RewriteEngine on
   RewriteCond %{HTTP_HOST} !^www\. [NC]
   RewriteRule (.*) http://$domain%{REQUEST_URI} [R=301,L]
