@@ -4,8 +4,6 @@ name: hetzner/jitsi
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
     paths:
       - "apps/hetzner/jitsi/**"
       - ".github/workflows/packer-jitsi.yml"
@@ -36,7 +34,7 @@ jobs:
           arguments: "-color=false -on-error=abort"
           target: apps/hetzner/jitsi/
         env:
-          HCLOUD_API_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}
+          HCLOUD_API_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
 
   cleanup:
     runs-on: [self-hosted, Linux, X64]
@@ -45,4 +43,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./.github/cleanup.sh jitsi
         env:
-          HCLOUD_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}
+          HCLOUD_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
