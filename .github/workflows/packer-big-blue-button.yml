@@ -4,8 +4,6 @@ name: hetzner/big-blue-button
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
     paths:
       - "apps/hetzner/big-blue-button/**"
       - ".github/workflows/packer-big-blue-button.yml"
@@ -36,7 +34,7 @@ jobs:
           arguments: "-color=false -on-error=abort"
           target: apps/hetzner/big-blue-button/
         env:
-          HCLOUD_API_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}
+          HCLOUD_API_TOKEN: ${{ github.ref == 'refs/heads/main' ? secrets.HCLOUD_API_TOKEN : secrets.HCLOUD_API_TOKEN_STAGING }}
   cleanup:
     runs-on: [self-hosted, Linux, X64]
     needs: packer
