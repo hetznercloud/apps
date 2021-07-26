@@ -43,4 +43,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./.github/cleanup.sh docker-ce
         env:
-          HCLOUD_TOKEN: ${{ secrets.HCLOUD_API_TOKEN }}
+          HCLOUD_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
