@@ -114,7 +114,7 @@ echo -en "\n\n"
   : ${le:="Y"}
     case $le in
         [Yy][eE][sS]|[yY] )
-          if [[ $domain_is_www = true ]]; then 
+          if [[ $domain_is_www = true ]]; then
             certbot --noninteractive --apache -d $domain --agree-tos --email $email --no-redirect
           elif [[ $domain_is_www = false ]]; then
             certbot --noninteractive --apache -d $domain --agree-tos --email $email --redirect
