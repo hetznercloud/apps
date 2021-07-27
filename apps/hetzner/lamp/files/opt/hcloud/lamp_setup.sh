@@ -75,6 +75,9 @@ echo "Hello World";
 ?>
 EOF
 
+# set domain_is_www variable
+if [[ $domain == "www."* ]]; then domain_is_www=true; else domain_is_www=false; fi
+
 sed -i "s/\$domain/$domain/g"  /etc/apache2/sites-enabled/000-default.conf
 sed -i "s/html/$domain/g"  /etc/apache2/sites-enabled/000-default.conf
 
@@ -88,6 +91,7 @@ systemctl restart apache2
 a2enconf block-xmlrpc
 a2enmod dir
 a2enmod rewrite
+a2enmod ssl
 } &> /dev/null
 
 
@@ -96,10 +100,35 @@ echo -en "\n\n"
   read -p "Note that the Domain needs to exist. [Y/n]: " le
   : ${le:="Y"}
     case $le in
-        [Yy][eE][sS]|[yY] ) certbot --noninteractive --apache -d $domain --agree-tos --email $email --redirect; certbot_crontab;;
-        [nN][oO]|[nN] ) echo -en "\nSkipping Let's Encrypt.\n";;
+        [Yy][eE][sS]|[yY] )
+          if [[ $domain_is_www = true ]]; then
+            certbot --noninteractive --apache -d $domain --agree-tos --email $email --no-redirect
+          elif [[ $domain_is_www = false ]]; then
+            certbot --noninteractive --apache -d $domain --agree-tos --email $email --redirect
+          fi
+          domain_use_https=true
+          certbot_crontab;;
+        [nN][oO]|[nN] ) echo -en "\nSkipping Let's Encrypt.\n"; domain_use_https=false;;
         * ) echo "Please type y or n.";;
     esac
+
+
+# set redirects for www domain
+if [[ $domain_is_www = true ]] && [[ $domain_use_https = true ]]; then
+    cat << EOF >> /var/www/$domain/.htaccess
+  RewriteEngine on
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule (.*) https://$domain%{REQUEST_URI} [R=301,L]
+EOF
+elif [[ $domain_is_www = true ]] && [[ $domain_use_https = false ]]; then
+    cat << EOF >> /var/www/$domain/.htaccess
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule (.*) http://$domain%{REQUEST_URI} [R=301,L]
+EOF
+fi
+systemctl restart apache2
 
 
 echo -en "\n\n"
