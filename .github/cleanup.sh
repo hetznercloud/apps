@@ -20,7 +20,7 @@ done
 
 ##
 # Remove old snapshots in case of an workflow failure in the past
-keys=$(hcloud ssh-key list | grep packer | awk '{ print $1 }')
+keys=$(./hcloud ssh-key list | grep packer | awk '{ print $1 }')
 for k in $keys
 do
   ./hcloud ssh-key delete $k
