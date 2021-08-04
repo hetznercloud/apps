@@ -9,6 +9,11 @@ variable "app_version" {
   default = "22.0.0"
 }
 
+variable "app_checksum" {
+  type    = string
+  default = "e2a6c16cc7a3b2f7970428c7c893dbd4ec95e170d519e61d8858ba6035fc8f7d"
+}
+
 variable "hcloud_image" {
   type    = string
   default = "ubuntu-20.04"
@@ -91,7 +96,7 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["application_name=${var.app_name}", "application_version=${var.app_version}", "DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    environment_vars = ["application_name=${var.app_name}", "application_version=${var.app_version}", "application_checksum=${var.app_checksum}", "DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
     scripts          = ["apps/shared/scripts/apt-upgrade.sh", "apps/hetzner/nextcloud/scripts/nextcloud-install.sh", "apps/shared/scripts/cleanup.sh"]
   }
 
