@@ -5,6 +5,7 @@ wget "https://github.com/hetznercloud/cli/releases/download/v1.26.0/hcloud-linux
 
 sha256sum -c "./.github/checksum.sha256"
 
+
 tar xzf hcloud-linux-amd64.tar.gz
 
 if [ -z "$1" ];
