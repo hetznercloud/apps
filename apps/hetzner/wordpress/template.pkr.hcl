@@ -9,6 +9,11 @@ variable "app_version" {
   default = "5.7"
 }
 
+variable "app_checksum" {
+  type    = string
+  default = "92be8c4afd0186f783a12bad994baecc8f941a88535acddecbae0d7702169b71"
+}
+
 variable "hcloud_image" {
   type    = string
   default = "ubuntu-20.04"
@@ -91,7 +96,7 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["application_name=${var.app_name}", "application_version=${var.app_version}", "DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    environment_vars = ["application_name=${var.app_name}", "application_version=${var.app_version}", "application_checksum=${var.app_checksum}", "DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
     scripts          = ["apps/shared/scripts/apt-upgrade.sh", "apps/hetzner/wordpress/scripts/wp-install.sh", "apps/shared/scripts/cleanup.sh"]
   }
 

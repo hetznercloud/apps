@@ -1,6 +1,11 @@
 #!/bin/bash
+set -e
 
-wget "https://github.com/hetznercloud/cli/releases/download/v1.24.0/hcloud-linux-amd64.tar.gz"
+wget "https://github.com/hetznercloud/cli/releases/download/v1.26.0/hcloud-linux-amd64.tar.gz"
+
+sha256sum -c "./.github/checksum.sha256"
+
+
 tar xzf hcloud-linux-amd64.tar.gz
 
 if [ -z "$1" ];
