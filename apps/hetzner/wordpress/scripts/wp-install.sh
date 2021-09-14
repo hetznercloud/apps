@@ -11,7 +11,7 @@ sed -e "s|upload_max_filesize.*|upload_max_filesize = 50M|g" \
 # Download given WordPress version and check sha256 checksum
 wget "https://wordpress.org/wordpress-${application_version}.tar.gz" -O /tmp/wordpress.tar.gz
 
-echo "${application_checksum} /tmp/wordpress.tar.gz" | sha256sum -c
+echo "${application_checksum} /tmp/wordpress.tar.gz" | sha1sum -c
 
 ##
 # Extract WordPress and set apache2 permissions
