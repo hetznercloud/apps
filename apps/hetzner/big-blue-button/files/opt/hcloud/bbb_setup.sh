@@ -49,7 +49,15 @@ user_input(){
     echo
     read -s -p "Your BBB Admin Password (again): " password2
     echo
-    [ "$password" = "$password2" ] && break || echo "Please try again."
+    if [ "$password" = "$password2" ]; then
+      if [ ${#password} -ge 5 ]; then
+        break
+      else
+        echo "Password too short."
+      fi
+    else
+      echo "Passwords don't match."
+    fi
   done
 
 }
@@ -122,6 +130,12 @@ install_greenlight() {
 
   sed -i "s/POSTGRES_PASSWORD=password/POSTGRES_PASSWORD=$greenlight_postgres_pass/g" /root/greenlight/docker-compose.yml
   sed -i "s/DB_PASSWORD=password/DB_PASSWORD=$greenlight_postgres_pass/g" /root/greenlight/.env
+
+  # Check if greenlight already exists and
+  if [[ $(docker network ls | grep greenlight) ]] || [[ $(docker container ls | grep greenlight) ]]
+  then
+    docker-compose -f /root/greenlight/docker-compose.yml down
+  fi
 
   docker-compose -f /root/greenlight/docker-compose.yml up -d
 
