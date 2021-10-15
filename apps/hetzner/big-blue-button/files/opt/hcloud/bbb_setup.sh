@@ -23,9 +23,14 @@ hostname=$(hostname)
 
 user_input(){
 
-  while [ -z $domain ]
+  while true
   do
     read -p "Your Domain: " domain
+    if grep -oP '(?=^.{4,253}$)(^(?:[a-zA-Z0-9](?:(?:[a-zA-Z0-9\-]){0,61}[a-zA-Z0-9])?\.)+([a-zA-Z]{2,}|xn--[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])$)' <<<"${domain}" >/dev/null 2>&1; then
+      break
+    else
+      echo "Please enter a valid FQDN."
+    fi
   done
 
   while [ -z $le_email ]
@@ -50,7 +55,7 @@ user_input(){
     read -s -p "Your BBB Admin Password (again): " password2
     echo
     if [ "$password" = "$password2" ]; then
-      if [ ${#password} -ge 5 ]; then
+      if [ ${#password} -ge 6 ]; then
         break
       else
         echo "Password too short."
@@ -187,9 +192,11 @@ echo -en "\n\n"
     case $le in
         [Yy][eE][sS]|[yY] )
           certbot --noninteractive --nginx -d $domain --agree-tos --email $le_email --redirect
-          certbot_crontab;;
+          certbot_crontab
+          greenlight_use_selfsigned=false;;
         [nN][oO]|[nN] )
-          echo -en "\nSkipping Let's Encrypt and using selfsigned Certificate.\n";;
+          echo -en "\nSkipping Let's Encrypt and using selfsigned Certificate.\n"
+          greenlight_use_selfsigned=true;;
         * ) echo "Please type y or n.";;
     esac
 
@@ -200,6 +207,13 @@ echo -en "\n"
 echo "Setting up user and assigning domain to BigBlueButton."
 echo -en "\n"
 sleep 20
+
+# Update CA for selfsigned
+if $greenlight_use_selfsigned; then
+  docker cp /etc/ssl/certs/bbb-selfsigned.crt greenlight-v2:/usr/local/share/ca-certificates/CA.crt
+  docker exec greenlight-v2 update-ca-certificates
+fi
+echo -en "\n"
 docker exec greenlight-v2 bundle exec rake user:create["$username","$email","$password","admin"]
 echo -en "\n\n"
 bbb-conf --setip "$domain"
