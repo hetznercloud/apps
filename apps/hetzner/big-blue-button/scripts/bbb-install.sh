@@ -97,7 +97,7 @@ chmod +x /usr/local/bin/docker-compose
 mkdir -p /root/greenlight
 
 # download greenlight image and create greenlight files
-docker pull bigbluebutton/greenlight:v2.10
+docker pull bigbluebutton/greenlight:v2
 docker pull postgres:13.2-alpine
 docker run --rm bigbluebutton/greenlight:v2 cat ./sample.env > /root/greenlight/.env
 docker run --rm bigbluebutton/greenlight:v2 cat ./docker-compose.yml > /root/greenlight/docker-compose.yml
