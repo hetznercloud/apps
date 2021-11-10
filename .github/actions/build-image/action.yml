@@ -1,0 +1,32 @@
+name: Build 1-Click App image
+description: Builds an OCA app from Packer configuration and saves the snapshot for subsequent internal Hetzner Cloud platform use.
+inputs:
+  app:
+    required: true
+  token:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    # validate Packer templates
+    - name: Validate Packer template
+      uses: hashicorp/packer-github-actions@master
+      with:
+        command: validate
+        arguments: -syntax-only
+        target: apps/hetzner/${{ inputs.app }}/
+
+    # build artifact
+    - name: Build
+      uses: hashicorp/packer-github-actions@master
+      with:
+        command: build
+        arguments: "-color=false -on-error=abort"
+        target: apps/hetzner/${{ inputs.app }}/
+      env:
+        HCLOUD_API_TOKEN: ${{ inputs.token }}
+
+    - run: ./.github/cleanup.sh ${{ inputs.app }}
+      shell: bash
+      env:
+        HCLOUD_TOKEN: ${{ inputs.token }}
