@@ -27,5 +27,6 @@ runs:
         HCLOUD_API_TOKEN: ${{ inputs.token }}
 
     - run: ./.github/cleanup.sh ${{ inputs.app }}
+      shell: bash
       env:
         HCLOUD_TOKEN: ${{ inputs.token }}
