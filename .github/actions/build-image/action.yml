@@ -3,7 +3,8 @@ description: Builds an OCA app from Packer configuration and saves the snapshot 
 inputs:
   app:
     required: true
-
+  token:
+    required: true
 runs:
   using: "composite"
   steps:
@@ -23,8 +24,8 @@ runs:
         arguments: "-color=false -on-error=abort"
         target: apps/hetzner/${{ inputs.app }}/
       env:
-        HCLOUD_API_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
+        HCLOUD_API_TOKEN: ${{ inputs.token }}
 
     - run: ./.github/cleanup.sh ${{ inputs.app }}
       env:
-        HCLOUD_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
+        HCLOUD_TOKEN: ${{ inputs.token }}

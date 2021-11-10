@@ -21,3 +21,5 @@ jobs:
       - uses: ./.github/actions/build-image
         with:
           app: lamp
+          token: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
+
