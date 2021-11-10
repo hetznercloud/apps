@@ -2,12 +2,14 @@
 name: hetzner/jitsi
 
 on:
-  workflow_dispatch:
   push:
     paths:
       - "apps/hetzner/jitsi/**"
       - ".github/workflows/packer-jitsi.yml"
       - "apps/shared/**"
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   packer:

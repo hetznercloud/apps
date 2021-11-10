@@ -2,12 +2,14 @@
 name: hetzner/nextcloud
 
 on:
-  workflow_dispatch:
   push:
     paths:
       - "apps/hetzner/nextcloud/**"
       - ".github/workflows/packer-nextcloud.yml"
       - "apps/shared/**"
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   packer:
