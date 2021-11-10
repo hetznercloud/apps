@@ -16,6 +16,8 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
     name: packer
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       - uses: ./.github/actions/build-image
         with:
           app: docker-ce

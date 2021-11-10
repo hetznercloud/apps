@@ -7,9 +7,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
     # validate Packer templates
     - name: Validate Packer template
       uses: hashicorp/packer-github-actions@master
