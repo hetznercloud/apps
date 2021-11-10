@@ -23,4 +23,3 @@ jobs:
         with:
           app: nextcloud
           token: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
-
