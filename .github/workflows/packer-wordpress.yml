@@ -13,34 +13,7 @@ jobs:
   packer:
     runs-on: [self-hosted, Linux, X64]
     name: packer
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      # validate templates
-      - name: Validate Template
-        uses: hashicorp/packer-github-actions@master
+      - uses: ./.github/actions/build-image
         with:
-          command: validate
-          arguments: -syntax-only
-          target: apps/hetzner/wordpress/
-
-      # build artifact
-      - name: Build Wordpress
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-color=false -on-error=abort"
-          target: apps/hetzner/wordpress/
-        env:
-          HCLOUD_API_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
-
-  cleanup:
-    runs-on: [self-hosted, Linux, X64]
-    needs: packer
-    steps:
-      - uses: actions/checkout@v2
-      - run: ./.github/cleanup.sh wordpress
-        env:
-          HCLOUD_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
+          app: wordpress
