@@ -6,6 +6,7 @@ on:
     paths:
       - "apps/hetzner/nextcloud/**"
       - ".github/workflows/packer-nextcloud.yml"
+      - ".github/actions/build-image/**"
       - "apps/shared/**"
   schedule:
     - cron: '0 0 * * *'

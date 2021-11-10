@@ -6,6 +6,7 @@ on:
     paths:
       - "apps/hetzner/docker-ce/**"
       - ".github/workflows/packer-docker-ce.yml"
+      - ".github/actions/build-image/**"
       - "apps/shared/**"
   schedule:
     - cron: '0 0 * * *'

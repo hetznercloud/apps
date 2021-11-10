@@ -6,6 +6,7 @@ on:
     paths:
       - "apps/hetzner/big-blue-button/**"
       - ".github/workflows/packer-big-blue-button.yml"
+      - ".github/actions/build-image/**"
       - "apps/shared/**"
   schedule:
     - cron: '0 0 * * *'
