@@ -8,6 +8,20 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: install hcloud-cli
+      shell: bash
+      run: |
+        mkdir hcloud
+        cd hcloud
+        wget -q "https://github.com/hetznercloud/cli/releases/download/v1.26.0/hcloud-linux-amd64.tar.gz"
+        sha256sum -c "../.github/checksum.sha256"
+        tar xzf hcloud-linux-amd64.tar.gz
+        pwd >> $GITHUB_PATH
+
+    - name: generate snapshot name
+      shell: bash
+      run: echo "snapshot_name=${{ inputs.app }}-${{ github.run_id }}-${{ github.run_attempt }}" >> $GITHUB_ENV
+
     # validate Packer templates
     - name: Validate Packer template
       uses: hashicorp/packer-github-actions@master
@@ -21,10 +35,24 @@ runs:
       uses: hashicorp/packer-github-actions@master
       with:
         command: build
-        arguments: "-color=false -on-error=abort"
+        arguments: "-color=false -on-error=abort -var snapshot_name=${{ env.snapshot_name }}"
         target: apps/hetzner/${{ inputs.app }}/
       env:
         HCLOUD_API_TOKEN: ${{ inputs.token }}
+
+    - name: Test
+      shell: bash
+      run: ./test.sh ${{ inputs.app }} ${{ env.snapshot_name }}
+      env:
+        HCLOUD_TOKEN: ${{ inputs.token }}
+
+    - name: Bless snapshot with holy label
+      shell: bash
+      run: |
+        snapshot_id=$(hcloud image list -o noheader -o "columns=id,description" | grep "${{ env.snapshot_name }}" | awk '{print $1}')
+        hcloud image add-label $snapshot_id app=${{ inputs.app }}
+      env:
+        HCLOUD_TOKEN: ${{ inputs.token }}
 
     - run: ./.github/cleanup.sh ${{ inputs.app }}
       shell: bash
