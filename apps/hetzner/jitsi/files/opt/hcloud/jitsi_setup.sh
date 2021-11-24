@@ -117,11 +117,12 @@ sed -i "s/\$host_ip_address/$host_ip_address/g"  /etc/cloud/templates/hosts.debi
 
 # Install Jitsi-Meet with debconf
 echo -en "\nJitsi-Meet is being installed. This can take some time..."
-remove_static_page
-jitsi_meet_debconf
-apt-get update > /dev/null
-apt-get install -y jitsi-meet > /dev/null
-
+{
+  remove_static_page
+  jitsi_meet_debconf
+  apt-get update
+  apt-get install -y jitsi-meet
+} >/dev/null 2>&1
 
 echo -en "\n\n"
   echo -en "Do you want to create a Let's Encrypt Certificate for Domain $domain? \n"
