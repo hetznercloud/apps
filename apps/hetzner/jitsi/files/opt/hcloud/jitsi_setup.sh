@@ -121,7 +121,7 @@ remove_static_page
 jitsi_meet_debconf
 apt-get update > /dev/null
 apt-get install -y jitsi-meet > /dev/null
-
+systemctl restart jitsi-videobridge2.service
 
 echo -en "\n\n"
   echo -en "Do you want to create a Let's Encrypt Certificate for Domain $domain? \n"
