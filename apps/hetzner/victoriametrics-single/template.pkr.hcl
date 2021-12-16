@@ -16,7 +16,7 @@ variable "hcloud_image" {
 
 variable "apt_packages" {
   type    = string
-  default = "wget software-properties-common"
+  default = "wget software-properties-common curl"
 }
 
 variable "git-sha" {
@@ -68,34 +68,33 @@ build {
     source      = "apps/hetzner/victoriametrics-single/files/var/"
   }
 
-  # Setup instance configuration
-  provisioner "shell" {
-    environment_vars = [
-      "DEBIAN_FRONTEND=noninteractive"
-    ]
-    scripts = [
-      "scripts/01-setup.sh",
-      "scripts/02-firewall.sh",
-    ]
+   provisioner "shell" {
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    scripts          = ["apps/shared/scripts/apt-upgrade.sh"]
   }
 
-  # Install VictoriaMetrics
   provisioner "shell" {
-    environment_vars = ["VICTORIAMETRICS_VERSION=${var.victoriametrics_version}", "DEBIAN_FRONTEND=noninteractive"    ]
-    scripts = [
-      "scripts/04-install-victoriametrics.sh",
-    ]
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    scripts          = ["apps/hetzner/victoriametrics-single/scripts/01-setup.sh"]
   }
 
-  # Cleanup and validate instance
   provisioner "shell" {
-    environment_vars = [
-      "DEBIAN_FRONTEND=noninteractive"
-    ]
-    scripts = [
-      "scripts/89-cleanup-logs.sh",
-      "scripts/90-cleanup.sh",
-      "scripts/99-img-check.sh"
-    ]
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    scripts          = ["apps/hetzner/victoriametrics-single/scripts/02-firewall.sh"]
+  }
+
+  provisioner "shell" {
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    scripts          = ["apps/hetzner/victoriametrics-single/scripts/04-install-victoriametrics.sh"]
+  }
+
+  provisioner "shell" {
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    scripts          = ["apps/hetzner/victoriametrics-single/scripts/89-cleanup-logs.sh"]
+  }
+  
+  provisioner "shell" {
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    scripts          = ["apps/hetzner/victoriametrics-single/scripts/90-cleanup.sh"]
   }
 }

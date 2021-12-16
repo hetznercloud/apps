@@ -14,26 +14,41 @@ For reading the data and evaluating alerting rules, VictoriaMetrics supports the
 
 ## Getting started after deploying VictoriaMetrics Single
 
-This One Click app uses 8424, 2003, 4242 and 8089 ports to accept metrics from different protocols. 
+### Config
 
-VictoriaMetrics provides a [User Interface](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#vmui) (UI) for query troubleshooting and exploration. The UI is available at `http://your_server_public_ipv4:8428/vmui`. The UI lets users explore query results via graphs and tables.
+VictoriaMetrics configuration is located at `/etc/victoriametrics/single/scrape.yml` on the droplet. 
+This One Click app uses 8428, 2003, 4242 and 8089 ports to accept metrics from different protocols. It's recommended to disable ports for protocols which are not needed. [Ubuntu firewall](https://help.ubuntu.com/community/UFW) can be used to easily disable access for specific ports.
 
-Run the following command to query and retrieve a result from VictoriaMetrics:
+### Scraping metrics
+
+VictoriaMetrics supports metrics scraping in the same way as Prometheus does. Check the configuration file to edit scraping targets. See more details about scraping at [How to scrape Prometheus exporters](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-scrape-prometheus-exporters-such-as-node-exporter).
+
+### Sending metrics
+
+Besides scraping, VictoriaMetrics accepts write requests for various ingestion protocols. This One Click app supports the following protocols:
+- [Datadog](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-send-data-from-datadog-agent), [Influx (telegraph)](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-send-data-from-influxdb-compatible-agents-such-as-telegraf), [JSON](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-import-data-in-json-line-format), [CSV](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-import-csv-data), [Prometheus](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-import-data-in-prometheus-exposition-format)  on port :8428
+- [Graphite (statsd)](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-send-data-from-graphite-compatible-agents-such-as-statsd) on port :2003 tcp/udp
+- [OpenTSDB](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-send-data-from-opentsdb-compatible-agents) on port :4242
+- Influx (telegraph) on port :8089 tcp/udp
+
+See more details and examples in [official documentation](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html).
+
+### UI
+
+VictoriaMetrics provides a [User Interface (UI)](https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#vmui) for query troubleshooting and exploration. The UI is available at `http://your_droplet_public_ipv4:8428/vmui`. It lets users explore query results via graphs and tables.
+
+To check it, open the following in your browser `http://your_droplet_public_ipv4:8428/vmui` and then enter `vm_app_uptime_seconds` to the Query Field to Execute the Query.
+
+Run the following command to query and retrieve a result from VictoriaMetrics Single with `curl`:
 
 ```bash
-curl -sg http://your_server_public_ipv4:8428/api/v1/query_range?query=vm_app_uptime_seconds | jq
+curl -sg http://your_droplet_public_ipv4:8428/api/v1/query_range?query=vm_app_uptime_seconds | jq
 ```
 
-You can open in browser `http://your_server_public_ipv4:8428/vmui` , enter `vm_app_uptime_seconds` to the Query Field and Execute Query.
+### Accessing
 
-Once the Server is created, you can use web console to start a session or you can SSH directly to the server as root:
+Once the Droplet is created, you can use DigitalOcean's web console to start a session or  SSH directly to the server as root:
 
 ```bash
-ssh root@your_server_public_ipv4
+ssh root@your_droplet_public_ipv4
 ```
-
-VictoriaMetrics is configured via a config file which is located at `/etc/victoriametrics/single/scrape.yml` on the droplet. Feel free to edit and add new targets for scraping. 
-
-It's recommended to disable ports for protocols which are not needed. [Ubuntu firewall](https://help.ubuntu.com/community/UFW) can be used to easily disable access for specific ports.
-
-For further documentation visit: https://docs.victoriametrics.com/Single-server-VictoriaMetrics.html#how-to-start-victoriametrics
