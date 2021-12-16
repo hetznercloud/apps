@@ -6,7 +6,7 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "latest"
+  default ="${env("VM_VERSION")}"
 }
 
 variable "hcloud_image" {
@@ -84,17 +84,13 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    environment_vars = ["VM_VERSION=${var.app_version}", "DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
     scripts          = ["apps/hetzner/victoriametrics-single/scripts/04-install-victoriametrics.sh"]
   }
 
   provisioner "shell" {
     environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
-    scripts          = ["apps/hetzner/victoriametrics-single/scripts/89-cleanup-logs.sh"]
+    scripts          = ["apps/shared/scripts/cleanup.sh"]
   }
   
-  provisioner "shell" {
-    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
-    scripts          = ["apps/hetzner/victoriametrics-single/scripts/90-cleanup.sh"]
-  }
 }
