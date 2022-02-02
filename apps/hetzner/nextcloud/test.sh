@@ -57,8 +57,6 @@ spawn /opt/hcloud/nextcloud_setup.sh
 match_max 100000
 expect -exact "Your Domain: "
 send -- "test.com\r"
-expect -exact "Your Email Address (for Let's Encrypt Notifications): "
-send -- "test@test.com\r"
 expect -exact "Your Username \[Default=admin\]: "
 send -- "test\r"
 expect -exact "Password: "

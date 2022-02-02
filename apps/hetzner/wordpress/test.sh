@@ -98,7 +98,7 @@ send -- ""
 expect -exact " "
 send -- "test.com\r"
 expect -exact "test.com\r
-Your Email Address (for Let's Encrypt Notifications and Wordpress Account): "
+Your Email Address (for Wordpress Account): "
 send -- "fa"
 expect -exact " "
 send -- ""
@@ -116,7 +116,7 @@ expect -exact "\r
 Password (again): "
 send -- "test\r"
 expect -exact "\r
-Title: "
+Wordpress Title: "
 send -- "Test\r"
 expect -exact "Test\r
 \r
