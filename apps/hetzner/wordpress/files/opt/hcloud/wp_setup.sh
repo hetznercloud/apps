@@ -25,9 +25,14 @@ user_input(){
     read -p "Your Domain: " domain
   done
 
-  while [ -z $email ]
+  while true
   do
-    read -p "Your Email Address (for Let's Encrypt Notifications and Wordpress Account): " email
+    read -p "Your Email Address (for Wordpress Account): " email
+    if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' <<<"${email}" >/dev/null 2>&1; then
+      break
+    else
+      echo "Please enter a valid E-Mail."
+    fi
   done
 
   while [ -z $username ]
@@ -45,7 +50,7 @@ user_input(){
     [ "$password" = "$password2" ] && break || echo "Please try again"
   done
 
-  read -p "Title: " title
+  read -p "Wordpress Title: " title
 
 }
 
@@ -114,10 +119,19 @@ echo -en "\n\n"
   : ${le:="Y"}
     case $le in
         [Yy][eE][sS]|[yY] )
+          while true
+          do
+            read -p "Your Email Address (for Let's Encrypt Notifications): " le_email
+            if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' <<<"${le_email}" >/dev/null 2>&1; then
+              break
+            else
+              echo "Please enter a valid E-Mail."
+            fi
+          done
           if [[ $domain_is_www = true ]]; then
-            certbot --noninteractive --apache -d $domain --agree-tos --email $email --no-redirect
+            certbot --noninteractive --apache -d $domain --agree-tos --email $le_email --no-redirect
           elif [[ $domain_is_www = false ]]; then
-            certbot --noninteractive --apache -d $domain --agree-tos --email $email --redirect
+            certbot --noninteractive --apache -d $domain --agree-tos --email $le_email --redirect
           fi
           domain_use_https=true
           certbot_crontab;;

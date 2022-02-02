@@ -6,7 +6,7 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "2.3.0"
+  default = "2.4.0"
 }
 
 variable "hcloud_image" {
