@@ -57,11 +57,11 @@ spawn /opt/hcloud/bbb_setup.sh
 match_max 100000
 expect -exact "Your Domain: "
 send -- "test.com\r"
-expect -exact "Your BBB Admin Username [Default: admin]: "
+expect -exact "Your BBB Admin Username \[Default: admin\]: "
 send -- "test\r"
 expect -exact "Your BBB Admin EMail Address: "
 send -- "test@test.com\r"
-expect -exact "Your BBB Admin Password [8-32 characters, A-Z, a-z, 0-9, #?!@$%^&*-]: "
+expect -exact "Your BBB Admin Password \[8-32 characters, A-Z, a-z, 0-9, #?!@$%^&*-\]: "
 send -- "Test123!\r"
 expect -exact "Your BBB Admin Password (again): "
 send -- "Test123!\r"
