@@ -26,11 +26,6 @@ user_input(){
     read -p "Your Domain: " domain
   done
 
-  while [ -z $email ]
-  do
-    read -p "Your Email Address (for Let's Encrypt Notifications): " email
-  done
-
 }
 
 certbot_crontab() {
@@ -59,7 +54,7 @@ do
 
     case $confirm in
       [yY][eE][sS]|[yY] ) break;;
-      [nN][oO]|[nN] ) unset domain email; user_input;;
+      [nN][oO]|[nN] ) unset domain; user_input;;
       * ) echo "Please type y or n.";;
     esac
 done
@@ -101,6 +96,15 @@ echo -en "\n\n"
   : ${le:="Y"}
     case $le in
         [Yy][eE][sS]|[yY] )
+          while true
+          do
+            read -p "Your Email Address (for Let's Encrypt Notifications): " email
+            if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' <<<"${email}" >/dev/null 2>&1; then
+              break
+            else
+              echo "Please enter a valid E-Mail."
+            fi
+          done
           if [[ $domain_is_www = true ]]; then
             certbot --noninteractive --apache -d $domain --agree-tos --email $email --no-redirect
           elif [[ $domain_is_www = false ]]; then

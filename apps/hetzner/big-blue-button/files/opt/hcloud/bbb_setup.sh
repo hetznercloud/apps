@@ -33,32 +33,33 @@ user_input(){
     fi
   done
 
-  while [ -z $le_email ]
-  do
-    read -p "Your Email Address (for Let's Encrypt Notifications): " le_email
-  done
-
   while [ -z $username ]
   do
-    read -p "Your BBB Admin Username: " username
-  done
-
-  while [ -z $email ]
-  do
-    read -p "Your BBB Admin EMail Address: " email
+    read -p "Your BBB Admin Username [Default: admin]: " username
+    : ${username:="admin"}
   done
 
   while true
   do
-    read -s -p "Your BBB Admin Password: " password
+    read -p "Your BBB Admin EMail Address: " email
+    if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' <<<"${email}" >/dev/null 2>&1; then
+      break
+    else
+      echo "Please enter a valid E-Mail."
+    fi
+  done
+
+  while true
+  do
+    read -s -p "Your BBB Admin Password [8-32 characters, A-Z, a-z, 0-9, #?!@$%^&*-]: " password
     echo
     read -s -p "Your BBB Admin Password (again): " password2
     echo
     if [ "$password" = "$password2" ]; then
-      if [ ${#password} -ge 6 ]; then
+      if grep -oP '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[^.(){}[\]:;<>,.\/~_+=|]{8,32}$' <<<"${password}" >/dev/null 2>&1; then
         break
       else
-        echo "Password too short."
+        echo "Password invalid."
       fi
     else
       echo "Passwords don't match."
@@ -71,6 +72,7 @@ user_input(){
 remove_static_page(){
 
   rm -rf /var/www/html
+  rm /etc/nginx/sites-enabled/default
   rm /etc/nginx/sites-enabled/hetzner
   rm /etc/nginx/sites-available/hetzner
   ln -s /etc/nginx/sites-available/bigbluebutton /etc/nginx/sites-enabled/bigbluebutton
@@ -96,11 +98,11 @@ selfsigned_cert(){
 
   organization=localdomain
   organizationalunit=bbb-test
-  email=$email
+  cert_email=$email
   commonname=$domain
 
   openssl rand -writerand /root/.rnd
-  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/bbb-selfsigned.key -out /etc/ssl/certs/bbb-selfsigned.crt -subj "/O=$organization/OU=$organizationalunit/CN=$domain/emailAddress=$le_email"
+  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/bbb-selfsigned.key -out /etc/ssl/certs/bbb-selfsigned.crt -subj "/O=$organization/OU=$organizationalunit/CN=$domain/emailAddress=$cert_email"
 
   openssl dhparam -dsaparam -out /etc/ssl/private/dhparam.pem 4096
 
@@ -120,6 +122,10 @@ configure_html5() {
 
 install_greenlight() {
 # https://github.com/bigbluebutton/bbb-install/blob/master/bbb-install.sh
+
+  echo -en "\n"
+  echo "Setting up Greenlight Frontend.."
+  echo -en "\n"
 
   source /root/.hcloud_password
 
@@ -159,7 +165,7 @@ do
 
     case $confirm in
       [yY][eE][sS]|[yY] ) break;;
-      [nN][oO]|[nN] ) unset domain le_email; user_input;;
+      [nN][oO]|[nN] ) unset domain email; user_input;;
       * ) echo "Please type y or n.";;
     esac
 done
@@ -184,13 +190,21 @@ remove_static_page
 selfsigned_cert
 systemctl restart nginx
 
-
 echo -en "\n\n"
   echo -en "Do you want to create a Let's Encrypt Certificate for Domain $domain? \n"
   read -p "Note that the Domain needs to exist. [Y/n]: " le
   : ${le:="Y"}
     case $le in
         [Yy][eE][sS]|[yY] )
+          while true
+          do
+            read -p "Your Email Address (for Let's Encrypt Notifications): " le_email
+            if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' <<<"${le_email}" >/dev/null 2>&1; then
+              break
+            else
+              echo "Please enter a valid E-Mail."
+            fi
+          done
           certbot --noninteractive --nginx -d $domain --agree-tos --email $le_email --redirect
           certbot_crontab
           greenlight_use_selfsigned=false;;

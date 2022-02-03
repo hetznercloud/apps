@@ -53,9 +53,9 @@ EOF
 apt-get update && apt-get install -y kurento-media-server
 
 
-# install big blue button 2.3.0
+# install big blue button
 echo \
-    "deb [arch=amd64 signed-by=/usr/share/keyrings/bigbluebutton-archive-keyring.gpg] https://ubuntu.bigbluebutton.org/bionic-230 \
+    "deb [arch=amd64 signed-by=/usr/share/keyrings/bigbluebutton-archive-keyring.gpg] https://ubuntu.bigbluebutton.org/bionic-240 \
     bigbluebutton-bionic main" | tee /etc/apt/sources.list.d/bigbluebutton.list
 
 cat <<EOT >> /etc/apt/preferences.d/bigbluebutton.pref

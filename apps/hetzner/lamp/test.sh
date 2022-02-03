@@ -72,9 +72,6 @@ Please enter your details to set up your new Apache Instance.\r
 Your Domain: "
 send -- "test.com\r"
 expect -exact "test.com\r
-Your Email Address (for Let's Encrypt Notifications): "
-send -- "test@test.com\r"
-expect -exact "test@test.com\r
 \r
 Is the everything correct? \[Y/n\] "
 send -- "Y\r"

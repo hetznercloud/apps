@@ -27,11 +27,6 @@ user_input(){
     read -p "Your Domain: " domain
   done
 
-  while [ -z $email ]
-  do
-    read -p "Your Email Address (for Let's Encrypt Notifications): " email
-  done
-
   while [ -z $username ]
   do
     read -p "Your Username [Default=admin]: " username
@@ -75,7 +70,7 @@ do
 
     case $confirm in
       [yY][eE][sS]|[yY] ) break;;
-      [nN][oO]|[nN] ) unset domain email username password; user_input;;
+      [nN][oO]|[nN] ) unset domain username password; user_input;;
       * ) echo "Please type y or n.";;
     esac
 done
@@ -98,7 +93,17 @@ echo -en "\n\n"
   read -p "Note that the Domain needs to exist. [Y/n]: " le
   : ${le:="Y"}
     case $le in
-        [Yy][eE][sS]|[yY] ) certbot --noninteractive --apache -d $domain --agree-tos --email $email --redirect; certbot_crontab;;
+        [Yy][eE][sS]|[yY] )
+          while true
+          do
+            read -p "Your Email Address (for Let's Encrypt Notifications): " email
+            if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' <<<"${email}" >/dev/null 2>&1; then
+              break
+            else
+              echo "Please enter a valid E-Mail."
+            fi
+          done
+          certbot --noninteractive --apache -d $domain --agree-tos --email $email --redirect; certbot_crontab;;
         [nN][oO]|[nN] ) echo -en "\nSkipping Let's Encrypt.\n";;
         * ) echo "Please type y or n.";;
     esac

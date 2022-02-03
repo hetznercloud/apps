@@ -57,8 +57,6 @@ spawn /opt/hcloud/jitsi_setup.sh
 match_max 100000
 expect -exact "Your Domain: "
 send -- "test.com\r"
-expect -exact "Your Email Address (for Let's Encrypt Notifications): "
-send -- "test@test.com\r"
 expect -exact "Is everything correct? \[Y/n\] "
 send -- "Y\r"
 expect -exact "Note that the Domain needs to exist. \[Y/n\]: "
