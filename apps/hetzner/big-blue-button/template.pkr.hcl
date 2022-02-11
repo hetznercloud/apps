@@ -6,7 +6,7 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "2.4.0"
+  default = "2.4.4"
 }
 
 variable "hcloud_image" {
@@ -16,7 +16,7 @@ variable "hcloud_image" {
 
 variable "apt_packages" {
   type    = string
-  default = "nginx certbot python-certbot-nginx haveged openjdk-8-jdk"
+  default = "nginx certbot python-certbot-nginx haveged openjdk-8-jre ruby"
 }
 
 variable "git-sha" {
