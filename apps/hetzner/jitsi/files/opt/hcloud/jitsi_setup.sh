@@ -20,6 +20,7 @@ EOF
 
 host_ip_address=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
 hostname=$(hostname)
+application_version=$APP_VERSION
 
 user_input(){
 
@@ -115,7 +116,7 @@ echo -en "\nJitsi-Meet is being installed. This can take some time..."
 remove_static_page
 jitsi_meet_debconf
 apt-get update > /dev/null
-apt-get install -y jitsi-meet > /dev/null
+apt-get install -y jitsi-meet=${application_version}* > /dev/null
 systemctl restart jitsi-videobridge2.service
 
 echo -en "\n\n"

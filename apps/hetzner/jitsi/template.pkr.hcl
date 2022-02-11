@@ -6,7 +6,7 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "2"
+  default = "2.0.6865-2"
 }
 
 variable "hcloud_image" {
@@ -85,6 +85,11 @@ build {
   provisioner "file" {
     destination = "/var/www/html/assets/"
     source      = "apps/hetzner/jitsi/images/"
+  }
+
+  provisioner "shell" {
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    inline           = ["sed -i 's/\\$APP_VERSION/${var.app_version}/g'  /opt/hcloud/jitsi_setup.sh"]
   }
 
   provisioner "shell" {
