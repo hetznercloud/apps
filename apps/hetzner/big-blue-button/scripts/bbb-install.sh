@@ -3,6 +3,7 @@
 # Add needed apt-repositories
 add-apt-repository ppa:bigbluebutton/support -y
 add-apt-repository ppa:rmescandon/yq -y
+add-apt-repository ppa:libreoffice/ppa -y
 yes | add-apt-repository ppa:libreoffice/ppa
 
 apt-get update && apt-get dist-upgrade -y
@@ -54,6 +55,15 @@ apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 # install Docker Compose 1.24.0
 curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+
+
+## Libreoffice Container
+# Build docker image
+docker build -t bbb-soffice /usr/share/bbb-libreoffice/docker/
+
+# rename files
+mv /usr/share/bbb-libreoffice-conversion/convert-local.sh /usr/share/bbb-libreoffice-conversion/convert.sh
+
 
 # Create greenlight directory
 mkdir -p /root/greenlight
