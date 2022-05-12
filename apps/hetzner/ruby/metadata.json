@@ -1,0 +1,15 @@
+{
+  "description_de": "",
+  "description_en": "",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/ruby",
+  "name": "Ruby",
+  "os_id": 15512617,
+  "packages": [
+    {
+      "license": "FreeBSD License",
+      "name": "Ruby"
+    }
+  ],
+  "recommended_server_type": 23,
+  "version": "3"
+}
