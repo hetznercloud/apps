@@ -1,6 +1,6 @@
 # Hetzner Cloud Ruby
 
-<img src="images/ruy-logo.png" height="97px">
+<img src="images/ruby-logo.png" height="97px">
 
 This app contains a ready to use Ruby installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
