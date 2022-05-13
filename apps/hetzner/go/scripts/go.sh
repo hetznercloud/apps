@@ -8,4 +8,4 @@ echo "${application_checksum} /tmp/go.tar.gz" | sha256sum -c
 
 # Install go
 tar -C /usr/local -xzf /tmp/go.tar.gz
-echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
