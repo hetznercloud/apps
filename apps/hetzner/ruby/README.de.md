@@ -1,17 +1,17 @@
-# Hetzner Cloud Docker
+# Hetzner Cloud Ruby
 
-<img src="images/docker-logo.png" height="97px">
+<img src="images/ruby-logo.png" height="97px">
 
-Diese App enthält eine fertige Docker-Installation.
+Diese App enthält eine fertige Ruby-Installation.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
-[Docker](https://www.docker.com/) ist ein Open-Source-Projekt zur Isolierung von Anwendungen mit Hilfe von Containervirtualisierung. Mit dieser App ist es möglich Anwendungen in unterschiedlichen Umgebungen zu nutzen.
+[Ruby](https://www.ruby-lang.org/de/) ist eine dynamische, freie Programmiersprache, die sich einfach anwenden und produktiv einsetzen lässt. Sie hat eine elegante Syntax, die man leicht lesen und schreiben kann.
 
 ## Getting Started
 
 Erstellen Sie sich Ihren Server wie gewohnt über die [Hetzner Cloud Console](https://console.hetzner.cloud). Alternativ zum Betriebssystem können Sie eine App wählen, die Sie gerne vorinstalliert hätten.
 
-Docker ist vorinstalliert, wenn das Image gebootet wird.
+Ruby ist vorinstalliert, wenn das Image gebootet wird.
 
 Sie können sich wie gewohnt auf Ihrem Server anmelden:
 
@@ -20,7 +20,7 @@ Sie können sich wie gewohnt auf Ihrem Server anmelden:
 
 ## Hetzner Cloud API
 
-Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinstalliertem Docker auch die Hetzner Cloud API genutzt werden.
+Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinstalliertem Ruby auch die Hetzner Cloud API genutzt werden.
 
 - Zum Beispiel per Curl-Befehl über die Kommandozeile
 
@@ -29,33 +29,33 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinst
   	-X POST \
   	-H "Authorization: Bearer $API_TOKEN" \
   	-H "Content-Type: application/json" \
-  	-d '{"name":"my-server", "server_type":"cx31", "image":"docker-ce"}' \
+  	-d '{"name":"my-server", "server_type":"cx31", "image":"ruby"}' \
   	'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Oder über [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cx31 --image docker-ce
+  hcloud server create --name my-server --type cx31 --image ruby
   ```
 
 ## Image Inhalt
 
 ### Betriebssystem
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installierte Pakete
 
-| NAME   | LIZENZ             |
-| ------ | ------------------ |
-| Docker | GPLv3 (Apache 2.0) |
+| NAME | LIZENZ  |
+| ---- | ------- |
+| Ruby | FreeBSD |
 
 ## Links
 
 Weitere Informationen über die installierten Pakete erhalten Sie in den offiziellen Dokumentationen:
 
-- [Docker](https://docs.docker.com/)
+- [Ruby](https://www.ruby-lang.org/de/)
 
 Weitere Informationen über Hetzner Cloud und Hetzner Cloud Apps erhalten Sie in unserer offiziellen Dokumentation:
 
