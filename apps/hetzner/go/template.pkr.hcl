@@ -62,7 +62,7 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["application_checksum=${var.app_checksum}", "DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
+    environment_vars = ["application_version=${var.app_version}", "application_checksum=${var.app_checksum}", "DEBIAN_FRONTEND=noninteractive", "LC_ALL=C", "LANG=en_US.UTF-8", "LC_CTYPE=en_US.UTF-8"]
     scripts          = ["apps/shared/scripts/apt-upgrade.sh", "apps/hetzner/go/scripts/go.sh", "apps/shared/scripts/cleanup.sh"]
   }
 
