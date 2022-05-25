@@ -1,0 +1,15 @@
+{
+  "description_de": "Ruby ist eine dynamische, freie Programmiersprache, die sich einfach anwenden und produktiv einsetzen l\u00e4sst. Sie hat eine elegante Syntax, die man leicht lesen und schreiben kann.",
+  "description_en": "Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. ",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/ruby",
+  "name": "Ruby",
+  "os_id": 67794396,
+  "packages": [
+    {
+      "license": "FreeBSD",
+      "name": "Ruby"
+    }
+  ],
+  "recommended_server_type": 23,
+  "version": "3"
+}
