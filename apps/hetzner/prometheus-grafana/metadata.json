@@ -1,0 +1,31 @@
+{
+  "description_de": "Prometheus stellt als Werkzeug zur \u00dcberwachung von Serverdaten alle notwendigen Informationen f\u00fcr Grafana zur Verf\u00fcgung welches diese anschlie\u00dfend graphisch darstellt.",
+  "description_en": "Prometheus provides all necessary information for Grafana as a tool for monitoring server data, which is then displayed graphically.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/prometheus-grafana",
+  "name": "Prometheus Grafana",
+  "os_id": 67794396,
+  "packages": [
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Prometheus"
+    },
+    {
+      "license": "AGPLv3",
+      "name": "Grafana"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Node-Exporter"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Cadvisor"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Docker"
+    }
+  ],
+  "recommended_server_type": 23,
+  "version": "latest"
+}
