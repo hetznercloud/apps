@@ -6,4 +6,5 @@
 .github/workflows/packer-nextcloud.yml
 .github/workflows/packer-wordpress.yml
 .github/workflows/packer-prometheus-grafana.yml
+.github/workflows/packer-collab-tools.yml
 apps/hetzner/prometheus-grafana/files/opt/containers/prometheus-grafana/grafana/provisioning/dashboards/

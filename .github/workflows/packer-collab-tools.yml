@@ -1,0 +1,25 @@
+---
+name: hetzner/collab-tools
+
+on:
+  push:
+    paths:
+      - "apps/hetzner/collab-tools/**"
+      - ".github/workflows/packer-collab-tools.yml"
+      - ".github/actions/build-image/**"
+      - "apps/shared/**"
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  packer:
+    runs-on: [self-hosted, Linux, X64]
+    name: packer
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - uses: ./.github/actions/build-image
+        with:
+          app: collab-tools
+          token: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
