@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Generate passwords
+grafana_initial_pass=$(openssl rand -hex 24)
+prometheus_initial_pass=$(openssl rand -hex 24)
+prometheus_hashed_pass=$(htpasswd -bnBC 10 "" ${prometheus_initial_pass} | tr -d ':\n'| base64 -w 0 )
+
+# Don't enable Grafana until first login
+cat >> /root/.bashrc <<EOM
+chmod +x /opt/hcloud/prometheus_grafana_setup.sh
+/opt/hcloud/prometheus_grafana_setup.sh
+EOM
+
+# Save the passwords
+cat > /root/.hcloud_password <<EOM
+grafana_initial_pass="${grafana_initial_pass}"
+prometheus_initial_pass="${prometheus_initial_pass}"
+EOM
+
+sed -i "s/grafana_initial_password/$grafana_initial_pass/g"  /opt/containers/prometheus-grafana/.env
+sed -i "s/prometheus_initial_password/$prometheus_hashed_pass/g"  /opt/containers/prometheus-grafana/.env
