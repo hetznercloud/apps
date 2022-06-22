@@ -1,4 +1,3 @@
-.github/workflows/packer-big-blue-button.yml
 .github/workflows/packer-docker-ce.yml
 .github/workflows/packer-gitlab.yml
 .github/workflows/packer-jitsi.yml
