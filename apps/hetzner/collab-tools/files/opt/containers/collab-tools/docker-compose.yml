@@ -1,0 +1,113 @@
+---
+version: "3.8"
+
+volumes:
+  database: {}
+  uploads: {}
+  caddy_data: {}
+  transfer_data: {}
+
+networks:
+  proxy:
+  database:
+
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+  database:
+    image: postgres:13.4-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - database:/var/lib/postgresql/data
+    networks:
+      - database
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    restart: unless-stopped
+    environment:
+      - CADDY_INGRESS_NETWORKS=proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+    networks:
+      - proxy
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+  hedgedoc:
+    image: quay.io/hedgedoc/hedgedoc:1.9.2-alpine
+    restart: unless-stopped
+    environment:
+      - CMD_DB_URL=postgres://${DB_USER}:${DB_PASS}@database:5432/${DB_NAME}
+      - CMD_DOMAIN=${HEDGEDOC_DOMAIN}
+      - CMD_URL_ADDPORT=false
+      - CMD_PROTOCOL_USESSL=true
+      - CMD_ALLOW_ORIGIN=[ "localhost", ${HEDGEDOC_DOMAIN} ]
+      - CMD_ALLOW_ANONYMOUS=false
+      - CMD_ALLOW_EMAIL_REGISTER=false
+    expose:
+      - 3000
+    volumes:
+      - uploads:/hedgedoc/public/uploads
+    networks:
+      - proxy
+      - database
+    depends_on:
+      - database
+    labels:
+      caddy: ${HEDGEDOC_DOMAIN}
+      caddy.reverse_proxy: "hedgedoc:3000"
+      com.centurylinklabs.watchtower.enable: "true"
+
+  transfer:
+    image: dutchcoders/transfer.sh:latest
+    restart: unless-stopped
+    command: --provider local
+    environment:
+      - BASEDIR=/tmp/
+    expose:
+      - 8080
+    volumes:
+      - transfer_data:/tmp/
+    networks:
+      - proxy
+    labels:
+      caddy: ${TRANSFER_DOMAIN}
+      caddy.reverse_proxy: "transfer:8080"
+      # Comment out these two lines if you don't want basic-auth to secure your transfer.sh:
+      caddy.basicauth: "*"
+      caddy.basicauth.transfer: "${TRANSFER_PASS_BCRYPT}"
+      com.centurylinklabs.watchtower.enable: "true"
+
+  whiteboard:
+    image: rofl256/whiteboard
+    restart: unless-stopped
+    expose:
+      - 8080
+    networks:
+      - proxy
+    labels:
+      caddy: ${WHITEBOARD_DOMAIN}
+      caddy.reverse_proxy: "whiteboard:8080"
+      # Comment out these two lines if you don't want basic-auth to secure your whiteboard:
+      caddy.basicauth: "*"
+      caddy.basicauth.whiteboard: "${WHITEBOARD_PASS_BCRYPT}"
+      com.centurylinklabs.watchtower.enable: "true"

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Generate passwords
+postgres_initial_pass=$(openssl rand -hex 32)
+
+# Add setup-script to trigger on first login
+cat >> /root/.bashrc <<EOM
+chmod +x /opt/hcloud/collab_tools_setup.sh
+/opt/hcloud/collab_tools_setup.sh
+EOM
+
+# Add alias to simplify managing HedgeDoc users
+cat >> /root/.bashrc <<EOM
+alias hedgedoc_users='docker compose -f /opt/containers/collab-tools/docker-compose.yml exec hedgedoc bin/manage_users'
+EOM
+
+# Save the passwords
+cat > /root/.hcloud_password <<EOM
+postgres_initial_pass="${postgres_initial_pass}"
+EOM
+
+sed -i "s/POSTGRES_PASSWORD_DUMMY/$postgres_initial_pass/g"  /opt/containers/collab-tools/.env
