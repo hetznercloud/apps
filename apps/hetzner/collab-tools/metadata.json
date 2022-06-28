@@ -1,7 +1,7 @@
 {
   "description_de": "Diese App ist eine Sammlung von n\u00fctzlichen Tools zur Collaboration an Dokumenten (HedgeDoc), einem Whiteboard und einem kurzzeit Speicher zum Dateiaustausch (transfer.sh)",
   "description_en": "This app contains a collection of collaboration tools to work together on documents (HedgeDoc), a whiteboard and share files in a short-term storage (transfer.sh)",
-  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/collab-tools",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/collaboration-tools",
   "name": "Collaboration Tools",
   "os_id": 67794396,
   "packages": [
