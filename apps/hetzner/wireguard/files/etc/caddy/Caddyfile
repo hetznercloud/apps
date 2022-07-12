@@ -1,0 +1,8 @@
+{
+  # Used for automatic HTTPS
+  email $email
+}
+
+$domain {
+  reverse_proxy [::1]:5000
+}

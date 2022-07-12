@@ -1,0 +1,8 @@
+[Unit]
+Description=Watcher for WireGuard via wg-quick(8) for %I
+
+[Path]
+PathChanged=/etc/wireguard/%i.conf
+
+[Install]
+WantedBy=multi-user.target

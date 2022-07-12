@@ -1,0 +1,58 @@
+# Default configuration for wireguard-ui.
+# Please note, that most of these settings have no affect after the initial start of wireguard-ui.
+# After that, wireguard-ui stores these settings in its own db and you can change them through the UI (or manually in the db) only.
+
+# Used to encrypt the session cookies. Should be a random key, 32 characters long.
+SESSION_SECRET=$session_secret
+
+# The login credentials for initial configuration.
+WGUI_USERNAME=admin
+WGUI_PASSWORD=$admin_password
+
+# The default endpoint address used in the global settings.
+WGUI_ENDPOINT_ADDRESS=$domain
+
+# The default DNS servers (comma-separated-list) used in the global settings.
+WGUI_DNS=1.1.1.1,1.0.0.1,2606:4700:4700::1111,2606:4700:4700::1001
+
+# The default MTU used in the global settings.
+# Theoretically, 1420 would be sufficient for Wireguard over IPv4 or IPv6. 1412 is safer when dealing with internet access over PPPoE.
+# But because of all the broken WiFis out there that use tunnels but drop ICMP, we better leave a bit more headroom.
+WGUI_MTU=1300
+
+# The default persistent keepalive interval used in the global settings.
+WGUI_PERSISTENT_KEEPALIVE=15
+
+# The default forward mark used in the global settings.
+WGUI_FORWARD_MARK=0xca6c
+
+# The default config file path used in the global settings.
+WGUI_CONFIG_FILE_PATH=/etc/wireguard/wg0.conf
+
+# Set this variable if you run wireguard-ui under a subpath of your reverse proxy virtual host.
+#BASE_PATH=/wireguard
+
+# The default interface addresses (comma-separated-list) used in the WireGuard server configuration.
+WGUI_SERVER_INTERFACE_ADDRESSES=$wg_interface_addresses
+
+# The default server listen port used in the WireGuard server configuration.
+WGUI_SERVER_LISTEN_PORT=51820
+
+# The default post-up and post-down scripts used in the WireGuard server configuration.
+WGUI_SERVER_POST_UP_SCRIPT=
+WGUI_SERVER_POST_DOWN_SCRIPT=
+
+# The default comma-separated-list of CIDRs for the 'Allowed IPs' field for new clients.
+WGUI_DEFAULT_CLIENT_ALLOWED_IPS=0.0.0.0/0,::/0
+
+# The default comma-separated-list of CIDRs for the 'Extra Allowed IPs' field for new clients.
+WGUI_DEFAULT_CLIENT_EXTRA_ALLOWED_IPS=
+
+# The default value for the 'Use Server DNS' checkbox for new clients.
+WGUI_DEFAULT_CLIENT_USE_SERVER_DNS=true
+
+# The default value for the 'Enable after creation' checkbox for new clients.
+WGUI_DEFAULT_CLIENT_ENABLE_AFTER_CREATION=true
+
+# You can configure further options, like email submission here.
+# Please take a look into the wireguard-ui readme for further details: https://github.com/ngoduykhanh/wireguard-ui#email-configuration

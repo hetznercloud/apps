@@ -1,0 +1,12 @@
+[Unit]
+Description=Restarter for WireGuard via wg-quick(8) for %I
+After=network-online.target
+StartLimitIntervalSec=10
+StartLimitBurst=5
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl restart wg-quick@%i.service
+
+[Install]
+RequiredBy=wg-quick-watcher@%i.path
