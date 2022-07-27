@@ -6,12 +6,12 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "6.0"
+  default = "6.0.1"
 }
 
 variable "app_checksum" {
   type    = string
-  default = "7a5a6d0591771e730b05c49d0c3fc134624d0491"
+  default = "a1c02b6b754d74c08a70d5a8b604bdb72f1b276a"
 }
 
 variable "hcloud_image" {
