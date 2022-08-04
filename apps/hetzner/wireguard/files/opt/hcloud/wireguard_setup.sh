@@ -43,12 +43,17 @@ user_input(){
 # Generate wireguard-ui session secret (16 bytes, 32 characters)
 session_secret=$(openssl rand -hex 16)
 
-# Retrieve the IP addresses of the server
-# TODO: Handle, when IPv4 or IPv6 is disabled?
-host_ipv4_address=$(ip addr show eth0 | grep "inet\b.*global" | head -n1 | awk '{print $2}' | cut -d/ -f1)
+# Build the list of subnets to be used for WireGuard, depending on whether the
+# VM has a IPv6 subnet assigned or not.
+# IPv4 is always enabled by default, even when the VM has no public IPv4 address,
+# because this could be still useful for connecting to private networks.
+wg_interface_addresses=172.30.0.1/24
 host_ipv6_subnet=$(ip addr show eth0 | grep "inet6\b.*global" | head -n1 | awk '{print $2}')
-host_ipv6_address=$(echo $host_ipv6_subnet | cut -d/ -f1)
-wg_interface_addresses=172.30.0.1/24,${host_ipv6_address%::1}:ac1e::1/120
+if [ ! -z $host_ipv6_subnet ]
+then
+  host_ipv6_address=$(echo $host_ipv6_subnet | cut -d/ -f1)
+  wg_interface_addresses=$wg_interface_addresses,${host_ipv6_address%::1}:ac1e::1/120
+fi
 
 echo -en "\n"
 echo "Please enter your details to set up your new WireGuard instance."
@@ -108,7 +113,7 @@ sysctl -p &> /dev/null
 
 echo -en "\n\n"
 echo "The installation is complete and WireGuard should be ready to use."
-echo "Please go to https://$domain and log in with your admin password to configure WireGuard clients."
+echo "Please go to https://$domain and log in with the user \"admin\" and your password to configure WireGuard clients."
 echo -en "\n"
 
 # Remove startup script from .bashrc
