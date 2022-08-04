@@ -21,7 +21,7 @@ variable "apt_packages" {
 
 variable "wireguard_ui_version" {
   type    = string
-  default = "0.4.0"
+  default = "0.4.1"
 }
 
 variable "caddy_version" {
