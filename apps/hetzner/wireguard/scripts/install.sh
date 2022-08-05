@@ -9,6 +9,9 @@ wget "https://github.com/MarcusWichelmann/wireguard-ui/releases/download/v${wire
 # Unpack wireguard-ui
 tar -C /usr/local/bin -xzf /tmp/wireguard-ui.tar.gz wireguard-ui
 
+# Create the data directory
+mkdir -p /usr/local/share/wireguard-ui
+
 # Download the given version of caddy
 wget "https://github.com/caddyserver/caddy/releases/download/v${caddy_version}/caddy_${caddy_version}_linux_amd64.tar.gz" -O /tmp/caddy.tar.gz
 

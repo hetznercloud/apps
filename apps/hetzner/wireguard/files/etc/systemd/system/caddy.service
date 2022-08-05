@@ -3,6 +3,7 @@ Description=Caddy
 Documentation=https://caddyserver.com/docs/
 After=network.target network-online.target
 Requires=network-online.target
+AssertFileIsExecutable=/usr/local/bin/caddy
 
 [Service]
 Type=notify

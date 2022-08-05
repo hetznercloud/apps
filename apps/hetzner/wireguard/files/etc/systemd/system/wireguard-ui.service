@@ -8,6 +8,7 @@ AssertFileIsExecutable=/usr/local/bin/wireguard-ui
 [Service]
 Type=simple
 EnvironmentFile=/etc/default/wireguard-ui
+WorkingDirectory=/usr/local/share/wireguard-ui
 ExecStart=/usr/local/bin/wireguard-ui -bind-address [::1]:5000
 Restart=on-failure
 SyslogIdentifier=wireguard-ui

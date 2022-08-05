@@ -1,4 +1,6 @@
 # Default configuration for wireguard-ui.
+# This file is loaded by the wireguard-ui systemd service.
+#
 # Please note, that most of these settings have no affect after the initial start of wireguard-ui.
 # After that, wireguard-ui stores these settings in its own db and you can change them through the UI (or manually in the db) only.
 
