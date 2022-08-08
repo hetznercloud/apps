@@ -9,7 +9,7 @@ SESSION_SECRET=$session_secret
 
 # The login credentials for initial configuration.
 WGUI_USERNAME=admin
-WGUI_PASSWORD=$admin_password
+WGUI_PASSWORD_HASH=$admin_password_hash
 
 # The default endpoint address used in the global settings.
 WGUI_ENDPOINT_ADDRESS=$domain

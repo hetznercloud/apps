@@ -73,9 +73,9 @@ You can find the firewall and NAT configuration at `/etc/nftables.conf`. Changes
 
 ## Changing the admin password
 
-To change the admin password of the management UI, please follow the following steps:
+To change the admin password of the management UI, please follow these steps:
 
-1. Generate a password hash of the new password:
+1. Generate a bcrypt password hash of the new password, you can use the caddy cli for that:
 
    ```
    caddy hash-password -algorithm bcrypt

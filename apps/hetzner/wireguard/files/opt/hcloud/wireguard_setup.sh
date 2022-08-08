@@ -46,7 +46,7 @@ session_secret=$(openssl rand -hex 16)
 # Build the list of subnets to be used for WireGuard, depending on whether the
 # VM has a IPv6 subnet assigned or not.
 # IPv4 is always enabled by default, even when the VM has no public IPv4 address,
-# because this could be still useful for connecting to private networks.
+# because this could still be useful for connecting to private networks.
 wg_interface_addresses=172.30.0.1/24
 host_ipv6_subnet=$(ip addr show eth0 | grep "inet6\b.*global" | head -n1 | awk '{print $2}')
 if [ ! -z $host_ipv6_subnet ]
@@ -73,11 +73,14 @@ do
   esac
 done
 
+echo "Installing. Please wait..."
+
+# Hash password
+password_hash=$(caddy hash-password -algorithm bcrypt -plaintext "$password")
+
 # Populate the wireguard-ui default config
-# TODO: Unfortunately, wirguard-ui accepts the password only in plaintext.
-# Maybe this should be patched or the user should be warned?
 sed -i "s/\$session_secret/$session_secret/g" /etc/default/wireguard-ui
-sed -i "s/\$admin_password/${password//\//\\/}/g" /etc/default/wireguard-ui
+sed -i "s/\$admin_password_hash/$password_hash/g" /etc/default/wireguard-ui
 sed -i "s/\$domain/$domain/g" /etc/default/wireguard-ui
 sed -i "s/\$wg_interface_addresses/${wg_interface_addresses//\//\\/}/g" /etc/default/wireguard-ui
 
