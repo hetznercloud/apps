@@ -45,7 +45,7 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
   hcloud server create --name my-server --type cx11 --image wireguard
   ```
 
-## How to connect
+## Connecting VPN clients
 
 To connect a new client, you should create a new client in the management UI first. Only the _Name_ field needs to be filled in, the others can be left untouched.
 
@@ -53,7 +53,7 @@ To connect a new client, you should create a new client in the management UI fir
 
 Now you can use the _QR code_ button to generate a QR code, which can be scanned with the WireGuard app for [Android](https://play.google.com/store/apps/details?id=com.wireguard.android) or [iOS](https://itunes.apple.com/us/app/wireguard/id1441195209?ls=1&mt=8). Or you _Download_ the client config, to connect from a PC or Mac. You can find a list of all available WireGuard clients [here](https://www.wireguard.com/install/).
 
-## How things work
+## How this app works
 
 ### Reverse proxy
 
@@ -61,7 +61,7 @@ This app automatically sets up a Caddy webserver as reverse proxy with automatic
 
 ### WireGuard config
 
-On first start, and each time the _Apply Config_ button in the management UI is clicked, the WireGuard configuration at `/etc/wireguard/wg0.conf` is rewritten. There is a `wg-quick-watcher@wg0.path` systemd unit file, that triggers a `systemctl restart wg-quick@wg0` each time, the WireGuard config file is modified. That's how changes get applied.
+On first start, and each time the _Apply config_ button in the management UI is clicked, the WireGuard configuration at `/etc/wireguard/wg0.conf` is rewritten. There is a `wg-quick-watcher@wg0.path` systemd unit file, that triggers a `systemctl restart wg-quick@wg0` each time, the WireGuard config file is modified. That's how changes get applied.
 
 If you want to modify the `wg0.conf` manually, you should disable wireguard-ui to make sure, that your changes do not get overwritten.
 
@@ -89,7 +89,7 @@ To change the admin password of the management UI, please follow these steps:
    systemctl restart wireguard-ui
    ```
 
-## Configuration
+## Additional configuration
 
 Most configuration options are available in the management webinterface and can be modified there, but there are some settings which aren't exposed. For these, please take a look at the `/etc/default/wireguard-ui` file.
 
@@ -103,7 +103,7 @@ You can download the latest Caddy `caddy_*_linux_amd64.tar.gz` from their [relea
 tar -C /usr/local/bin -xzf caddy_*_linux_amd64.tar.gz caddy
 ```
 
-To update wireguard-ui, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above. Because of some recent patches, that did not make it into the latest wireguard-ui release yet, you might temporarily find more up to date builds [here](https://github.com/MarcusWichelmann/wireguard-ui/releases).
+To update wireguard-ui, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above. Because of some recent patches, that did not make it into the latest wireguard-ui release yet, you might temporarily find more up to date builds [here](https://github.com/MarcusWichelmann/wireguard-ui/releases). If this is the case, please use these.
 
 After everything is up to date again, please restart the affected systemd services:
 
