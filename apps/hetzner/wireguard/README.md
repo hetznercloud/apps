@@ -1,19 +1,19 @@
 # Hetzner Cloud WireGuard
 
-TODO IMAGE
+<img src="images/wireguard-logo.png" height="100px">
 
 With this app, your server becomes a ready to use WireGuard VPN server, combined with a webinterface to manage it. Through this VPN, your devices can reach the internet as well as all private networks connected to the server.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
 [WireGuard](https://www.wireguard.com/) is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN.
 
-TODO what is the management ui: wireguard-ui
+[WireGuard UI](https://github.com/ngoduykhanh/wireguard-ui) is a simple, web-based management UI for WireGuard.
 
 ## Getting Started
 
 Create your server as usual using the [Hetzner Cloud Console](https://console.hetzner.cloud). As an alternative to the operating system, you can choose an app that you would like to have pre-installed.
 
-WireGuard and the mangement UI are preinstalled when the image is booted, but not enabled yet.
+WireGuard and the management UI are preinstalled when the image is booted, but not enabled yet.
 
 To activate them, please login to your server:
 
@@ -57,13 +57,13 @@ Now you can use the _QR code_ button to generate a QR code, which can be scanned
 
 ### Reverse proxy
 
-This app automatically sets up a Caddy webserver as reverse proxy with automatic HTTPS using Let's Encrypt. You can find its configuration at `/etc/caddy/Caddyfile`. That's why wireguard-ui is configured to only bind locally on port 5000.
+This app automatically sets up a Caddy webserver as reverse proxy with automatic HTTPS using Let's Encrypt. You can find its configuration at `/etc/caddy/Caddyfile`. That's why WireGuard UI is configured to only bind locally on port 5000.
 
 ### WireGuard config
 
 On first start, and each time the _Apply config_ button in the management UI is clicked, the WireGuard configuration at `/etc/wireguard/wg0.conf` is rewritten. There is a `wg-quick-watcher@wg0.path` systemd unit file, that triggers a `systemctl restart wg-quick@wg0` each time, the WireGuard config file is modified. That's how changes get applied.
 
-If you want to modify the `wg0.conf` manually, you should disable wireguard-ui to make sure, that your changes do not get overwritten.
+If you want to modify the `wg0.conf` manually, you should disable WireGuard UI to make sure, that your changes do not get overwritten.
 
 ### Firewall
 
@@ -83,7 +83,7 @@ To change the admin password of the management UI, please follow these steps:
 
 2. Edit `/usr/local/share/wireguard-ui/db/server/users.json` and replace the `password_hash` with the newly generated hash.
 
-3. Restart wireguard-ui:
+3. Restart WireGuard UI:
 
    ```
    systemctl restart wireguard-ui
@@ -95,7 +95,7 @@ Most configuration options are available in the management webinterface and can 
 
 ## Updating
 
-While WireGuard and the WireGuard cli tools can be regularly updated using `apt update` and `apt upgrade`, the Caddy webserver and wireguard-ui are manually installed.
+While WireGuard and the WireGuard cli tools can be regularly updated using `apt update` and `apt upgrade`, the Caddy webserver and WireGuard UI are manually installed.
 
 You can download the latest Caddy `caddy_*_linux_amd64.tar.gz` from their [releases page](https://github.com/caddyserver/caddy/releases) and extract it:
 
@@ -103,7 +103,7 @@ You can download the latest Caddy `caddy_*_linux_amd64.tar.gz` from their [relea
 tar -C /usr/local/bin -xzf caddy_*_linux_amd64.tar.gz caddy
 ```
 
-To update wireguard-ui, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above. Because of some recent patches, that did not make it into the latest wireguard-ui release yet, you might temporarily find more up to date builds [here](https://github.com/MarcusWichelmann/wireguard-ui/releases). If this is the case, please use these.
+To update WireGuard UI, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above. Because of some recent patches, that did not make it into the latest WireGuard UI release yet, you might temporarily find more up to date builds [here](https://github.com/MarcusWichelmann/wireguard-ui/releases). If this is the case, please use these.
 
 After everything is up to date again, please restart the affected systemd services:
 
@@ -122,7 +122,7 @@ systemctl restart wireguard-ui caddy
 | NAME         | LICENSE            |
 | ------------ | ------------------ |
 | WireGuard    | GPLv2              |
-| wireguard-ui | MIT                |
+| WireGuard UI | MIT                |
 | Caddy        | Apache License 2.0 |
 
 ## Links
@@ -130,7 +130,7 @@ systemctl restart wireguard-ui caddy
 For more information about the installed packages, please refer to their official documentation:
 
 - [WireGuard](https://www.wireguard.com/)
-- [wireguard-ui](https://github.com/ngoduykhanh/wireguard-ui/blob/master/README.md)
+- [WireGuard UI](https://github.com/ngoduykhanh/wireguard-ui/blob/master/README.md)
 - [Caddy](https://caddyserver.com/docs/)
 
 - [Let’s Encrypt](https://letsencrypt.org/docs/)
