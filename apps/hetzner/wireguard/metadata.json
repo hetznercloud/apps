@@ -1,0 +1,23 @@
+{
+  "description_de": "WireGuard ist eine sehr einfache, aber schnelle und moderne VPN-L\u00f6sung, die state-of-the-art Kryptographie verwendet. Diese App verbindet diese mit einer intuitiven Weboberfl\u00e4che, die es sehr einfach macht einen Wireguard VPN einzurichten, der von all Ihren Ger\u00e4ten benutzt werden kann, um das Internet durch diesen Server zu erreichen. Sie k\u00f6nnen diese App auch dazu verwenden, um aus der Ferne auf Ihre privaten Cloud Netzwerke zuzugreifen.",
+  "description_en": "WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. This app combines it with an intuitive Web-UI that makes it very easy to set up a WireGuard VPN, which can be used by all your devices to reach the internet through this server. This app can also be used to access your private cloud networks remotely.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/wireguard",
+  "name": "WireGuard",
+  "os_id": 67794396,
+  "packages": [
+    {
+      "license": "GPLv2",
+      "name": "WireGuard"
+    },
+    {
+      "license": "MIT",
+      "name": "wireguard-ui"
+    },
+    {
+      "license": "Apache License 2.0",
+      "name": "Caddy"
+    }
+  ],
+  "recommended_server_type": 1,
+  "version": "latest"
+}

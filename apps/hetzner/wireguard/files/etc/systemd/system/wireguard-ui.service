@@ -1,0 +1,17 @@
+[Unit]
+Description=WireGuard UI
+Documentation=https://github.com/ngoduykhanh/wireguard-ui
+After=network.target network-online.target
+Requires=network-online.target
+AssertFileIsExecutable=/usr/local/bin/wireguard-ui
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/wireguard-ui
+WorkingDirectory=/usr/local/share/wireguard-ui
+ExecStart=/usr/local/bin/wireguard-ui -bind-address [::1]:5000
+Restart=on-failure
+SyslogIdentifier=wireguard-ui
+
+[Install]
+WantedBy=multi-user.target
