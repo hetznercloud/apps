@@ -24,7 +24,7 @@ Dies führt Sie durch einen Prozess, wobei Sie Angaben wie die Domain und ein Ad
 
 Wenn Sie fertig sind, können Sie sich an der Management-UI anmelden und Ihre ersten WireGuard Clients anlegen.
 
-Im untenstehenden Video wird der gesamte Prozess, vom Erstellen eines Servers in der Cloud Console, über das konfigurieren von Domain und Admin-Passwort, bis hin zum Anlegen eines ersten Clients (siehe "[VPN-Clients verbinden](#vpn-clients-verbinden)"), Schritt für Schritt gezeigt.
+Im untenstehenden Video wird der gesamte Prozess, vom Erstellen eines Servers in der Cloud Console, über das Konfigurieren von Domain und Admin-Passwort, bis hin zum Anlegen eines ersten Clients (siehe "[VPN-Clients verbinden](#vpn-clients-verbinden)"), Schritt für Schritt gezeigt.
 
 <video src="https://user-images.githubusercontent.com/84835304/189129284-4b3792bb-41ea-48b2-8f95-55dec36ab8c8.mp4" width="100%" controls>
   Hetzner App WireGuard
