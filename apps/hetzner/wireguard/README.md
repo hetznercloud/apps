@@ -26,7 +26,7 @@ When you are done, you will be able to login to the management UI and configure 
 
 Check out the video below to see the entire process, from creating a server via Cloud Console to configuring the domain and admin password via a CLI. It also shows how to configure the first client (see "[Connecting VPN clients](#connecting-vpn-clients)").
 
-<video src="https://user-images.githubusercontent.com/84835304/189129284-4b3792bb-41ea-48b2-8f95-55dec36ab8c8.mp4" width="100%" controls>
+<video src="https://user-images.githubusercontent.com/84835304/189336266-c34aa7c6-a6ea-4809-b72e-78bcd5afe1d6.mp4" width="100%" controls>
   Hetzner App WireGuard
 </video>
 
