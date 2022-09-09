@@ -24,6 +24,12 @@ This will guide you through a process where you can configure the domain and adm
 
 When you are done, you will be able to login to the management UI and configure the first WireGuard clients.
 
+Check out the video below to see the entire process, from creating a server via Cloud Console to configuring the domain and admin password via a CLI. It also shows how to configure the first client (see "[Connecting VPN clients](#connecting-vpn-clients)").
+
+<video src="https://user-images.githubusercontent.com/84835304/189129284-4b3792bb-41ea-48b2-8f95-55dec36ab8c8.mp4" width="100%" controls>
+  Hetzner App WireGuard
+</video>
+
 ## Hetzner Cloud API
 
 Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to set up a server with pre-installed WireGuard.
@@ -52,6 +58,8 @@ To connect a new client, you should create a new client in the management UI fir
 **Important:** Always remember to click _Apply config_ after adding clients or doing changes in the management UI. Otherwise new clients won't be able to connect.
 
 Now you can use the _QR code_ button to generate a QR code, which can be scanned with the WireGuard app for [Android](https://play.google.com/store/apps/details?id=com.wireguard.android) or [iOS](https://itunes.apple.com/us/app/wireguard/id1441195209?ls=1&mt=8). Or you _Download_ the client config, to connect from a PC or Mac. You can find a list of all available WireGuard clients [here](https://www.wireguard.com/install/).
+
+For a quick demonstration, take a look at the video above. Starting at 1:35 minutes, it will guide you through the steps to connect your first client.
 
 ## How this app works
 
