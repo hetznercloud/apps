@@ -6,7 +6,7 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "1.18.2"
+  default = "1.19.1"
 }
 
 variable "app_checksum" {
