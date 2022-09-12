@@ -24,6 +24,12 @@ Dies führt Sie durch einen Prozess, wobei Sie Angaben wie die Domain und ein Ad
 
 Wenn Sie fertig sind, können Sie sich an der Management-UI anmelden und Ihre ersten WireGuard Clients anlegen.
 
+Im untenstehenden Video wird der gesamte Prozess, vom Erstellen eines Servers in der Cloud Console, über das Konfigurieren von Domain und Admin-Passwort, bis hin zum Anlegen eines ersten Clients (siehe "[VPN-Clients verbinden](#vpn-clients-verbinden)"), Schritt für Schritt gezeigt.
+
+<video src="https://user-images.githubusercontent.com/84835304/189129284-4b3792bb-41ea-48b2-8f95-55dec36ab8c8.mp4" width="100%" controls>
+  Hetzner App WireGuard
+</video>
+
 ## Hetzner Cloud API
 
 Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinstalliertem WireGuard auch die Hetzner Cloud API genutzt werden.
@@ -52,6 +58,8 @@ Um einen neuen VPN-Client zu verbinden, sollten Sie zunächst einen neuen Client
 **Wichtig:** Denken Sie immer daran, _Apply config_ zu klicken, nachdem Sie Clients hinzugefügt oder Änderungen in der Management-UI vorgenommen haben. Ansonsten werden sich die neuen Clients nicht verbinden können.
 
 Nun können Sie den _QR code_-Button benutzen, um einen QR-Code zu generieren, welchen Sie mit der WireGuard App für [Android](https://play.google.com/store/apps/details?id=com.wireguard.android) oder [iOS](https://itunes.apple.com/us/app/wireguard/id1441195209?ls=1&mt=8) scannen können. Oder Sie nutzen _Download_, um eine Konfigurationsdatei herunterzuladen, welche Sie zum Verbinden eines PCs oder MACs nutzen können. [Hier](https://www.wireguard.com/install/) finden Sie eine Liste aller verfügbaren WireGuard Client-Anwendungen.
+
+Die einzelnen Schritte zum Verbinden eines Clients können Sie sich zur Veranschaulichung auch im oberen Video ab 1:35 Minuten ansehen.
 
 ## Funktionsweise dieser App
 
