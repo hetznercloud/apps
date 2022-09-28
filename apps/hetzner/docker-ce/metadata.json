@@ -3,7 +3,7 @@
   "description_en": "Docker is an open source project that automates the deployment of code inside software containers. It uses OS-level virtualization to deliver software in packages called containers.",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/docker-ce",
   "name": "Docker CE",
-  "os_id": 15512617,
+  "os_id": 67794396,
   "packages": [
     {
       "license": "GPLv3 (Apache-2.0)",
