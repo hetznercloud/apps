@@ -15,7 +15,7 @@ Pin-Priority: 500
 EOT
 
 apt-get -y update
-apt-get -y install docker-ce
+apt-get -y install docker-ce docker-compose-plugin
 
 systemctl enable docker
 systemctl start docker
