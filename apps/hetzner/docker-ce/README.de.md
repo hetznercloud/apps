@@ -43,13 +43,14 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinst
 
 ### Betriebssystem
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installierte Pakete
 
-| NAME   | LIZENZ             |
-| ------ | ------------------ |
-| Docker | GPLv3 (Apache 2.0) |
+| NAME                  | LIZENZ             |
+| --------------------- | ------------------ |
+| Docker                | GPLv3 (Apache 2.0) |
+| Docker Compose Plugin |                    |
 
 ## Links
 
