@@ -43,13 +43,14 @@ In addition to the Hetzner Cloud Console you can also use the Hetzner Cloud API 
 
 ### Base OS
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installed packages
 
-| NAME   | LICENSE            |
-| ------ | ------------------ |
-| Docker | GPLv3 (Apache 2.0) |
+| NAME                  | LICENSE            |
+| --------------------- | ------------------ |
+| Docker                | GPLv3 (Apache 2.0) |
+| Docker Compose Plugin |                    |
 
 ## Links
 
