@@ -82,15 +82,15 @@ ask_domain "TRANSFER"
 transfer_domain="${domain}"; unset domain
 transfer_pass=$(openssl rand -hex 24)
 echo -en "transfer_basic_auth_user=transfer\ntransfer_basic_auth_pass=${transfer_pass}\n" >> /root/.hcloud_password
-transfer_pass_bcrypt=$(docker run lucaslorentz/caddy-docker-proxy:ci-alpine hash-password -plaintext $transfer_pass 2>/dev/null)
-sed -i "s/TRANSFER_PASS_DUMMY/$transfer_pass_bcrypt/g"  /opt/containers/collab-tools/.env
+transfer_pass_bcrypt=$(docker run lucaslorentz/caddy-docker-proxy:ci-alpine hash-password --plaintext $transfer_pass 2>/dev/null | base64 -w 0)
+sed -i "s/TRANSFER_PASS_DUMMY/${transfer_pass_bcrypt//\//\\/}/g"  /opt/containers/collab-tools/.env
 
 ask_domain "WHITEBOARD"
 whiteboard_domain="${domain}"; unset domain
 whiteboard_pass=$(openssl rand -hex 24)
 echo -en "whiteboard_basic_auth_user=whiteboard\nwhiteboard_basic_auth_pass=${whiteboard_pass}\n" >> /root/.hcloud_password
-whiteboard_pass_bcrypt=$(docker run lucaslorentz/caddy-docker-proxy:ci-alpine hash-password -plaintext $whiteboard_pass 2>/dev/null)
-sed -i "s/WHITEBOARD_PASS_DUMMY/$whiteboard_pass_bcrypt/g"  /opt/containers/collab-tools/.env
+whiteboard_pass_bcrypt=$(docker run lucaslorentz/caddy-docker-proxy:ci-alpine hash-password --plaintext $whiteboard_pass 2>/dev/null | base64 -w 0)
+sed -i "s/WHITEBOARD_PASS_DUMMY/${whiteboard_pass_bcrypt//\//\\/}/g"  /opt/containers/collab-tools/.env
 
 echo "The installation is being performed. This can take some time..."
 {

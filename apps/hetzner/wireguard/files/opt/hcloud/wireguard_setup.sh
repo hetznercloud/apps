@@ -80,7 +80,7 @@ password_hash=$(caddy hash-password -algorithm bcrypt -plaintext "$password")
 
 # Populate the wireguard-ui default config
 sed -i "s/\$session_secret/$session_secret/g" /etc/default/wireguard-ui
-sed -i "s/\$admin_password_hash/$password_hash/g" /etc/default/wireguard-ui
+sed -i "s/\$admin_password_hash/${password_hash//\//\\/}/g" /etc/default/wireguard-ui
 sed -i "s/\$domain/$domain/g" /etc/default/wireguard-ui
 sed -i "s/\$wg_interface_addresses/${wg_interface_addresses//\//\\/}/g" /etc/default/wireguard-ui
 
