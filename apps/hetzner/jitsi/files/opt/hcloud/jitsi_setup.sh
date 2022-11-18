@@ -57,6 +57,7 @@ jitsi_meet_debconf(){
 
   cat <<EOF | sudo debconf-set-selections
   jitsi-meet jitsi-meet/jvb-serve boolean false
+  jitsi-meet-prosody jitsi-meet/jaas-choice boolean false
   jitsi-meet-prosody jitsi-meet-prosody/jvb-hostname string $domain
   jitsi-videobridge jitsi-videobridge/jvb-hostname string $domain
   jitsi-meet jitsi-meet/cert-choice select "Generate a new self-signed certificate (You will later get a chance to obtain a Let's encrypt certificate)"
