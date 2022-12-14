@@ -11,7 +11,7 @@ variable "app_version" {
 
 variable "app_checksum" {
   type    = string
-  default = "e4c74640c50b27d59dfab8cf5578769eb668d10a"
+  default = "80f0f829645dec07c68bcfe0a0a1e1d563992fcb"
 }
 
 variable "hcloud_image" {
