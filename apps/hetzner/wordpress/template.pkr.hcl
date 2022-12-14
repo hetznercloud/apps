@@ -16,7 +16,7 @@ variable "app_checksum" {
 
 variable "hcloud_image" {
   type    = string
-  default = "ubuntu-20.04"
+  default = "ubuntu-22.04"
 }
 
 variable "apt_packages" {

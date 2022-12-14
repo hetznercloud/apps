@@ -3,7 +3,7 @@
   "description_en": "WordPress is used by more than 60 million websites, including 41% of the top 10 million websites as of May 2021, WordPress is one of the most popular content management system solutions in use. WordPress has also been used for other application domains, such as pervasive display systems (PDS).",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/wordpress",
   "name": "Wordpress",
-  "os_id": 15512617,
+  "os_id": 67794396,
   "packages": [
     {
       "license": "GPL",
