@@ -85,4 +85,4 @@ expect eof
 
 EXPECT
 
-curl localhost/users/sign_in | grep 'This is a self-managed instance of GitLab.'
+curl localhost/users/sign_in | grep 'GitLab Community Edition'
