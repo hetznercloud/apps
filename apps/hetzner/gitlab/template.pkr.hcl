@@ -6,12 +6,12 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "15.3"
+  default = "15.6"
 }
 
 variable "hcloud_image" {
   type    = string
-  default = "ubuntu-20.04"
+  default = "ubuntu-22.04"
 }
 
 variable "apt_packages" {

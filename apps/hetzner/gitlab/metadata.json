@@ -3,7 +3,7 @@
   "description_en": "Gitlab is an open source DevOps platform. Its mission is to help teams collaborate on software development and to provide a place where everyone can contribute. This app allows you to manage changes to documents and more.",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/gitlab-ce",
   "name": "GitLab CE",
-  "os_id": 15512617,
+  "os_id": 67794396,
   "packages": [
     {
       "license": "GPL (Expat)",
@@ -23,5 +23,5 @@
     }
   ],
   "recommended_server_type": 5,
-  "version": "15.3"
+  "version": "15.6"
 }
