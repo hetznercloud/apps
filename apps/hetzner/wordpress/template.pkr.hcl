@@ -6,17 +6,17 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "6.0.1"
+  default = "6.1.1"
 }
 
 variable "app_checksum" {
   type    = string
-  default = "a1c02b6b754d74c08a70d5a8b604bdb72f1b276a"
+  default = "80f0f829645dec07c68bcfe0a0a1e1d563992fcb"
 }
 
 variable "hcloud_image" {
   type    = string
-  default = "ubuntu-20.04"
+  default = "ubuntu-22.04"
 }
 
 variable "apt_packages" {
