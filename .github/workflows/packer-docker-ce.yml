@@ -9,7 +9,7 @@ on:
       - ".github/actions/build-image/**"
       - "apps/shared/**"
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 13 * * *"
   workflow_dispatch:
 
 jobs:
