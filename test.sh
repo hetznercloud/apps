@@ -71,7 +71,7 @@ ssh-keygen -N '' -t ed25519 -f /tmp/$test_prefix
 hcloud ssh-key create --name $test_prefix --public-key-from-file /tmp/$test_prefix.pub
 
 echo creating server...
-hcloud server create --image $snapshot_id --name $test_prefix --type cpx31 --ssh-key $test_prefix
+hcloud server create --image $snapshot_id --name $test_prefix --type cpx21 --ssh-key $test_prefix
 ip=$(hcloud server ip $test_prefix)
 ssh="ssh -i /tmp/$test_prefix -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$ip"
 
