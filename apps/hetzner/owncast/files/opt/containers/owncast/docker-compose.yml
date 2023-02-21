@@ -1,0 +1,94 @@
+---
+version: "3.8"
+
+volumes:
+  traefik_data: {}
+  owncast_data: {}
+
+networks:
+  proxy:
+
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: "watchtower"
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  traefik:
+    image: traefik
+    container_name: "traefik"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - "--api=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--metrics.prometheus=true"
+      - "--metrics.prometheus.addEntryPointsLabels=true"
+      - "--metrics.prometheus.addServicesLabels=true"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/opt/traefik/access.log"
+      - "--global.sendAnonymousUsage=false"
+      - "--entryPoints.http.address=:80"
+      - "--entryPoints.https.address=:443"
+      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge=true"
+      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge.entryPoint=http"
+      - "--certificatesresolvers.mytlschallenge.acme.email=${LETSENCRYPT_MAIL}"
+      - "--certificatesresolvers.mytlschallenge.acme.storage=/opt/traefik/acme.json"
+    labels:
+      # global redirect HTTPS
+      - "traefik.http.routers.http-catchall.rule=HostRegexp(`{any:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=http"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https@docker"
+
+      # middleware: Redirect HTTP->HTTPS
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+
+      # sts middlewares
+      - "traefik.http.middlewares.servicestls.headers.stsincludesubdomains=false"
+      - "traefik.http.middlewares.servicestls.headers.stspreload=true"
+      - "traefik.http.middlewares.servicestls.headers.stsseconds=15552001"
+      - "traefik.http.middlewares.servicestls.headers.isdevelopment=false"
+
+      # https proto
+      - "traefik.http.middlewares.testHeader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.middlewares.testHeader.headers.framedeny=true"
+      - "traefik.http.middlewares.testHeader.headers.sslredirect=true"
+
+      # autoupdate traefik container
+      - "com.centurylinklabs.watchtower.enable=true"
+    networks:
+      - proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "traefik_data:/opt/traefik/"
+
+  owncast:
+    image: gabekangas/owncast #ghcr.io/owncast/owncast:nightly
+    container_name: "owncast"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - "1935:1935"
+    labels:
+      - "traefik.http.routers.owncast.rule=Host(`${OWNCAST_DOMAIN}`)"
+      - "traefik.http.routers.owncast.entrypoints=https"
+      - "traefik.http.routers.owncast.tls.certresolver=mytlschallenge"
+      - "traefik.http.services.owncast.loadbalancer.server.port=8080"
+      - "com.centurylinklabs.watchtower.enable=true"
+    volumes:
+      - "owncast_data:/app/data"
