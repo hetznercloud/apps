@@ -1,0 +1,23 @@
+{
+  "description_de": "Owncast ist ein kostenloser und quelloffener Live-Video- und Web-Chat-Server für die Verwendung mit g\u00e4ngiger Broadcasting-Software.",
+  "description_en": "Owncast is a free and open source live video and web chat server for use with existing popular broadcasting software.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/owncast",
+  "name": "Owncast",
+  "os_id": 67794396,
+  "packages": [
+    {
+      "license": "MIT",
+      "name": "Owncast"
+    },
+    {
+      "license": "MIT",
+      "name": "Traefik"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Docker"
+    }
+  ],
+  "recommended_server_type": 23,
+  "version": "latest"
+}
