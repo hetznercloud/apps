@@ -23,3 +23,5 @@ jobs:
         with:
           app: owncast
           token: ${{ github.ref == 'refs/heads/main' && secrets.HCLOUD_API_TOKEN || secrets.HCLOUD_API_TOKEN_STAGING }}
+          server_location: ${{ secrets.HCLOUD_SERVER_LOCATION }}
+          server_type: ${{ secrets.HCLOUD_SERVER_TYPE }}
