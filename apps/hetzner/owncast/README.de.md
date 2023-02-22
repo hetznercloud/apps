@@ -48,12 +48,12 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Owncast Servers auc
 
 Dieses Image enthält Docker und alle anderen aufgeführten Anwendungen als Docker Container.
 
-| NAME               | LIZENZ             |
-| ------------------ | ------------------ |
-| Docker             | GPLv3 (Apache 2.0) |
-| Owncast            | MIT                |
-| Traefik            | MIT                |
-| Watchtower         | GPLv3 (Apache 2.0) |
+| NAME       | LIZENZ             |
+| ---------- | ------------------ |
+| Docker     | GPLv3 (Apache 2.0) |
+| Owncast    | MIT                |
+| Traefik    | MIT                |
+| Watchtower | GPLv3 (Apache 2.0) |
 
 ### Passwörter
 
@@ -68,7 +68,6 @@ Weitere Informationen über die installierten Pakete erhalten Sie in den offizie
 - [Owncast](https://github.com/owncast/owncast/)
 - [Traefik](https://github.com/traefik/traefik/)
 - [Watchtower](https://containrrr.dev/watchtower/)
-
 - [Let's Encrypt](https://letsencrypt.org/de/docs/)
 
 Weitere Informationen über Hetzner Cloud und Hetzner Cloud Apps erhalten Sie in unserer offiziellen Dokumentation:

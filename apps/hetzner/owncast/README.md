@@ -48,13 +48,12 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
 
 This image contains Docker and all other listed applications as Docker containers.
 
-| NAME               | LICENSE            |
-| ------------------ | ------------------ |
-| Docker             | GPLv3 (Apache 2.0) |
-| Owncast            | MIT                |
-| Traefik            | MIT                |
-| Watchtower         | GPLv3 (Apache 2.0) |
-
+| NAME       | LICENSE            |
+| ---------- | ------------------ |
+| Docker     | GPLv3 (Apache 2.0) |
+| Owncast    | MIT                |
+| Traefik    | MIT                |
+| Watchtower | GPLv3 (Apache 2.0) |
 
 ### Passwords
 
@@ -69,7 +68,6 @@ For more information about the installed packages, see the official documentatio
 - [Owncast](https://github.com/owncast/owncast/)
 - [Traefik](https://github.com/traefik/traefik/)
 - [Watchtower](https://containrrr.dev/watchtower/)
-
 - [Let's Encrypt](https://letsencrypt.org/de/docs/)
 
 For more information about Hetzner Cloud and Hetzner Cloud Apps, please see our official documentation:
