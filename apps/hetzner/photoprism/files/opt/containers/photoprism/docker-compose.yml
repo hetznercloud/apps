@@ -1,0 +1,168 @@
+---
+version: "3.8"
+
+volumes:
+  mariadb_data: {}
+  photoprism_import: {}
+  photoprism_originals: {}
+  photoprism_storage: {}
+  traefik_data: {}
+
+networks:
+  proxy: {}
+  db: {}
+
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: "watchtower"
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  traefik:
+    image: traefik
+    container_name: "traefik"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - "--api=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--metrics.prometheus=true"
+      - "--metrics.prometheus.addEntryPointsLabels=true"
+      - "--metrics.prometheus.addServicesLabels=true"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/opt/traefik/access.log"
+      - "--global.sendAnonymousUsage=false"
+      - "--entryPoints.http.address=:80"
+      - "--entryPoints.https.address=:443"
+      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge=true"
+      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge.entryPoint=http"
+      - "--certificatesresolvers.mytlschallenge.acme.email=${LETSENCRYPT_MAIL}"
+      - "--certificatesresolvers.mytlschallenge.acme.storage=/opt/traefik/acme.json"
+    labels:
+      # global redirect HTTPS
+      - "traefik.http.routers.http-catchall.rule=HostRegexp(`{any:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=http"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https@docker"
+
+      # middleware: Redirect HTTP->HTTPS
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+
+      # sts middlewares
+      - "traefik.http.middlewares.servicestls.headers.stsincludesubdomains=false"
+      - "traefik.http.middlewares.servicestls.headers.stspreload=true"
+      - "traefik.http.middlewares.servicestls.headers.stsseconds=15552001"
+      - "traefik.http.middlewares.servicestls.headers.isdevelopment=false"
+
+      # https proto
+      - "traefik.http.middlewares.testHeader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.middlewares.testHeader.headers.framedeny=true"
+      - "traefik.http.middlewares.testHeader.headers.sslredirect=true"
+
+      # autoupdate traefik container
+      - "com.centurylinklabs.watchtower.enable=true"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "traefik_data:/opt/traefik/"
+    networks:
+      - proxy
+      - db
+  photoprism:
+    image: photoprism/photoprism:latest
+    container_name: photoprism
+    depends_on:
+      - traefik
+      - mariadb
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    user: 1000:1000
+    privileged: true
+    ports:
+      - "2342:2342"
+    environment:
+      PHOTOPRISM_ADMIN_USER: "photo_admin" # superadmin username
+      PHOTOPRISM_ADMIN_PASSWORD: "${PHOTOPRISM_PASSWORD}" # initial superadmin password (minimum 8 characters)
+      PHOTOPRISM_AUTH_MODE: "password" # authentication mode (public, password)
+      PHOTOPRISM_SITE_URL: "https://${PHOTOPRISM_DOMAIN}/" # server URL in the format "http(s)://domain.name(:port)/(path)"
+      PHOTOPRISM_ORIGINALS_LIMIT: 5000 # file size limit for originals in MB (increase for high-res video)
+      PHOTOPRISM_HTTP_COMPRESSION: "gzip" # improves transfer speed and bandwidth utilization (none or gzip)
+      PHOTOPRISM_LOG_LEVEL: "info" # log level: trace, debug, info, warning, error, fatal, or panic
+      PHOTOPRISM_READONLY: "false" # do not modify originals directory (reduced functionality)
+      PHOTOPRISM_EXPERIMENTAL: "false" # enables experimental features
+      PHOTOPRISM_DISABLE_CHOWN: "false" # disables updating storage permissions via chmod and chown on startup
+      PHOTOPRISM_DISABLE_WEBDAV: "false" # disables built-in WebDAV server
+      PHOTOPRISM_DISABLE_SETTINGS: "false" # disables settings UI and API
+      PHOTOPRISM_DISABLE_TENSORFLOW: "false" # disables all features depending on TensorFlow
+      PHOTOPRISM_DISABLE_FACES: "false" # disables face detection and recognition (requires TensorFlow)
+      PHOTOPRISM_DISABLE_CLASSIFICATION: "false" # disables image classification (requires TensorFlow)
+      PHOTOPRISM_DISABLE_RAW: "false" # disables indexing and conversion of RAW files
+      PHOTOPRISM_RAW_PRESETS: "false" # enables applying user presets when converting RAW files (reduces performance)
+      PHOTOPRISM_JPEG_QUALITY: 85 # a higher value increases the quality and file size of JPEG images and thumbnails (25-100)
+      PHOTOPRISM_DETECT_NSFW: "false" # automatically flags photos as private that MAY be offensive (requires TensorFlow)
+      PHOTOPRISM_UPLOAD_NSFW: "true" # allows uploads that MAY be offensive (no effect without TensorFlow)
+      PHOTOPRISM_DATABASE_DRIVER: "mysql" # use MariaDB 10.5+ or MySQL 8+ instead of SQLite for improved performance
+      PHOTOPRISM_DATABASE_SERVER: "mariadb:3306" # MariaDB or MySQL database server (hostname:port)
+      PHOTOPRISM_DATABASE_NAME: "photoprism" # MariaDB or MySQL database schema name
+      PHOTOPRISM_DATABASE_USER: "photoprism" # MariaDB or MySQL database user name
+      PHOTOPRISM_DATABASE_PASSWORD: "${MARIADB_PASSWORD}" # MariaDB or MySQL database user password
+      PHOTOPRISM_SITE_CAPTION: "AI-Powered Photos App"
+      PHOTOPRISM_SITE_DESCRIPTION: "" # meta site description
+      PHOTOPRISM_SITE_AUTHOR: "" # meta site author
+      ## Hardware Video Transcoding:
+      PHOTOPRISM_FFMPEG_ENCODER: "software" # FFmpeg encoder ("software", "intel", "nvidia", "apple", "raspberry")
+      PHOTOPRISM_FFMPEG_BITRATE: "32" # FFmpeg encoding bitrate limit in Mbit/s (default: 50)
+    working_dir: "/photoprism" # do not change or remove
+    ## Storage Folders: "~" is a shortcut for your home directory, "." for the current directory
+    volumes:
+      - "photoprism_originals:/photoprism/originals" # original media files (photos and videos)
+      - "photoprism_import:/photoprism/import" # *optional* folder from which files can be imported to originals
+      - "photoprism_storage:/photoprism/storage" # *writable* storage folder for cache, database, and sidecar files (never remove)
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.photoprism.rule=Host(`${PHOTOPRISM_DOMAIN}`)"
+      - "traefik.http.routers.photoprism.entrypoints=https"
+      - "traefik.http.routers.photoprism.tls.certresolver=mytlschallenge"
+      - "traefik.http.services.photoprism.loadbalancer.server.port=2342"
+      - "com.centurylinklabs.watchtower.enable=true"
+    networks:
+      - proxy
+      - db
+  mariadb:
+    ## If MariaDB gets stuck in a restart loop, this points to a memory or filesystem issue:
+    ## https://docs.photoprism.app/getting-started/troubleshooting/#fatal-server-errors
+    restart: unless-stopped
+    image: mariadb:10.11
+    container_name: mariadb
+    user: 999:999
+    privileged: true
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    ## --lower-case-table-names=1 stores tables in lowercase and compares names in a case-insensitive manner
+    ## see https://mariadb.com/kb/en/server-system-variables/#lower_case_table_names
+    command: mysqld --innodb-buffer-pool-size=2G --lower-case-table-names=1 --transaction-isolation=READ-COMMITTED --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=512 --innodb-rollback-on-timeout=OFF --innodb-lock-wait-timeout=180
+    volumes:
+      - "mariadb_data:/var/lib/mysql"
+    environment:
+      MARIADB_AUTO_UPGRADE: "1"
+      MARIADB_INITDB_SKIP_TZINFO: "1"
+      MARIADB_DATABASE: "photoprism"
+      MARIADB_USER: "photoprism"
+      MARIADB_PASSWORD: "${MARIADB_PASSWORD}"
+      MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
+    networks:
+      - db
