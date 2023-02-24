@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Add setup-script to trigger on first login
+cat >> /root/.bashrc <<EOM
+chmod +x /opt/hcloud/photoprism_setup.sh
+/opt/hcloud/photoprism_setup.sh
+EOM

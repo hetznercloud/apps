@@ -1,0 +1,27 @@
+{
+  "description_de": "PhotoPrism\u00ae ist eine AI-Powered Foto-App f\u00fcr das dezentralisierte Web. Sie nutzt die neuesten Technologien, um Bilder automatisch zu markieren und zu finden, ohne Ihnen im Weg zu stehen.",
+  "description_en": "PhotoPrism\u00ae is an AI-Powered Photos App for the Decentralized Web. It makes use of the latest technologies to tag and find pictures automatically without getting in your way.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/photoprism/",
+  "name": "PhotoPrism",
+  "os_id": 67794396,
+  "packages": [
+    {
+      "license": "AGPLv3",
+      "name": "PhotoPrism"
+    },
+    {
+      "license": "MIT",
+      "name": "Traefik"
+    },
+    {
+      "license": "GPLv2",
+      "name": "MariaDB"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Docker"
+    }
+  ],
+  "recommended_server_type": 23,
+  "version": "latest"
+}
