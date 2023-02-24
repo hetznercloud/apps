@@ -14,12 +14,6 @@ variable "hcloud_api_token" {
   sensitive = true
 }
 
-variable "hcloud_server_type" {
-  type = string
-  default = "${env("HCLOUD_SERVER_TYPE")}"
-  sensitive = true
-}
-
 variable "hcloud_server_location" {
   type = string
   default = "${env("HCLOUD_SERVER_LOCATION")}"

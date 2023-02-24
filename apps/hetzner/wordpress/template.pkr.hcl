@@ -13,6 +13,11 @@ variable "app_checksum" {
   default = "80f0f829645dec07c68bcfe0a0a1e1d563992fcb"
 }
 
+variable "hcloud_server_type" {
+  type    = string
+  default = "cx11"
+}
+
 variable "hcloud_image" {
   type    = string
   default = "ubuntu-22.04"
