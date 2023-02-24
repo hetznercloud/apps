@@ -124,6 +124,7 @@ services:
       ## Hardware Video Transcoding:
       PHOTOPRISM_FFMPEG_ENCODER: "software" # FFmpeg encoder ("software", "intel", "nvidia", "apple", "raspberry")
       PHOTOPRISM_FFMPEG_BITRATE: "32" # FFmpeg encoding bitrate limit in Mbit/s (default: 50)
+      PHOTOPRISM_PARTNER_ID: "Hetzner"
     working_dir: "/photoprism" # do not change or remove
     ## Storage Folders: "~" is a shortcut for your home directory, "." for the current directory
     volumes:
