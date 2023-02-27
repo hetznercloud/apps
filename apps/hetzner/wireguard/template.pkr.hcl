@@ -8,11 +8,6 @@ variable "app_version" {
   default = "latest"
 }
 
-variable "hcloud_server_type" {
-  type    = string
-  default = "cx11"
-}
-
 variable "hcloud_image" {
   type    = string
   default = "ubuntu-22.04"
