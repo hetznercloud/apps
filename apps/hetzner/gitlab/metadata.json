@@ -22,6 +22,6 @@
       "name": "Postfix"
     }
   ],
-  "recommended_server_type": 5,
+  "recommended_server_type": 23,
   "version": "15.6"
 }
