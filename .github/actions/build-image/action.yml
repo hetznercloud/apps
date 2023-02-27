@@ -9,6 +9,8 @@ inputs:
     required: true
   server_type:
     required: true
+  base_server_type:
+    required: true
 runs:
   using: "composite"
   steps:
@@ -43,6 +45,7 @@ runs:
         target: apps/hetzner/${{ inputs.app }}/
       env:
         HCLOUD_API_TOKEN: ${{ inputs.token }}
+        HCLOUD_BASE_SERVER_TYPE: ${{ inputs.base_server_type }}
         HCLOUD_SERVER_TYPE: ${{ inputs.server_type }}
         HCLOUD_SERVER_LOCATION: ${{ inputs.server_location }}
 
