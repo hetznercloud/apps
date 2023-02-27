@@ -10,7 +10,7 @@ variable "app_version" {
 
 variable "hcloud_server_type" {
   type    = string
-  default = "cpx11"
+  default = "cx11"
 }
 
 variable "hcloud_image" {
