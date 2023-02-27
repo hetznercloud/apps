@@ -41,14 +41,14 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name": "my-server", "server_type": "cx11", "image": "wireguard"}' \
+     -d '{"name": "my-server", "server_type": "cpx11", "image": "wireguard"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Or via [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cx11 --image wireguard
+  hcloud server create --name my-server --type cpx11 --image wireguard
   ```
 
 ## Connecting VPN clients
