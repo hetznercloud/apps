@@ -1,0 +1,19 @@
+{
+  "description_de": "Eine Remote-Desktop-Software, die Open-Source-Alternative TeamViewer, ist sofort einsatzbereit und muss nicht konfiguriert werden. Sie haben die volle Kontrolle \u00fcber Ihre Daten und m\u00fcssen sich keine Sorgen um die Sicherheit machen.",
+  "description_en": "A remote desktop software, the open source TeamViewer alternative, works out of the box, no configuration required. You have full control of your data, with no concerns about security.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/rustdesk/",
+  "name": "RustDesk",
+  "os_id": 67794396,
+  "packages": [
+    {
+      "license": "AGPLv3",
+      "name": "RustDesk"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Docker"
+    }
+  ],
+  "recommended_server_type": 22,
+  "version": "latest"
+}
