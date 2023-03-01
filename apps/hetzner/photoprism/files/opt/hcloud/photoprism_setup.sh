@@ -3,9 +3,9 @@
 cat <<EOF
  _________________________________________________________________________________
 |                                                                                 |
-|   Welcome to the Photoprism configuration.                                      |
+|   Welcome to the PhotoPrism configuration.                                      |
 |                                                                                 |
-|   In this process a Traefik, Photoprism, MariaDB and Watchtower will be set up  |
+|   In this process a Traefik, PhotoPrism, MariaDB and Watchtower will be set up  |
 |   accordingly together with all necessary dependencies. You only need to        |
 |   set your desired Domain and Email which will be used to configure             |
 |   the reverse proxy and to obtain Let's Encrypt Certificates.                   |
@@ -20,7 +20,7 @@ user_input(){
 
   while [ -z $domain ]
   do
-    read -p "Your Photoprism Domain: " domain
+    read -p "Your PhotoPrism Domain: " domain
   done
 
   echo "Please enter an Email address for Let's Encrypt notifications:"
@@ -48,7 +48,7 @@ docker compose -f /opt/containers/photoprism/docker-compose.yml pull &>/dev/null
 
 
 echo -en "\n"
-echo "Please enter your details to set up your Photoprism Instance."
+echo "Please enter your details to set up your PhotoPrism Instance."
 
 user_input
 
@@ -103,7 +103,7 @@ docker compose -f /opt/containers/photoprism/docker-compose.yml up -d
 } &> /dev/null & progress
 
 echo -en "\n\n"
-echo "The installation is complete and photoprism should be running at your domain."
+echo "The installation is complete and PhotoPrism should be running at your domain."
 echo "Your credentials were saved to /root/.hcloud_password"
 echo "--- https://${domain} ---"
 echo "User: photo_admin"
