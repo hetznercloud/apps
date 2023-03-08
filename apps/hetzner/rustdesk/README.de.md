@@ -1,5 +1,7 @@
 # Hetzner Cloud RustDesk
 
+<img src="images/rustdesk-logo.png" height="100px">
+
 [RustDesk](https://github.com/rustdesk/rustdesk/) verwandelt Ihren Server in einen sofort einsatzbereiten Remote-Desktop-Server, der ohne Konfiguration sofort funktioniert.
 Sie haben die volle Kontrolle über Ihre Daten und müssen sich keine Sorgen um die Sicherheit machen.
 
