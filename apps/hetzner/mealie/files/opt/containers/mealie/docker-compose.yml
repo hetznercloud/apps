@@ -1,0 +1,121 @@
+---
+version: "3.8"
+
+volumes:
+  traefik_data: {}
+  mealie_data: {}
+
+networks:
+  proxy:
+  backend:
+
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: "watchtower"
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  traefik:
+    image: traefik
+    container_name: "traefik"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - "--api=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--metrics.prometheus=true"
+      - "--metrics.prometheus.addEntryPointsLabels=true"
+      - "--metrics.prometheus.addServicesLabels=true"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/opt/traefik/access.log"
+      - "--global.sendAnonymousUsage=false"
+      - "--entryPoints.http.address=:80"
+      - "--entryPoints.https.address=:443"
+      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge=true"
+      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge.entryPoint=http"
+      - "--certificatesresolvers.mytlschallenge.acme.email=${LETSENCRYPT_MAIL}"
+      - "--certificatesresolvers.mytlschallenge.acme.storage=/opt/traefik/acme.json"
+    labels:
+      # global redirect HTTPS
+      - "traefik.http.routers.http-catchall.rule=HostRegexp(`{any:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=http"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https@docker"
+
+      # middleware: Redirect HTTP->HTTPS
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+
+      # sts middlewares
+      - "traefik.http.middlewares.servicestls.headers.stsincludesubdomains=false"
+      - "traefik.http.middlewares.servicestls.headers.stspreload=true"
+      - "traefik.http.middlewares.servicestls.headers.stsseconds=15552001"
+      - "traefik.http.middlewares.servicestls.headers.isdevelopment=false"
+
+      # https proto
+      - "traefik.http.middlewares.testHeader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.middlewares.testHeader.headers.framedeny=true"
+      - "traefik.http.middlewares.testHeader.headers.sslredirect=true"
+
+      # autoupdate traefik container
+      - "com.centurylinklabs.watchtower.enable=true"
+    networks:
+      - proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "traefik_data:/opt/traefik/"
+
+  mealie-frontend:
+    image: hkotel/mealie:frontend-${MEALIE_VERSION}
+    container_name: "mealie-frontend"
+    environment:
+      # Set Frontend ENV Variables Here
+      - API_URL=http://mealie-api:9000 #
+    restart: always
+    volumes:
+      - mealie_data:/app/data/
+    networks:
+      - proxy
+      - backend
+    labels:
+      - "traefik.http.routers.mealie.rule=Host(`${MEALIE_DOMAIN}`)"
+      - "traefik.http.routers.mealie.entrypoints=https"
+      - "traefik.http.routers.mealie.tls.certresolver=mytlschallenge"
+      - "traefik.http.services.mealie.loadbalancer.server.port=3000"
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  mealie-api:
+    image: hkotel/mealie:api-${MEALIE_VERSION}
+    container_name: "mealie-api"
+    restart: unless-stopped
+    volumes:
+      - mealie_data:/app/data/
+    environment:
+      # Set Backend ENV Variables Here
+      - ALLOW_SIGNUP=false
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - MAX_WORKERS=1
+      - WEB_CONCURRENCY=1
+      - DEFAULT_EMAIL=${MEALIE_DEFAULT_EMAIL}
+      - BASE_URL=https://${MEALIE_DOMAIN}
+      # - SMTP_HOST=None	# Required For email
+      # - SMTP_PORT=587	# Required For email
+      # - SMTP_FROM_NAME=Mealie	# Required For email
+      # - SMTP_AUTH_STRATEGY=TLS	# Required For email, Options: 'TLS', 'SSL', 'NONE'
+      # - SMTP_FROM_EMAIL=None	# Required For email
+      # - SMTP_USER=None	# Required if SMTP_AUTH_STRATEGY is 'TLS' or 'SSL'
+      # - SMTP_PASSWORD=None	# Required if SMTP_AUTH_STRATEGY is 'TLS' or 'SSL'
+    networks:
+      - backend

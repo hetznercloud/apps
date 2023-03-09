@@ -1,0 +1,23 @@
+{
+  "description_de": "Ein selbstgehosteter Rezeptmanager und Essensplaner mit einem RestAPI-Backend und einer in Vue entwickelten Frontend-Anwendung f\u00fcr eine angenehme Benutzererfahrung f\u00fcr die ganze Familie.",
+  "description_en": "A self-hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/mealie/",
+  "name": "Mealie",
+  "os_id": 67794396,
+  "packages": [
+    {
+      "license": "AGPLv3",
+      "name": "Mealie"
+    },
+    {
+      "license": "MIT",
+      "name": "Traefik"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Docker"
+    }
+  ],
+  "recommended_server_type": 22,
+  "version": "v1.0.0beta-5"
+}
