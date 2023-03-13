@@ -1,6 +1,7 @@
 # Hetzner Cloud PhotoPrism
 
 <img src="images/photoprism-logo.png" height="100px">
+<br>
 
 [PhotoPrism](https://github.com/photoprism/photoprism/) turns your server into a ready-to-go photo solution with AI functionality.
 It uses the latest technologies to automatically tag and find images without getting in your way.

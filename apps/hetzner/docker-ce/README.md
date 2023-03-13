@@ -1,6 +1,7 @@
 # Hetzner Cloud Docker
 
 <img src="images/docker-logo.png" height="97px">
+<br>
 
 This app contains a ready to use Docker installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).

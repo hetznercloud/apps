@@ -1,6 +1,7 @@
 # Hetzner Cloud Prometheus Grafana
 
 <img src="images/prometheus-grafana-logo.png" height="97px">
+<br>
 
 This app contains a ready Prometheus and Grafana installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
