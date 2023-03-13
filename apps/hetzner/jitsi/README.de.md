@@ -1,6 +1,7 @@
 # Hetzner Cloud Jitsi
 
 <img src="images/jitsi-logo.png" height="97px">
+<br>
 
 Diese App enthält eine fertige Jitsi-Installation.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.

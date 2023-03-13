@@ -1,6 +1,7 @@
 # Hetzner Cloud Owncast
 
 <img src="images/owncast-logo.png" height="100px">
+<br>
 
 Mit dieser App wird Ihr Server zu einem einsatzbereiten Live-Streaming- und Chat-Server. Mit [Owncast](https://owncast.online/) können Sie von OBS-Studio oder jeder anderen rtmp-Medienquelle streamen.
 

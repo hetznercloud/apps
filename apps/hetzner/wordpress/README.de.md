@@ -1,6 +1,7 @@
 # Hetzner Cloud WordPress
 
 <img src="images/wordpress-logo.png" height="97px">
+<br>
 
 Diese App enthält eine fertige WordPress-Installation inklusive MySQL und Apache2.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.

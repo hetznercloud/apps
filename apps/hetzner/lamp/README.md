@@ -1,6 +1,7 @@
 # Hetzner Cloud LAMP
 
 <img src="images/lamp-logo.png" height="97px">
+<br>
 
 This app contains a ready to use LAMP installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).

@@ -1,6 +1,7 @@
 # Hetzner Cloud PhotoPrism
 
 <img src="images/photoprism-logo.png" height="100px">
+<br>
 
 Mit [PhotoPrism](https://github.com/photoprism/photoprism/) wird Ihr Server zu einer einsatzbereiten Foto Lösung mit AI Funktionalität.
 Sie nutzt die neuesten Technologien, um Bilder automatisch zu markieren und zu finden, ohne Ihnen im Weg zu stehen.
