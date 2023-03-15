@@ -87,7 +87,7 @@ To change the admin password of the management UI, please follow these steps:
 1. Generate a bcrypt password hash of the new password, you can use the caddy cli for that:
 
    ```
-   caddy hash-password -algorithm bcrypt
+   caddy hash-password --algorithm bcrypt | tr -d '\n' | base64 -w0 && echo
    ```
 
 2. Edit `/usr/local/share/wireguard-ui/db/server/users.json` and replace the `password_hash` with the newly generated hash.
@@ -112,7 +112,7 @@ You can download the latest Caddy `caddy_*_linux_amd64.tar.gz` from their [relea
 tar -C /usr/local/bin -xzf caddy_*_linux_amd64.tar.gz caddy
 ```
 
-To update WireGuard UI, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above. Because of some recent patches, that did not make it into the latest WireGuard UI release yet, you might temporarily find more up to date builds [here](https://github.com/MarcusWichelmann/wireguard-ui/releases). If this is the case, please use these.
+To update WireGuard UI, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above.
 
 After everything is up to date again, please restart the affected systemd services:
 
