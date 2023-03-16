@@ -75,8 +75,8 @@ done
 
 echo "Installing. Please wait..."
 
-# Hash password
-password_hash=$(caddy hash-password -algorithm bcrypt -plaintext "$password")
+# Hash password and encode it again with base64 to be compatible with the format wireguard-ui requires
+password_hash=$(caddy hash-password --algorithm bcrypt --plaintext "$password" | tr -d '\n' | base64 -w0)
 
 # Populate the wireguard-ui default config
 sed -i "s/\$session_secret/$session_secret/g" /etc/default/wireguard-ui

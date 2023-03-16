@@ -87,7 +87,7 @@ Um das Admin-Passwort der Management-UI zu ändern, folgen Sie bitte diesen Schr
 1. Generieren Sie einen bcrypt Passwort-Hash für das neue Passwort. Sie können dafür die Caddy CLI benutzen:
 
    ```
-   caddy hash-password -algorithm bcrypt
+   caddy hash-password --algorithm bcrypt | tr -d '\n' | base64 -w0 && echo
    ```
 
 2. Bearbeiten Sie `/usr/local/share/wireguard-ui/db/server/users.json` und ersetzen Sie den `password_hash` mit dem soeben generierten, neuen Hash.
@@ -112,7 +112,7 @@ Für Caddy können Sie die aktuellste `caddy_*_linux_amd64.tar.gz` von der [Rele
 tar -C /usr/local/bin -xzf caddy_*_linux_amd64.tar.gz caddy
 ```
 
-Um WireGuard UI zu aktualisieren, laden Sie bitte das neueste Release-Archiv von deren [Release-Seite](https://github.com/ngoduykhanh/wireguard-ui/releases) herunter und entpacken Sie die `wireguard-ui` Binärdatei nach `/usr/local/bin`, ähnlich wie oben gezeigt. Aufgrund von jüngsten Patches, die noch nicht in den offiziellen WireGuard UI Releases angekommen sind, finden Sie [hier](https://github.com/MarcusWichelmann/wireguard-ui/releases) möglicherweise vorrübergehend aktuellere Builds. Wenn dies der Fall ist, nutzen Sie bitte diese.
+Um WireGuard UI zu aktualisieren, laden Sie bitte das neueste Release-Archiv von deren [Release-Seite](https://github.com/ngoduykhanh/wireguard-ui/releases) herunter und entpacken Sie die `wireguard-ui` Binärdatei nach `/usr/local/bin`, ähnlich wie oben gezeigt.
 
 Nachdem alles wieder auf dem neuesten Stand ist, können Sie die betroffenen Dienste neustarten:
 

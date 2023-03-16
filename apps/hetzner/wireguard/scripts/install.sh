@@ -2,9 +2,7 @@
 set -e
 
 # Download the given version of wireguard-ui
-# TODO: For now, we use a fork of wireguard-ui that contains some fixes that have not been merged into upstream yet.
-# As soon as these fixes, or similar ones, are merged, we should switch back to a release by https://github.com/ngoduykhanh/wireguard-ui.
-wget "https://github.com/MarcusWichelmann/wireguard-ui/releases/download/v${wireguard_ui_version}/wireguard-ui-v${wireguard_ui_version}-linux-amd64.tar.gz" -O /tmp/wireguard-ui.tar.gz
+wget "https://github.com/ngoduykhanh/wireguard-ui/releases/download/v${wireguard_ui_version}/wireguard-ui-v${wireguard_ui_version}-linux-amd64.tar.gz" -O /tmp/wireguard-ui.tar.gz
 
 # Unpack wireguard-ui
 tar -C /usr/local/bin -xzf /tmp/wireguard-ui.tar.gz wireguard-ui
