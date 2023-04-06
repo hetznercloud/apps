@@ -77,7 +77,7 @@ Weitere Informationen über die installierten Pakete erhalten Sie in den offizie
 - [Docker](https://www.docker.com/)
 - [Caddy-docker-proxy](https://github.com/lucaslorentz/caddy-docker-proxy/)
 - [Watchtower](https://containrrr.dev/watchtower/)
-- [Postqres](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 - [Let’s Encrypt](https://letsencrypt.org/de/docs/)
 
