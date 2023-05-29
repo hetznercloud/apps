@@ -66,7 +66,7 @@ Um Let's Encrypt nachträglich zu aktivieren, führen Sie bitte folgende Schritt
 
 ### Betriebssystem
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installierte Pakete
 
