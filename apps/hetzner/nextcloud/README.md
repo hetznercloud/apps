@@ -69,7 +69,7 @@ To activate Let's Encrypt after the initial script has run, please follow the st
 
 ### Base OS
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installed packages
 
