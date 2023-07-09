@@ -133,7 +133,7 @@ services:
       - "photoprism_storage:/photoprism/storage" # *writable* storage folder for cache, database, and sidecar files (never remove)
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=proxy"
+      - "traefik.docker.network=photoprism_proxy"
       - "traefik.http.routers.photoprism.rule=Host(`${PHOTOPRISM_DOMAIN}`)"
       - "traefik.http.routers.photoprism.entrypoints=https"
       - "traefik.http.routers.photoprism.tls.certresolver=mytlschallenge"
