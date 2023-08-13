@@ -23,6 +23,12 @@ user_input(){
     read -p "Your domain: " domain
   done
 
+  echo "Please enter an admin username:"
+  while [ -z $username ]
+  do
+    read -p "username: " username
+  done
+
   echo "Please enter the password that should be used to protect the management UI:"
   while true
   do
@@ -80,6 +86,7 @@ password_hash=$(caddy hash-password --algorithm bcrypt --plaintext "$password" |
 
 # Populate the wireguard-ui default config
 sed -i "s/\$session_secret/$session_secret/g" /etc/default/wireguard-ui
+sed -i "s/\$admin_username/$admin_username/g" /etc/default/wireguard-ui
 sed -i "s/\$admin_password_hash/${password_hash//\//\\/}/g" /etc/default/wireguard-ui
 sed -i "s/\$domain/$domain/g" /etc/default/wireguard-ui
 sed -i "s/\$wg_interface_addresses/${wg_interface_addresses//\//\\/}/g" /etc/default/wireguard-ui
