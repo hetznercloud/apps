@@ -21,6 +21,8 @@ To activate the collection, please login to your server:
 
 This will take you through a process whereby you can then use any services from the web, with automatic Let's Encrypt support.
 
+After successful setup, the generated account details will be printed to your console. For reference, the admin user name by default is `photos_admin`.
+
 ## Hetzner Cloud API
 
 Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to set up a server with PhotoPrism.
@@ -67,6 +69,8 @@ We use automatically generated passwords that are stored in the following folder
 ```
 /root/.hcloud_password
 ```
+
+The PhotoPrism admin user name is `photos_admin` by default.
 
 ## Links
 
