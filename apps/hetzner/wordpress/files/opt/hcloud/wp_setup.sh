@@ -28,7 +28,7 @@ user_input(){
   while true
   do
     read -p "Your Email Address (for Wordpress Account): " email
-    if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' <<<"${email}" >/dev/null 2>&1; then
+    if grep -oP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}$' <<<"${email}" >/dev/null 2>&1; then
       break
     else
       echo "Please enter a valid E-Mail."
