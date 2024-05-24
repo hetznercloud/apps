@@ -11,7 +11,7 @@ EOM
 
 # Add alias to simplify managing HedgeDoc users
 cat >> /root/.bashrc <<EOM
-alias hedgedoc_users='docker compose -f /opt/containers/collab-tools/docker-compose.yml exec hedgedoc bin/manage_users'
+alias hedgedoc_users='docker compose -f /opt/containers/collab-tools/docker-compose.yml exec hedgedoc /app/hedgedoc/bin/manage_users'
 EOM
 
 # Save the passwords
