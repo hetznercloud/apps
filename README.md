@@ -32,3 +32,18 @@ These files will also be used to provide the documentation on https://docs.hetzn
 ### Metadata
 
 This file will contain some metadata which we use while displaying the app to you via our Cloud Console or public API.
+
+### Development
+
+You can build a snapshot yourself either for testing or to use as your personal app-template via
+
+```sh
+$ export HCLOUD_TOKEN=[...]
+$ ./build.sh
+
+Usage: ./build.sh <app> <arch>
+* app: subfolder in apps/hetzner/
+* arch: either amd64 or arm64
+
+$ ./build.sh wireguard arm64
+```
