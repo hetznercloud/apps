@@ -14,14 +14,19 @@ You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud
 
 Create your server as usual using the [Hetzner Cloud Console](https://console.hetzner.cloud). As an alternative to the operating system, you can choose an app that you would like to have pre-installed.
 
-WireGuard and the management UI are preinstalled when the image is booted, but not enabled yet.
+Now, that you know, which IP addresses are assigned to your server, configure a domain with the following DNS records, so you can use it for this WireGuard app:
 
-To activate them, please login to your server:
+- **A** record with the IPv4 address of the server, if it has one
+- **AAAA** record with the IPv6 address of the server, if it has one
+
+You may need to wait a few minutes until the DNS changes are propagated.
+
+After that, please login to your server:
 
 - By _SSH key_, if you provided one when you created your server.
 - By _root password_, which you received from us by email when you created your server, if no SSH key was provided.
 
-This will guide you through a process where you can configure the domain and admin password, that you can later use to reach the management UI. TLS will be automatically set up using Let's Encrypt.
+This will guide you through a process where you can configure the domain and admin credentials, that you can later use to reach the management UI. TLS will be automatically set up using Let's Encrypt.
 
 When you are done, you will be able to login to the management UI and configure the first WireGuard clients.
 
@@ -42,7 +47,7 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name": "my-server", "server_type": "cpx11", "image": "wireguard"}' \
+     -d '{"name": "my-server", "server_type":"cpx11", "image":"wireguard"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
@@ -70,7 +75,7 @@ This app automatically sets up a Caddy webserver as reverse proxy with automatic
 
 ### WireGuard config
 
-On first start, and each time the _Apply config_ button in the management UI is clicked, the WireGuard configuration at `/etc/wireguard/wg0.conf` is rewritten. There is a `wg-quick-watcher@wg0.path` systemd unit file, that triggers a `systemctl restart wg-quick@wg0` each time, the WireGuard config file is modified. That's how changes get applied.
+On first start, and each time the _Apply config_ button in the management UI is clicked, the WireGuard configuration at `/etc/wireguard/wg0.conf` is rewritten. There is a `wg-quick-watcher@wg0.path` systemd unit, that triggers a `systemctl restart wg-quick@wg0` each time, the WireGuard config file is modified. That's how changes get applied.
 
 If you want to modify the `wg0.conf` manually, you should disable WireGuard UI to make sure, that your changes do not get overwritten.
 
@@ -80,9 +85,9 @@ During installation, all IPv4 and IPv6 forwarding gets enabled in the kernel. To
 
 You can find the firewall and NAT configuration at `/etc/nftables.conf`. Changes can be applied with `systemctl restart nftables`.
 
-## Changing the admin password
+## Changing the password
 
-To change the admin password of the management UI, please follow these steps:
+The user password can be changed over the management UI after logging in and clicking on the current username. If you have forgotten your password or use an older version of the app, please follow these steps:
 
 1. Generate a bcrypt password hash of the new password, you can use the caddy cli for that:
 
@@ -91,6 +96,7 @@ To change the admin password of the management UI, please follow these steps:
    ```
 
 2. Edit `/usr/local/share/wireguard-ui/db/server/users.json` and replace the `password_hash` with the newly generated hash.
+   - On newer versions of wireguard-ui (since v0.5.0), the path is `/usr/local/share/wireguard-ui/db/users/{username}.json` instead.
 
 3. Restart WireGuard UI:
 
@@ -112,7 +118,7 @@ You can download the latest Caddy `caddy_*_linux_amd64.tar.gz` from their [relea
 tar -C /usr/local/bin -xzf caddy_*_linux_amd64.tar.gz caddy
 ```
 
-To update WireGuard UI, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above.
+To update WireGuard UI, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above. Because of some recent patches, that did not make it into the latest WireGuard UI release yet, you might find more up to date builds [here](https://github.com/MarcusWichelmann/wireguard-ui/releases). If this is the case, please use these.
 
 After everything is up to date again, please restart the affected systemd services:
 

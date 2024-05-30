@@ -3,7 +3,7 @@
   "description_en": "Nextcloud is a  self-hosted productivity platform that keeps you in control. Nextcloud products are designed with compliance in mind, providing extensive data policy enforcement, encryption, user management and auditing capabilities. Nextcloud is committed to provide technology that is a perfect fit for your organization.",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/nextcloud",
   "name": "Nextcloud",
-  "os_id": 67794396,
+  "os_id": 161547269,
   "packages": [
     {
       "license": "AGPLv3",
@@ -27,5 +27,5 @@
     }
   ],
   "recommended_server_type": 23,
-  "version": "25.0.3"
+  "version": "28.0.5"
 }

@@ -3,7 +3,7 @@
   "description_en": "LAMP describes a system which provides a Linux based Apache web server with PHP and MySQL database. All four components are open source projects.",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/lamp-stack",
   "name": "LAMP Stack",
-  "os_id": 67794396,
+  "os_id": 161547269,
   "packages": [
     {
       "license": "GPL",
@@ -27,5 +27,5 @@
     }
   ],
   "recommended_server_type": 23,
-  "version": "5.7"
+  "version": "latest"
 }

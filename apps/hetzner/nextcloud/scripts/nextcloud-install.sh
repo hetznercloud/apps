@@ -6,7 +6,8 @@ set -e
 sed -e "s|upload_max_filesize.*|upload_max_filesize = 50M|g" \
     -e "s|post_max_size.*|post_max_size = 50M|g" \
     -e "s|max_execution_time.*|max_execution_time = 60|g" \
-    -i /etc/php/8.1/apache2/php.ini
+    -e "s|memory_limit.*|memory_limit = 512M|g" \
+    -i /etc/php/8.3/apache2/php.ini
 
 # Download given Nextcloud version and check sha256 checksum
 wget "https://download.nextcloud.com/server/releases/nextcloud-${application_version}.zip" -O /tmp/nextcloud.zip

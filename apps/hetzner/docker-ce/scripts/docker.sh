@@ -1,7 +1,14 @@
-#!/bin/sh
+#!/bin/bash
+
+DEBARCH='amd64'
+
+ARCH=$(uname -i)
+if [ "$ARCH" == 'aarch64' ]; then
+    DEBARCH='arm64'
+fi
 
 echo \
-    "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    "deb [arch=$DEBARCH signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
 
 cat <<EOT >> /etc/apt/preferences.d/docker-ce.pref

@@ -34,7 +34,7 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name": "my-photoprism-server", "server_type": "cpx21", "image": "photoprism"}' \
+     -d '{"name":"my-photoprism-server", "server_type":"cpx21", "image":"photoprism"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 

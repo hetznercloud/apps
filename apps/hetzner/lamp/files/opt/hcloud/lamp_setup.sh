@@ -73,8 +73,8 @@ EOF
 # set domain_is_www variable
 if [[ $domain == "www."* ]]; then domain_is_www=true; else domain_is_www=false; fi
 
-sed -i "s/\$domain/$domain/g"  /etc/apache2/sites-enabled/000-default.conf
-sed -i "s/html/$domain/g"  /etc/apache2/sites-enabled/000-default.conf
+sed -i "s/\$domain/$domain/g"  /etc/apache2/sites-available/000-default.conf
+sed -i "s/html/$domain/g"  /etc/apache2/sites-available/000-default.conf
 
 chown -R www-data: /var/www/$domain/
 

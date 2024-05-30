@@ -37,6 +37,16 @@ progress(){
 
 }
 
+ARCH=$(uname -i)
+if [ "$ARCH" == 'aarch64' ]; then
+    # on arm64 we need to install
+    # rustdesk/rustdesk-server:latest-arm64v8
+    # instead of
+    # rustdesk/rustdesk-server:latest
+    echo >> /opt/containers/rustdesk/.env
+    echo "RUSTDESK_ARM64_SUFFIX=-arm64v8" >> /opt/containers/rustdesk/.env
+fi
+
 # already start to pull the docker images
 docker compose -f /opt/containers/rustdesk/docker-compose.yml pull &>/dev/null &
 
@@ -58,7 +68,6 @@ do
       * ) echo "Please type y or n.";;
     esac
 done
-
 
 echo "The installation is being performed. This can take some time..."
 {

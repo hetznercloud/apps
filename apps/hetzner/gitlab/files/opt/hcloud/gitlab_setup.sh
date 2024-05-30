@@ -87,7 +87,7 @@ fi
 # Reconfigure gitlab
 gitlab-ctl reconfigure
 
-} &> /dev/null & progress
+} &> /var/log/hcloud-gitlab-setup.log & progress
 
 source /root/.hcloud_password
 echo -en "\n\n"

@@ -85,4 +85,13 @@ expect eof
 
 EXPECT
 
-curl localhost/users/sign_in | grep 'GitLab Community Edition'
+echo "Waiting for gitlab: ..."
+for i in {1..90}; do
+  if [[ "$(curl localhost/users/sign_in | grep 'GitLab Community Edition')" ]]; then
+    exit 0
+  fi
+  sleep 2
+  echo -n .
+done
+
+exit 1

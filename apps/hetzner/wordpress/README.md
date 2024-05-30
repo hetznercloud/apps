@@ -34,14 +34,14 @@ In addition to the Hetzner Cloud Console you can also use the Hetzner Cloud API 
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name":"my-server", "server_type":"cx31", "image":"wordpress"}' \
+     -d '{"name":"my-server", "server_type":"cpx21", "image":"wordpress"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Or via [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cx31 --image wordpress
+  hcloud server create --name my-server --type cpx21 --image wordpress
   ```
 
 ## Activate Let's Encrypt post installation

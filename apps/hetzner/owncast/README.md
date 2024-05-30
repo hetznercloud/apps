@@ -31,7 +31,7 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name": "my-owncast-server", "server_type": "cpx21", "image": "owncast"}' \
+     -d '{"name":"my-owncast-server", "server_type":"cpx21", "image":"owncast"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 

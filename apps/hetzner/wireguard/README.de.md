@@ -14,14 +14,19 @@ Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud)
 
 Erstellen Sie sich Ihren Server wie gewohnt über die [Hetzner Cloud Console](https://console.hetzner.cloud). Alternativ zum Betriebssystem können Sie eine App wählen, die Sie gerne vorinstalliert hätten.
 
-WireGuard und das Management-Webinterface "WireGuard UI" sind auf dem Server vorinstalliert, aber zunächst nicht aktiviert.
+Nun, wo Sie die IP-Adressen wissen, die dem Server zugeordnet wurden, konfigurieren Sie die Domain, die Sie für die WireGuard App nutzen möchten, mit den folgenden DNS Einträgen:
 
-Um sie zu aktivieren, melden Sie sich bitte auf Ihrem server an:
+- **A**-Record mit der IPv4-Adresse des Servers, falls vorhanden
+- **AAAA**-Record mit der IPv6-Adresse des Servers, falls vorhanden
+
+Möglicherweise müssen Sie ein paar Minuten warten, bis die DNS-Änderungen übernommen wurden.
+
+Anschließend melden Sie sich bitte auf Ihrem server an:
 
 - Per _SSH-Key_, falls Sie beim Erstellen Ihres Servers einen angegeben haben
 - Per _root-Passwort_, das Sie beim Erstellen Ihres Servers per E-Mail von uns erhalten haben, wenn kein SSH-Key angegeben wurde
 
-Dies führt Sie durch einen Prozess, wobei Sie Angaben wie die Domain und ein Admin-Passwort konfigurieren können, welche Sie anschließend nutzen können, um die Management-UI zu erreichen. TLS mittels Let's Encrypt wird automatisch für Sie konfiguriert.
+Dies führt Sie durch einen Prozess, wobei Sie Angaben wie die Domain und Admin-Zugangsdaten konfigurieren können, welche Sie anschließend nutzen können, um die Management-UI zu erreichen. TLS mittels Let's Encrypt wird automatisch für Sie konfiguriert.
 
 Wenn Sie fertig sind, können Sie sich an der Management-UI anmelden und Ihre ersten WireGuard Clients anlegen.
 
@@ -42,14 +47,14 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinst
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name":"my-server", "server_type":"cpx21", "image":"wireguard"}' \
+     -d '{"name":"my-server", "server_type":"cpx11", "image":"wireguard"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Oder über [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cpx21 --image wireguard
+  hcloud server create --name my-server --type cpx11 --image wireguard
   ```
 
 ## VPN-Clients verbinden
@@ -70,7 +75,7 @@ Diese App richtet als Reverse-Proxy automatisch einen Caddy Webserver mit automa
 
 ### WireGuard-Konfiguration
 
-Beim ersten Start, und jedes Mal, wenn in der Management-UI _Apply config_ betätigt wird, wird die WireGuard-Konfiguration unter `/etc/wireguard/wg0.conf` neugeschrieben. Es existiert eine `wg-quick-watcher@wg0.path` Systemd Unit File, die jedes Mal, wenn die Konfiguration verändert wird, ein `systemctl restart wg-quick@wg0` auslöst. Auf diese Weise werden Änderungen angewendet.
+Beim ersten Start, und jedes Mal, wenn in der Management-UI _Apply config_ betätigt wird, wird die WireGuard-Konfiguration unter `/etc/wireguard/wg0.conf` neugeschrieben. Es existiert eine `wg-quick-watcher@wg0.path` Systemd Unit, die jedes Mal, wenn die Konfiguration verändert wird, ein `systemctl restart wg-quick@wg0` auslöst. Auf diese Weise werden Änderungen angewendet.
 
 Wenn Sie die `wg0.conf` manuell anpassen wollen, sollten Sie vorher WireGuard UI deaktivieren, um sicherzustellen, dass Ihre Anpassungen nicht überschrieben werden.
 
@@ -80,9 +85,9 @@ Während der Installation wird das IPv4- und IPv6-Forwarding im Kernel aktiviert
 
 Sie finden die Firewall- und NAT-Konfiguration unter `/etc/nftables.conf`. Änderungen können mit `systemctl restart nftables` angewendet werden.
 
-## Admin-Passwort ändern
+## Passwort ändern
 
-Um das Admin-Passwort der Management-UI zu ändern, folgen Sie bitte diesen Schritten:
+Das Benutzer-Passwort lässt sich über die Management-UI ändern, nachdem Sie eingeloggt sind und auf Ihren aktuellen Nutzernamen klicken. Falls Sie aber Ihr Passwort vergessen haben, oder eine ältere Version der App benutzen, folgen Sie bitte diesen Schritten:
 
 1. Generieren Sie einen bcrypt Passwort-Hash für das neue Passwort. Sie können dafür die Caddy CLI benutzen:
 
@@ -91,6 +96,7 @@ Um das Admin-Passwort der Management-UI zu ändern, folgen Sie bitte diesen Schr
    ```
 
 2. Bearbeiten Sie `/usr/local/share/wireguard-ui/db/server/users.json` und ersetzen Sie den `password_hash` mit dem soeben generierten, neuen Hash.
+  - Bei neueren Versionen von wireguard-ui (seit v0.5.0) lautet der Pfad stattdessen `/usr/local/share/wireguard-ui/db/users/{username}.json`.
 
 3. Starten Sie WireGuard UI neu:
 
@@ -112,7 +118,7 @@ Für Caddy können Sie die aktuellste `caddy_*_linux_amd64.tar.gz` von der [Rele
 tar -C /usr/local/bin -xzf caddy_*_linux_amd64.tar.gz caddy
 ```
 
-Um WireGuard UI zu aktualisieren, laden Sie bitte das neueste Release-Archiv von deren [Release-Seite](https://github.com/ngoduykhanh/wireguard-ui/releases) herunter und entpacken Sie die `wireguard-ui` Binärdatei nach `/usr/local/bin`, ähnlich wie oben gezeigt.
+Um WireGuard UI zu aktualisieren, laden Sie bitte das neueste Release-Archiv von deren [Release-Seite](https://github.com/ngoduykhanh/wireguard-ui/releases) herunter und entpacken Sie die `wireguard-ui` Binärdatei nach `/usr/local/bin`, ähnlich wie oben gezeigt. Aufgrund von jüngsten Patches, die noch nicht in den offiziellen WireGuard UI Releases angekommen sind, finden Sie [hier](https://github.com/MarcusWichelmann/wireguard-ui/releases) möglicherweise aktuellere Builds. Wenn dies der Fall ist, nutzen Sie bitte diese.
 
 Nachdem alles wieder auf dem neuesten Stand ist, können Sie die betroffenen Dienste neustarten:
 

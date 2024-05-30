@@ -4,11 +4,17 @@
 # Please note, that most of these settings have no affect after the initial start of wireguard-ui.
 # After that, wireguard-ui stores these settings in its own db and you can change them through the UI (or manually in the db) only.
 
+# Set this variable if you run wireguard-ui under a subpath of your reverse proxy virtual host.
+#BASE_PATH=/wireguard
+
+# The addresses where wireguard-ui should bind on.
+#BIND_ADDRESS=0.0.0.0:80
+
 # Used to encrypt the session cookies. Should be a random key, 32 characters long.
 SESSION_SECRET=$session_secret
 
 # The login credentials for initial configuration.
-WGUI_USERNAME=admin
+WGUI_USERNAME=$admin_username
 WGUI_PASSWORD_HASH=$admin_password_hash
 
 # The default endpoint address used in the global settings.
@@ -25,14 +31,17 @@ WGUI_MTU=1300
 # The default persistent keepalive interval used in the global settings.
 WGUI_PERSISTENT_KEEPALIVE=15
 
-# The default forward mark used in the global settings.
-WGUI_FORWARD_MARK=0xca6c
+# The default firewall mark used in the global settings.
+WGUI_FIREWALL_MARK=0xca6c
+
+# The default routing table used in the global settings.
+WGUI_TABLE=auto
 
 # The default config file path used in the global settings.
 WGUI_CONFIG_FILE_PATH=/etc/wireguard/wg0.conf
 
-# Set this variable if you run wireguard-ui under a subpath of your reverse proxy virtual host.
-#BASE_PATH=/wireguard
+# The default log level.
+WGUI_LOG_LEVEL=INFO
 
 # The default interface addresses (comma-separated-list) used in the WireGuard server configuration.
 WGUI_SERVER_INTERFACE_ADDRESSES=$wg_interface_addresses

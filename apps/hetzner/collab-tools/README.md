@@ -29,14 +29,14 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name": "my-server", "server_type": "cpx21", "image": "collaboration-tools"}' \
+     -d '{"name":"my-server", "server_type":"cpx21", "image":"collab-tools"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Or via [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cpx21 --image collaboration-tools
+  hcloud server create --name my-server --type cpx21 --image collab-tools
   ```
 
 ## Image content
@@ -57,7 +57,7 @@ This image contains Docker and all other listed applications as Docker container
 | Docker             | GPLv3 (Apache 2.0) |
 | Watchtower         | GPLv3 (Apache 2.0) |
 | Caddy-docker-proxy | MIT                |
-| Postqresql         | PostgreSQL Licence |
+| PostgreSQL         | PostgreSQL Licence |
 
 ### Passwords
 
