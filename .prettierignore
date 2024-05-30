@@ -1,9 +1,0 @@
-.github/workflows/packer-docker-ce.yml
-.github/workflows/packer-gitlab.yml
-.github/workflows/packer-jitsi.yml
-.github/workflows/packer-lamp.yml
-.github/workflows/packer-nextcloud.yml
-.github/workflows/packer-wordpress.yml
-.github/workflows/packer-prometheus-grafana.yml
-.github/workflows/packer-collab-tools.yml
-apps/hetzner/prometheus-grafana/files/opt/containers/prometheus-grafana/grafana/provisioning/dashboards/
