@@ -24,7 +24,7 @@ services:
       - 21116:21116
       - 21116:21116/udp
       - 21118:21118
-    image: rustdesk/rustdesk-server:latest
+    image: rustdesk/rustdesk-server:latest${RUSTDESK_ARM64_SUFFIX}
     command: hbbs -r ${RUSTDESK_DOMAIN}:21117
     volumes:
       - ./data:/root
@@ -41,8 +41,8 @@ services:
     ports:
       - 21117:21117
       - 21119:21119
-    image: rustdesk/rustdesk-server:latest
-    command: hbbr
+    image: rustdesk/rustdesk-server:latest${RUSTDESK_ARM64_SUFFIX}
+    command: hbbr -k _
     volumes:
       - ./data:/root
     networks:

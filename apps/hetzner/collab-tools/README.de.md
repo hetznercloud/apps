@@ -29,14 +29,14 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit allen v
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name":"my-server", "server_type":"cpx21", "image":"collaboration-tools"}' \
+     -d '{"name":"my-server", "server_type":"cpx21", "image":"collab-tools"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Oder über [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cpx21 --image collaboration-tools
+  hcloud server create --name my-server --type cpx21 --image collab-tools
   ```
 
 ## Image Inhalt
@@ -57,7 +57,7 @@ Dieses Image enthält Docker und alle anderen aufgeführten Anwendungen als Dock
 | Docker             | GPLv3 (Apache 2.0) |
 | Watchtower         | GPLv3 (Apache 2.0) |
 | Caddy-docker-proxy | MIT                |
-| Postqresql         | PostgreSQL Licence |
+| PostgreSQL         | PostgreSQL Licence |
 
 ### Passwörter
 

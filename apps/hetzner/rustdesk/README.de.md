@@ -32,14 +32,14 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines RustDesk Servers au
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name":"my-rustdesk-server", "server_type":"cpx21", "image":"rustdesk"}' \
+     -d '{"name":"my-rustdesk-server", "server_type":"cpx11", "image":"rustdesk"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Oder über [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-rustdesk-server --type cpx21 --image rustdesk
+  hcloud server create --name my-rustdesk-server --type cpx11 --image rustdesk
   ```
 
 ## Image Inhalt

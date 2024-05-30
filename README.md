@@ -16,17 +16,18 @@ We use a combination of [Packer](https://www.packer.io/) and [cloud-init](https:
 
 This results in as much transparency to the actual content as possible and allows you to reproduce what ends up in the app you deploy to your server by looking at the files in this repository.
 
+> We do not build the apps on Github anymore but on our internal CI. This repo contains a mirror of the used packer templates and metadata and a script to build a snapshot yourself.
+
 ## Structure
 
 The officially by Hetzner maintained apps live under `apps/hetzner` and might use some generic scripts from `apps/shared`.
-Each app will live in its own folder and have a dedicated `.github/workflows` file for the CI.
 
 ### Readme
 
 Each app will have both a `README.md` and a `README.de.md` file which will give you a short overview about the implementation of the software in our apps.
 This will include what we have installed in this image, where you can find passwords if we have generated any and what you might need to configure by yourself.
 
-These files will also be used to provide the documentation on https://docs.hetzner.com.
+These files will also be used to provide the documentation on https://docs.hetzner.com/cloud/apps.
 
 ### Metadata
 
@@ -34,8 +35,15 @@ This file will contain some metadata which we use while displaying the app to yo
 
 ### Development
 
-We use GitHub Actions and [pre-commit](https://pre-commit.com/) to enforce different rule sets.
-GitHub Actions run automatically on each Pull Request.
+You can build a snapshot yourself either for testing or to use as your personal app-template via
 
-In order to set up your local machine to validate your changes with `pre-commit`, [install it](https://pre-commit.com/#install)
-and run `pre-commit install` to enable the hooks locally.
+```sh
+$ export HCLOUD_TOKEN=[...]
+$ ./build.sh
+
+Usage: ./build.sh <app> <arch>
+* app: subfolder in apps/hetzner/
+* arch: either amd64 or arm64
+
+$ ./build.sh wireguard arm64
+```

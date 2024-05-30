@@ -23,7 +23,7 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
 
   database:
-    image: postgres:13.4-alpine
+    image: postgres:13.12-alpine@sha256:aabd695a63c5bd78e05a8c9c0f897c48e115dea1d590e10049dbf25b81349697
     restart: unless-stopped
     environment:
       - POSTGRES_USER=${DB_USER}
@@ -53,16 +53,19 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
 
   hedgedoc:
-    image: quay.io/hedgedoc/hedgedoc:1.9.2-alpine
+    image: lscr.io/linuxserver/hedgedoc:latest
     restart: unless-stopped
     environment:
-      - CMD_DB_URL=postgres://${DB_USER}:${DB_PASS}@database:5432/${DB_NAME}
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
       - CMD_DOMAIN=${HEDGEDOC_DOMAIN}
       - CMD_URL_ADDPORT=false
       - CMD_PROTOCOL_USESSL=true
       - CMD_ALLOW_ORIGIN=[ "localhost", ${HEDGEDOC_DOMAIN} ]
       - CMD_ALLOW_ANONYMOUS=false
       - CMD_ALLOW_EMAIL_REGISTER=false
+      - CMD_DB_URL=postgres://${DB_USER}:${DB_PASS}@database:5432/${DB_NAME}
     expose:
       - 3000
     volumes:
@@ -98,7 +101,11 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
 
   whiteboard:
-    image: rofl256/whiteboard
+    # rofl256/whiteboard wasn't available for ARM64 at the time of writing
+    # https://github.com/cracker0dks/whiteboard/pull/164
+    # when an official arm64 image is available, this can be reenabled
+    # image: rofl256/whiteboard
+    build: /opt/containers/whiteboard
     restart: unless-stopped
     expose:
       - 8080

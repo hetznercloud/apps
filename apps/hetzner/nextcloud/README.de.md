@@ -32,14 +32,14 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinst
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name":"my-server", "server_type":"cx31", "image":"nextcloud"}' \
+     -d '{"name":"my-server", "server_type":"cpx21", "image":"nextcloud"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Oder über [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cx31 --image nextcloud
+  hcloud server create --name my-server --type cpx21 --image nextcloud
   ```
 
 ## Let's Encrypt nachträglich aktivieren
@@ -66,7 +66,7 @@ Um Let's Encrypt nachträglich zu aktivieren, führen Sie bitte folgende Schritt
 
 ### Betriebssystem
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 20.04
 
 ### Installierte Pakete
 

@@ -9,30 +9,56 @@ cat <<EOF
 |   accordingly. You only need to set your desired domain which will      |
 |   be used to configure the reverse proxy and to obtain Let's Encrypt    |
 |   certificates.                                                         |
-|                                                                         |
-|   ATTENTION: Please make sure your domain exists and points to the      |
-|              IPv4/IPv6 address of your server!                          |
-|                                                                         |
-|   Please enter the domain in following pattern: wireguard.example.com   |
 |_________________________________________________________________________|
 EOF
 
 user_input(){
-  while [ -z $domain ]
-  do
-    read -p "Your domain: " domain
-  done
-
-  echo "Please enter the password that should be used to protect the management UI:"
+  echo "Please enter a domain (e.g. wireguard.example.com) that points to the IPv4 and/or IPv6 address"
+  echo "of this server."
   while true
   do
-    read -s -p "Password: " password
+    read -p "Your domain: " domain
+    [ -z $domain ] && continue
+
+    if [ "$domain" != "${domain/.clients.your-server.de/}" ]; then
+      echo -en "\n"
+      echo "WARNING: Using *.clients.your-server.de domains is not recommended, because Let's Encrypt"
+      echo "will likely run into a rate limit and your VM will not be able to retrieve a TLS certificate."
+      echo "Please configure your own domain and enter it here."
+
+      while true
+      do
+        read -p "Do you want to use this domain anyway? [y/N] " confirm
+        : ${confirm:="N"}
+
+        case $confirm in
+          [yY][eE][sS]|[yY] ) break 2;;
+          [nN][oO]|[nN] ) unset domain; echo -en "\n"; continue 2;;
+          * ) echo "Please type y or n.";;
+        esac
+      done
+    fi
+
+    break
+  done
+
+  echo -en "\n"
+  echo "Please enter the credentials for the user that is used to protect the management UI:"
+  while [ -z $username ]
+  do
+    read -p "Admin username: " username
+  done
+
+  while true
+  do
+    read -s -p "Admin password: " password
     echo
-    read -s -p "Password (again): " password2
+    read -s -p "Admin password (again): " password2
     echo
     [ "$password" = "$password2" ] && break || echo "Please try again."
   done
 
+  echo -en "\n"
   echo "Please enter an Email address for Let's Encrypt notifications:"
   while [ -z $email ]
   do
@@ -57,6 +83,7 @@ fi
 
 echo -en "\n"
 echo "Please enter your details to set up your new WireGuard instance."
+echo -en "\n"
 
 user_input
 
@@ -68,7 +95,7 @@ do
 
   case $confirm in
     [yY][eE][sS]|[yY] ) break;;
-    [nN][oO]|[nN] ) unset domain password email; user_input;;
+    [nN][oO]|[nN] ) unset domain username password email; user_input;;
     * ) echo "Please type y or n.";;
   esac
 done
@@ -80,6 +107,7 @@ password_hash=$(caddy hash-password --algorithm bcrypt --plaintext "$password" |
 
 # Populate the wireguard-ui default config
 sed -i "s/\$session_secret/$session_secret/g" /etc/default/wireguard-ui
+sed -i "s/\$admin_username/$username/g" /etc/default/wireguard-ui
 sed -i "s/\$admin_password_hash/${password_hash//\//\\/}/g" /etc/default/wireguard-ui
 sed -i "s/\$domain/$domain/g" /etc/default/wireguard-ui
 sed -i "s/\$wg_interface_addresses/${wg_interface_addresses//\//\\/}/g" /etc/default/wireguard-ui
@@ -116,7 +144,8 @@ sysctl -p &> /dev/null
 
 echo -en "\n\n"
 echo "The installation is complete and WireGuard should be ready to use."
-echo "Please go to https://$domain and log in with the user \"admin\" and your password to configure WireGuard clients."
+echo "Please go to https://$domain and log in with the user \"$username\" and your password to"
+echo "configure WireGuard clients."
 echo -en "\n"
 
 # Remove startup script from .bashrc

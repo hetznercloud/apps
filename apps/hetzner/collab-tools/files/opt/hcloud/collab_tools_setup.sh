@@ -100,7 +100,7 @@ docker compose -f /opt/containers/collab-tools/docker-compose.yml up -d
 countdown
 
 # wait until the setup is up before injecting the user
-docker compose -f /opt/containers/collab-tools/docker-compose.yml exec hedgedoc bin/manage_users --add docs@local.host --pass $hedgedoc_pass &> /dev/null
+docker compose -f /opt/containers/collab-tools/docker-compose.yml exec hedgedoc /app/hedgedoc/bin/manage_users --add docs@local.host --pass $hedgedoc_pass &> /dev/null
 
 source /root/.hcloud_password
 echo -en "\n\n"
