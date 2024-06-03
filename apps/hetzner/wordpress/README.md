@@ -6,6 +6,8 @@
 This app contains a ready to use WordPress installation including MySQL and Apache2.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/wordpress)
+
 [WordPress](https://wordpress.com/) is an open source content management system that allows you to create a website or blog in minutes.
 
 ## Getting started
@@ -68,7 +70,7 @@ To activate Let's Encrypt after the initial script has run, please follow the st
 
 ### Base OS
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 24.04
 
 ### Installed packages
 
