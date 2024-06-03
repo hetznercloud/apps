@@ -6,6 +6,8 @@
 This app contains a ready to use GitLab installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/gitlab)
+
 [GitLab](https://about.gitlab.com/) is an open-source DevOps platform. Its mission is to help teams collaborate on software development and to provide a place where everyone can contribute. This app allows you to manage changes to documents and more.
 
 ## Getting started
@@ -72,7 +74,7 @@ To activate Let's Encrypt after the initial script has run, please follow the st
 
 ### Base OS
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installed packages
 

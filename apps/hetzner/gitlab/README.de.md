@@ -6,6 +6,8 @@
 Diese App enthält eine fertige GitLab-Installation.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/gitlab)
+
 [GitLab](https://about.gitlab.com/) ist eine Open-Source DevOps-Plattform. Ziel der Anwendung ist es die Zusammenarbeit bei der Softwareentwicklung in Teams zu vereinfachen und einen Ort zur Verfügung zu stellen, an dem jeder etwas zum Projekt beitragen kann. Mit dieser App ist es unter anderem möglich Änderungen an Dokumenten oder Dateien zu erfassen.
 
 ## Getting Started
@@ -70,7 +72,7 @@ Gitlab stellt automatisiert alles auf SSL um und bezieht ein gültiges Let's Enc
 
 ### Betriebssystem
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installierte Pakete
 
