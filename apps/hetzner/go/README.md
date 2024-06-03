@@ -6,6 +6,8 @@
 This app contains a ready to use Go installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/go)
+
 [Go](https://go.dev/) is an open source programming language that makes it easy to build simple, reliable, and efficient software.
 
 ## Getting started
