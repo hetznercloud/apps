@@ -6,6 +6,8 @@
 Diese App enthält eine fertige Ruby-Installation.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/ruby)
+
 [Ruby](https://www.ruby-lang.org/de/) ist eine dynamische, freie Programmiersprache, die sich einfach anwenden und produktiv einsetzen lässt. Sie hat eine elegante Syntax, die man leicht lesen und schreiben kann.
 
 ## Getting Started
