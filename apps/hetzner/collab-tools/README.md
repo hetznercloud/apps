@@ -3,6 +3,8 @@
 This app contains a collection of different collaboration tools.
 You can install them via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/collab-tools)
+
 The collaboration collection consists of [Transfer](https://transfer.sh/), a file sharing service which can be used both via the web interface and via the command line, [HedgeDoc](https://hedgedoc.org/) which can be used as a Markdown editor for brainstorming by several people at the same time and [Whiteboard](https://github.com/cracker0dks/whiteboard) to document ideas graphically.
 
 ## Getting Started
