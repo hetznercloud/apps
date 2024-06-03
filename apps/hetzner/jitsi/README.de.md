@@ -6,6 +6,8 @@
 Diese App enthält eine fertige Jitsi-Installation.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/jitsi)
+
 [Jitsi](https://jitsi.org/) ist eine Sammlung an Open Source Projekten, die es Ihnen ermöglichen sichere Videokonferenzlösungen einfach zu bauen und anzuwenden. Das Herz von Jitsi bilden Jitsi Videobridge und Jitsi Meet, die es Ihnen ermöglichen Konferenzen im Internet abzuhalten.
 
 ## Getting Started
@@ -58,7 +60,7 @@ Dieses stellt Jitsi auf SSL um und bezieht ein gültiges Let's Encrypt Zertifika
 
 ### Betriebssystem
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 22.04
 
 ### Installierte Pakete
 
