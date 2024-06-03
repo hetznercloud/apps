@@ -6,6 +6,8 @@
 This app contains a ready Prometheus and Grafana installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/prometheus-grafana)
+
 [Grafana](https://grafana.com/) is an open source software for visualization of metrics. These metrics are provided by the application [Prometheus](https://prometheus.io/).
 
 ## Getting Started
