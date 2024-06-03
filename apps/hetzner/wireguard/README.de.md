@@ -6,6 +6,8 @@
 Mit dieser App wird Ihr Server zu einem einfach zu verwendenen WireGuard VPN-Server, inklusive Management-Webinterface. Durch diesen VPN können Ihre Geräte auf das Internet zugreifen, sowie auf alle privaten Netzwerke, die mit dem Server verbunden sind.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/wireguard)
+
 [WireGuard](https://www.wireguard.com/) ist eine sehr einfache, aber schnelle und moderne VPN-Lösung, die state-of-the-art Kryptographie verwendet. Es zielt darauf an, schneller, einfacher, schlanker und nützlicher als IPsec zu sein. Es ist außerdem wesentlich performanter als OpenVPN.
 
 [WireGuard UI](https://github.com/ngoduykhanh/wireguard-ui) ist eine einfache, web-basierte Management-UI für WireGuard.
