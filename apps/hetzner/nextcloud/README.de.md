@@ -6,6 +6,8 @@
 Diese App enthält eine fertige Nextcloud-Installation.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/nextcloud)
+
 [Nextcloud](https://nextcloud.com/de/) vereint die Einfachheit mit der sich Dienste wie Dropbox und Google Drive nutzen lassen mit Sicherheit, Privatsphäre und Kontrolle. Es ist eine freie Software, mit der man unter anderem Daten auf einem eigenen Server speichern kann (Filehosting).
 
 ## Getting Started
@@ -66,7 +68,7 @@ Um Let's Encrypt nachträglich zu aktivieren, führen Sie bitte folgende Schritt
 
 ### Betriebssystem
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 24.04
 
 ### Installierte Pakete
 
