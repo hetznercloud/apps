@@ -6,6 +6,8 @@
 This app contains a ready to use Docker installation.
 You can install it via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/docker-ce)
+
 [Docker](https://www.docker.com/) is an open source project that uses OS-level virtualization to deliver software in packages called containers. This app allows you to deploy applications in any environment.
 
 ## Getting started
@@ -44,7 +46,7 @@ In addition to the Hetzner Cloud Console you can also use the Hetzner Cloud API 
 
 ### Base OS
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installed packages
 
