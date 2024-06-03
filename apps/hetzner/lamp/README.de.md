@@ -6,6 +6,8 @@
 Diese App enthält eine fertige LAMP-Installation.
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
+[![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/lamp)
+
 LAMP beschreibt ein System, das den Web-Server Apache mit PHP und den Datenbank-Server MySQL unter Linux bereitstellt. Bei allen vier Komponenten handelt es sich um Open-Source-Projekte.
 
 L - [Linux](https://www.kernel.org/) ist das Betriebssystem.
@@ -74,7 +76,7 @@ Um Let's Encrypt nachträglich zu aktivieren, führen Sie bitte folgende Schritt
 
 ### Betriebssystem
 
-- [x] Ubuntu 20.04
+- [x] Ubuntu 24.04
 
 ### Installierte Pakete
 
