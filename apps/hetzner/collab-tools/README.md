@@ -1,5 +1,8 @@
 # Hetzner Cloud Collaboration Tools
 
+> Starting on 5 June 2024, this App will be deprecated. Starting on 5 July 2024, this App will no longer be available.
+> If you want to use it after that, you can create your own App template snapshot as described [here](https://github.com/hetznercloud/apps?tab=readme-ov-file#development)
+
 This app contains a collection of different collaboration tools.
 You can install them via the [Hetzner Cloud Console](https://console.hetzner.cloud) or the [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server).
 

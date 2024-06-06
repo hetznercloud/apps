@@ -1,5 +1,8 @@
 # Hetzner Cloud Kollaboration Tools
 
+> Diese App ist ab dem 05. Juni 2024 veraltet und ab dem 05. Juli 2024 nicht mehr verfügbar.
+> Sollten Sie diese App weiterhin verwenden wollen, wird Ihnen [hier](https://github.com/hetznercloud/apps?tab=readme-ov-file#development) erklärt, wie Sie selbst ein App-Template Snapshot anlegen können.
+
 Diese App enthält eine Sammlung von verschiedenen Kollaborationstools
 Sie können sie über die [Hetzner Cloud Console](https://console.hetzner.cloud) oder die [Hetzner Cloud API](https://docs.hetzner.cloud/#servers-create-a-server) installieren.
 
