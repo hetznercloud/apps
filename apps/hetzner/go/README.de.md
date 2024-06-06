@@ -1,5 +1,8 @@
 # Hetzner Cloud Go
 
+> Diese App ist ab dem 05. Juni 2024 veraltet und ab dem 05. Juli 2024 nicht mehr verfügbar.
+> Sollten Sie diese App weiterhin verwenden wollen, wird Ihnen [hier](https://github.com/hetznercloud/apps?tab=readme-ov-file#development) erklärt, wie Sie selbst ein App-Template Snapshot anlegen können.
+
 <img src="images/go-logo.png" height="97px">
 <br>
 

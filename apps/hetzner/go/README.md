@@ -1,5 +1,8 @@
 # Hetzner Cloud Go
 
+> Starting on 5 June 2024, this App will be deprecated. Starting on 5 July 2024, this App will no longer be available.
+> If you want to use it after that, you can create your own App template snapshot as described [here](https://github.com/hetznercloud/apps?tab=readme-ov-file#development)
+
 <img src="images/go-logo.png" height="97px">
 <br>
 
