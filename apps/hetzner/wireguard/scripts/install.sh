@@ -10,7 +10,7 @@ fi
 
 # Download the given version of wireguard-ui
 # Note, that we're using a fork of wireguard-ui here, so we have more control about the applied patches and releases.
-wget "https://github.com/MarcusWichelmann/wireguard-ui/releases/download/v${wireguard_ui_version}/wireguard-ui-v${wireguard_ui_version}-linux-${GOARCH}.tar.gz" -O /tmp/wireguard-ui.tar.gz
+wget "https://github.com/ngoduykhanh/wireguard-ui/releases/download/v${wireguard_ui_version}/wireguard-ui-v${wireguard_ui_version}-linux-${GOARCH}.tar.gz" -O /tmp/wireguard-ui.tar.gz
 
 # Unpack wireguard-ui
 tar -C /usr/local/bin -xzf /tmp/wireguard-ui.tar.gz wireguard-ui

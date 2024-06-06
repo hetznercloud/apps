@@ -120,7 +120,7 @@ You can download the latest Caddy `caddy_*_linux_amd64.tar.gz` from their [relea
 tar -C /usr/local/bin -xzf caddy_*_linux_amd64.tar.gz caddy
 ```
 
-To update WireGuard UI, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above. Because of some recent patches, that did not make it into the latest WireGuard UI release yet, you might find more up to date builds [here](https://github.com/MarcusWichelmann/wireguard-ui/releases). If this is the case, please use these.
+To update WireGuard UI, please download the latest release from their [releases page](https://github.com/ngoduykhanh/wireguard-ui/releases) and extract the `wireguard-ui` binary to `/usr/local/bin` like shown above.
 
 After everything is up to date again, please restart the affected systemd services:
 
@@ -132,7 +132,7 @@ systemctl restart wireguard-ui caddy
 
 ### Operating system
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installed packages
 

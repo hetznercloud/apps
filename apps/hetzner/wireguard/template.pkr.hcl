@@ -10,7 +10,7 @@ variable "app_version" {
 
 variable "hcloud_image" {
   type    = string
-  default = "ubuntu-22.04"
+  default = "ubuntu-24.04"
 }
 
 variable "apt_packages" {
@@ -20,12 +20,12 @@ variable "apt_packages" {
 
 variable "wireguard_ui_version" {
   type    = string
-  default = "0.5.2"
+  default = "0.6.2"
 }
 
 variable "caddy_version" {
   type    = string
-  default = "2.7.4"
+  default = "2.8.4"
 }
 
 build {
