@@ -1,6 +1,4 @@
 ---
-version: "3.8"
-
 volumes:
   traefik_data: {}
   owncast_data: {}

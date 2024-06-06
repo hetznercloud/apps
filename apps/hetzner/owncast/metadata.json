@@ -3,7 +3,7 @@
   "description_en": "Owncast is a free and open source live video and web chat server for use with existing popular broadcasting software.",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/owncast/",
   "name": "Owncast",
-  "os_id": 67794396,
+  "os_id": 161547269,
   "packages": [
     {
       "license": "MIT",

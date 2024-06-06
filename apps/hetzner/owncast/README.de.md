@@ -47,7 +47,7 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Owncast Servers auc
 
 ### Betriebssystem
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installierte Pakete
 
