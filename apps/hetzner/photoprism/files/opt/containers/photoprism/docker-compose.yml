@@ -1,6 +1,4 @@
 ---
-version: "3.8"
-
 volumes:
   mariadb_data: {}
   photoprism_import: {}

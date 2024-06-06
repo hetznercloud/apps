@@ -50,7 +50,7 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines PhotoPrism Servers 
 
 ### Betriebssystem
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installierte Pakete
 
