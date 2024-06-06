@@ -48,7 +48,7 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinst
 
 ### Betriebssystem
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installierte Pakete und Container
 

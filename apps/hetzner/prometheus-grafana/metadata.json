@@ -3,7 +3,7 @@
   "description_en": "Prometheus provides all necessary information for Grafana as a tool for monitoring server data, which is then displayed graphically.",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/prometheus-grafana",
   "name": "Prometheus Grafana",
-  "os_id": 67794396,
+  "os_id": 161547269,
   "packages": [
     {
       "license": "GPLv3 (Apache-2.0)",

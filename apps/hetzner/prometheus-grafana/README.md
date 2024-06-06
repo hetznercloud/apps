@@ -48,7 +48,7 @@ Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to 
 
 ### Base OS
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installed packages and containers
 
