@@ -34,14 +34,14 @@ Anstelle der Hetzner Cloud Console kann zum Einrichten eines Servers mit vorinst
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name":"my-server", "server_type":"cpx21", "image":"gitlab"}' \
+     -d '{"name":"my-server", "server_type":"cpx31", "image":"gitlab"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Oder über [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cpx21 --image gitlab
+  hcloud server create --name my-server --type cpx31 --image gitlab
   ```
 
 ## Let's Encrypt nachträglich aktivieren
@@ -72,7 +72,7 @@ Gitlab stellt automatisiert alles auf SSL um und bezieht ein gültiges Let's Enc
 
 ### Betriebssystem
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installierte Pakete
 

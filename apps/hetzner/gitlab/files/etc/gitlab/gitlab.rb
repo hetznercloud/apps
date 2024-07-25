@@ -132,6 +132,14 @@ external_url '$domain'
 ##! `10` for Light Red
 # gitlab_rails['gitlab_default_theme'] = 2
 
+### Custom html header tags
+###! See https://docs.gitlab.com/ee/administration/custom_html_header_tags.html for more
+# In some cases some custom header tags are needed
+# e.g., to add the EU cookie consent
+# Tip: you must add the externals source to the content_security_policy as
+#      well, typically the script_src and style_src.
+# gitlab_rails['custom_html_header_tags'] = nil
+
 ### Default project feature settings
 # gitlab_rails['gitlab_default_projects_features_issues'] = true
 # gitlab_rails['gitlab_default_projects_features_merge_requests'] = true
@@ -186,6 +194,8 @@ external_url '$domain'
 # gitlab_rails['ci_runner_versions_reconciliation_worker_cron'] = "@daily"
 # gitlab_rails['ci_runners_stale_machines_cleanup_worker_cron'] = "36 * * * *"
 # gitlab_rails['ci_catalog_resources_process_sync_events_worker_cron'] = "*/1 * * * *"
+# gitlab_rails['ci_click_house_finished_pipelines_sync_worker_cron'] = "*/4 * * * *"
+# gitlab_rails['ci_click_house_finished_pipelines_sync_worker_args'] = [1]
 
 ### Webhook Settings
 ###! Number of seconds to wait for HTTP response after sending webhook HTTP POST
@@ -802,9 +812,15 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # gitlab_rails['redis_tls_ca_cert_file'] = '/opt/gitlab/embedded/ssl/certs/cacert.pem'
 # gitlab_rails['redis_tls_client_cert_file'] = nil
 # gitlab_rails['redis_tls_client_key_file'] = nil
+# gitlab_rails['redis_connect_timeout'] = nil
+# gitlab_rails['redis_read_timeout'] = nil
+# gitlab_rails['redis_write_timeout'] = nil
 
 #### Redis local UNIX socket (will be disabled if TCP method is used)
 # gitlab_rails['redis_socket'] = "/var/opt/gitlab/redis/redis.socket"
+
+#### Session cookie settings
+# gitlab_rails['session_store_session_cookie_token_prefix'] = ''
 
 #### Sentinel support
 ####! To have Sentinel working, you must enable Redis TCP connection support
@@ -816,6 +832,10 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 #   {'host' => '127.0.0.1', 'port' => 26379},
 # ]
 # gitlab_rails['redis_sentinels_password'] = 'sentinel-requirepass-goes-here'
+
+# gitlab_rails']['redis_sentinel_master'] = nil
+# gitlab_rails']['redis_sentinel_master_ip'] = nil
+# gitlab_rails']['redis_sentinel_master_port'] = nil
 
 #### Cluster support
 ####! Cluster support is only available for selected Redis instances. `resque.yml` will not
@@ -1025,7 +1045,7 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 
 ### Registry garbage collection
 ###! Docs: https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md?ref_type=heads#gc
-# registry['gc'] = { 
+# registry['gc'] = {
 #   'disabled' => false,
 #   'maxbackoff' => '24h',
 #   'noidlebackoff' => false,
@@ -1048,7 +1068,8 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 #     'name' => 'test_endpoint',
 #     'url' => 'https://gitlab.example.com/notify2',
 #     'timeout' => '500ms',
-#     'threshold' => 5,
+#     'threshold' => 5, # DEPRECATED: use maxretries instead https://gitlab.com/gitlab-org/container-registry/-/issues/1243
+#     'maxretries' => 5,
 #     'backoff' => '1s',
 #     'headers' => {
 #       "Authorization" => ["AUTHORIZATION_EXAMPLE_TOKEN"]
@@ -1058,6 +1079,7 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 ### Default registry notifications
 # registry['default_notifications_timeout'] = "500ms"
 # registry['default_notifications_threshold'] = 5
+# registry['default_notifications_maxretries'] = 5
 # registry['default_notifications_backoff'] = "1s"
 # registry['default_notifications_headers'] = {}
 
@@ -1280,9 +1302,7 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # sidekiq['log_format'] = "json"
 # sidekiq['shutdown_timeout'] = 4
 # sidekiq['interval'] = nil
-# sidekiq['concurrency'] = nil
-# sidekiq['max_concurrency'] = 20
-# sidekiq['min_concurrency'] = nil
+# sidekiq['concurrency'] = 20
 
 ##! GitLab allows route a job to a particular queue determined by an array of ##! routing rules.
 ##! Each routing rule is a tuple of queue selector query and corresponding queue. By default,
@@ -1343,6 +1363,8 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 ##! **We do not recommend changing this directory.**
 # gitlab_shell['dir'] = "/var/opt/gitlab/gitlab-shell"
 
+# gitlab_shell['lfs_pure_ssh_protocol'] = false
+
 ################################################################################
 ## gitlab-sshd
 ################################################################################
@@ -1367,6 +1389,9 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # gitlab_sshd['ciphers'] = nil
 # gitlab_sshd['kex_algorithms'] = nil
 # gitlab_sshd['macs'] = nil
+##! A list of the to be accepted public key algorithms.
+##! For example: %w(ssh-ed25519 ecdsa-sha2-nistp256 rsa-sha2-256 rsa-sha2-512)
+# gitlab_sshd['public_key_algorithms'] = nil
 # gitlab_sshd['login_grace_time'] = 60
 # gitlab_sshd['host_keys_dir'] = '/var/opt/gitlab/gitlab-sshd'
 # gitlab_sshd['host_keys_glob'] = 'ssh_host_*_key'
@@ -1781,7 +1806,7 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # nginx['cache_max_size'] = '5000m'
 # nginx['server_names_hash_bucket_size'] = 64
 ##! These paths have proxy_request_buffering disabled
-# nginx['request_buffering_off_path_regex'] = "/api/v\\d/jobs/\\d+/artifacts$|/import/gitlab_project$|\\.git/git-receive-pack$|\\.git/gitlab-lfs/objects|\\.git/info/lfs/objects/batch$"
+# nginx['request_buffering_off_path_regex'] = "/api/v\\d/jobs/\\d+/artifacts$|/import/gitlab_project$|\\.git/git-receive-pack$|\\.git/ssh-receive-pack$|\\.git/ssh-upload-pack$|\\.git/gitlab-lfs/objects|\\.git/info/lfs/objects/batch$"
 
 ### Nginx status
 # nginx['status'] = {
@@ -2073,6 +2098,12 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 
 # Experimental - Enable namespace in path
 # gitlab_pages['namespace_in_path'] = false
+
+##! Configure GitLab Pages client cert and client key which will be used as mutual TLS with GitLab API
+# gitlab_pages['client_cert'] = "/path/to/client.crt"
+# gitlab_pages['client_key'] = "/path/to/client.key"
+##! Configure root CA certs used to sign client certs which will be used with GitLab API
+# gitlab_pages['client_ca_certs'] = "/path/to/ca.crt"
 
 ################################################################################
 ## GitLab Pages NGINX
@@ -3467,3 +3498,12 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # crond['log_directory'] = '/var/log/gitlab/crond'
 # crond['cron_d'] = '/var/opt/gitlab/crond'
 # crond['flags'] = {}
+
+####
+# gitlab-backup-cli settings
+####
+# gitlab_backup_cli['enable'] = false
+# gitlab_backup_cli['user'] = 'gitlab-backup'
+# gitlab_backup_cli['group'] = 'gitlab-backup'
+# gitlab_backup_cli['dir'] = '/var/opt/gitlab/backups'
+# gitlab_backup_cli['additional_groups'] = %w[git gitlab-psql registry]

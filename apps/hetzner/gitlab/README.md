@@ -36,14 +36,14 @@ In addition to the Hetzner Cloud Console you can also use the Hetzner Cloud API 
      -X POST \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"name":"my-server", "server_type":"cpx21", "image":"gitlab"}' \
+     -d '{"name":"my-server", "server_type":"cpx31", "image":"gitlab"}' \
      'https://api.hetzner.cloud/v1/servers'
   ```
 
 - Or via [hcloud-cli](https://github.com/hetznercloud/cli)
 
   ```
-  hcloud server create --name my-server --type cpx21 --image gitlab
+  hcloud server create --name my-server --type cpx31 --image gitlab
   ```
 
 ## Activate Let's Encrypt post installation
@@ -74,7 +74,7 @@ To activate Let's Encrypt after the initial script has run, please follow the st
 
 ### Base OS
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installed packages
 

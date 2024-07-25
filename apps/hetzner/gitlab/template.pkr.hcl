@@ -5,12 +5,12 @@ variable "app_name" {
 
 variable "app_version" {
   type    = string
-  default = "17.0"
+  default = "17.2"
 }
 
 variable "hcloud_image" {
   type    = string
-  default = "ubuntu-22.04"
+  default = "ubuntu-24.04"
 }
 
 variable "apt_packages" {
