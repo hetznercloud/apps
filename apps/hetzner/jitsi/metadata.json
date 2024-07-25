@@ -3,7 +3,7 @@
   "description_en": "Jitsi is a set of open source projects that allows you to easily build and deploy secure video conferencing solutions. At the heart of Jitsi are Jitsi Videobridge and Jitsi Meet, which let you have conferences on the internet.",
   "documentation_url": "https://docs.hetzner.com/cloud/apps/list/jitsi-meet",
   "name": "Jitsi Meet",
-  "os_id": 67794396,
+  "os_id": 161547269,
   "packages": [
     {
       "license": "GPLv3 (Apache-2.0)",

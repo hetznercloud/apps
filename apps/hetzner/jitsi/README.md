@@ -62,7 +62,7 @@ It will configure Jitsi to use SSL and it will obtain a valid Let's Encrypt cert
 
 ### Base OS
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installed packages
 

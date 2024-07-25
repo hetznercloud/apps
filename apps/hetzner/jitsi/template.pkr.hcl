@@ -10,7 +10,7 @@ variable "app_version" {
 
 variable "hcloud_image" {
   type    = string
-  default = "ubuntu-22.04"
+  default = "ubuntu-24.04"
 }
 
 variable "apt_packages" {

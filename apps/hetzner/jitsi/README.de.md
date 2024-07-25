@@ -60,7 +60,7 @@ Dieses stellt Jitsi auf SSL um und bezieht ein gültiges Let's Encrypt Zertifika
 
 ### Betriebssystem
 
-- [x] Ubuntu 22.04
+- [x] Ubuntu 24.04
 
 ### Installierte Pakete
 
