@@ -81,7 +81,7 @@ then
   systemctl stop apache2
   systemctl disable apache2
   rm -rf /var/www/html
-  apt purge -y apache2
+  apt purge -y apache2*
 fi
 
 # Reconfigure gitlab
