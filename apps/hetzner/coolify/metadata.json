@@ -1,0 +1,19 @@
+{
+  "description_de": "Eine Open-Source & selbst-hostbare Heroku / Netlify / Vercel Alternative.",
+  "description_en": "An open-source & self-hostable Heroku / Netlify / Vercel alternative.",
+  "documentation_url": "https://docs.hetzner.com/cloud/apps/list/coolify/",
+  "name": "Coolify",
+  "os_id": 161547269,
+  "packages": [
+    {
+      "license": "AGPLv3",
+      "name": "Coolify"
+    },
+    {
+      "license": "GPLv3 (Apache-2.0)",
+      "name": "Docker"
+    }
+  ],
+  "recommended_server_type": 22,
+  "version": "latest"
+}
