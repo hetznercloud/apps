@@ -3,7 +3,7 @@
 <img src="images/coolify-logo.png" height="100px">
 <br>
 
-[Coolify](https://github.com/coollabsio/coolify) verwandelt Ihren Server in eine Open-Source & selbst-hostbare Heroku / Netlify / Vercel Alternative.
+[Coolify](https://coolify.io/) verwandelt Ihren Server in eine Open-Source & selbst-hostbare Heroku / Netlify / Vercel Alternative.
 
 [![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/coolify)
 
@@ -13,14 +13,12 @@ Sie können Coolify über die [Hetzner Cloud Console](https://console.hetzner.cl
 
 Erstellen Sie sich Ihren Server wie gewohnt über die [Hetzner Cloud Console](https://console.hetzner.cloud). Alternativ zum Betriebssystem können Sie eine App wählen, die Sie gerne vorinstalliert hätten.
 
-Die Sammlung ist in Form von [Docker-Images](https://www.docker.com/) auf dem Server vorinstalliert, aber nicht aktiviert.
-
-Um die Sammlung zu aktivieren, melden Sie sich bitte auf Ihrem Server an:
+Um die Installation von Coolify abzuschließen, melden Sie sich bitte auf Ihrem Server an:
 
 - Per _SSH-Key_, falls Sie beim Erstellen Ihres Servers einen angegeben haben
 - Per _root-Passwort_, das Sie beim Erstellen Ihres Servers per E-Mail von uns erhalten haben, wenn kein SSH-Key angegeben wurde
 
-Dies führt Sie durch einen Prozess, wobei sie anschließend alle Services aus dem Web, mit automatischer Let's Encrypt-Unterstützung, benutzen können.
+Dadurch wird Coolify aktiviert und die URL der Verwaltungsoberfläche angezeigt.
 
 ## Hetzner Cloud API
 
@@ -63,7 +61,7 @@ Dieses Image enthält Docker und alle anderen aufgeführten Anwendungen als Dock
 Weitere Informationen über die installierten Pakete erhalten Sie in den offiziellen Dokumentationen:
 
 - [Docker](https://www.docker.com/)
-- [Coolify](https://github.com/coolify/coolify/)
+- [Coolify](https://coolify.io/docs/)
 
 Weitere Informationen über Hetzner Cloud und Hetzner Cloud Apps erhalten Sie in unserer offiziellen Dokumentation:
 

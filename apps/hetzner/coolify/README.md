@@ -3,7 +3,7 @@
 <img src="images/coolify-logo.png" height="100px">
 <br>
 
-[Coolify](https://github.com/coollabsio/coolify) turns your server into an open-source & self-hostable Heroku / Netlify / Vercel alternative.
+[Coolify](https://coolify.io/) turns your server into an open-source & self-hostable Heroku / Netlify / Vercel alternative.
 
 [![Deploy to Hetzner Cloud](../../shared/images/deploy_to_hetzner.png)](https://console.hetzner.cloud/deploy/coolify)
 
@@ -13,20 +13,20 @@ You can install Coolify via the [Hetzner Cloud Console](https://console.hetzner.
 
 Create your server as usual using the [Hetzner Cloud Console](https://console.hetzner.cloud). As an alternative to the operating system, you can choose an app that you would like to have pre-installed.
 
-The collection is preinstalled on the server in the form of [Docker images](https://www.docker.com/), but it is not activated.
+Coolify will then be preinstalled on the server, but it will not yet be activated.
 
-To activate the collection, please login to your server:
+To activate Coolify, please log in to your server:
 
-- By _SSH key_, if you provided one when you created your server.
-- By _root password_, which you received from us by email when you created your server, if no SSH key was provided.
+- Use an _SSH key_ if you were provided one when you created your server.
+- Use the _root-password_ which we sent to you via email when you created your server; use this if you did not get an SSH key.
 
-This will take you through a process whereby you can then use any services from the web, with automatic Let's Encrypt support.
+This will activate Coolify and display the URL of the administration interface.
 
 ## Hetzner Cloud API
 
-Instead of the Hetzner Cloud Console, the Hetzner Cloud API can also be used to set up a server with Coolify.
+Instead of using the Hetzner Cloud Console, you can use the Hetzner Cloud API to set up a server with Coolify.
 
-- For example via curl command from the command line
+- For example, via a curl command from the command line:
 
   ```
   curl \
@@ -63,7 +63,7 @@ This image contains Docker and all other listed applications as Docker container
 For more information about the installed packages, see the official documentation:
 
 - [Docker](https://www.docker.com/)
-- [Coolify](https://github.com/coolify/coolify/)
+- [Coolify](https://coolify.io/docs/)
 
 For more information about Hetzner Cloud and Hetzner Cloud Apps, please see our official documentation:
 
