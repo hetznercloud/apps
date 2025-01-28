@@ -34,8 +34,21 @@ external_url '$domain'
 ## Roles for multi-instance GitLab
 ##! The default is to have no roles enabled, which results in GitLab running as an all-in-one instance.
 ##! Options:
-##!   redis_sentinel_role redis_master_role redis_replica_role geo_primary_role geo_secondary_role
-##!   postgres_role consul_role application_role monitoring_role
+##!   application_role
+##!   redis_sentinel_role
+##!   redis_master_role
+##!   redis_replica_role
+##!   monitoring_role
+##!   geo_primary_role
+##!   geo_secondary_role
+##!   postgres_role
+##!   patroni_role
+##!   consul_role
+##!   pgbouncer_role
+##!   pages_role
+##!   sidekiq_role
+##!   spamcheck_role
+##!   gitaly_role
 ##! For more details on each role, see:
 ##! https://docs.gitlab.com/omnibus/roles/index.html#roles
 ##!
@@ -230,6 +243,8 @@ external_url '$domain'
 #  'enabled' => false,
 #  'report_only' => false,
 #  # Each directive is a String (e.g. "'self'").
+#  # This section only needs to be set if you need custom CSP directives
+#  # See https://docs.gitlab.com/omnibus/settings/configuration.html#set-a-content-security-policy
 #  'directives' => {
 #    'base_uri' => nil,
 #    'child_src' => nil,
@@ -671,16 +686,6 @@ external_url '$domain'
 #    "SKIP" => "db,uploads,repositories,builds,artifacts,lfs,registry,pages"
 #}
 
-### For setting up different data storing directory
-###! Docs: https://docs.gitlab.com/omnibus/settings/configuration.html#store-git-data-in-an-alternative-directory
-###! **If you want to use a single non-default directory to store git data use a
-###!   path that doesn't contain symlinks.**
-# git_data_dirs({
-#   "default" => {
-#     "path" => "/mnt/nfs-01/git-data"
-#    }
-# })
-
 ### Gitaly settings
 # gitlab_rails['gitaly_token'] = 'secret token'
 
@@ -988,6 +993,7 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # registry['uid'] = nil
 # registry['gid'] = nil
 # registry['dir'] = "/var/opt/gitlab/registry"
+# registry['shell'] = "/usr/sbin/nologin"
 # registry['registry_http_addr'] = "127.0.0.1:5000"
 # registry['debug_addr'] = "localhost:5001"
 # registry['log_directory'] = "/var/log/gitlab/registry"
@@ -1092,12 +1098,6 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # gitlab_rails['sentry_dsn'] = 'https://<key>@sentry.io/<project>'
 # gitlab_rails['sentry_clientside_dsn'] = 'https://<key>@sentry.io/<project>'
 # gitlab_rails['sentry_environment'] = 'production'
-
-################################################################################
-## CI_JOB_JWT
-################################################################################
-##! RSA private key used to sign CI_JOB_JWT
-# gitlab_rails['ci_jwt_signing_key'] = nil # Will be generated if not set.
 
 ################################################################################
 ## GitLab Workhorse
@@ -1365,6 +1365,7 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 # gitlab_shell['dir'] = "/var/opt/gitlab/gitlab-shell"
 
 # gitlab_shell['lfs_pure_ssh_protocol'] = false
+# gitlab_shell['pat'] = { enabled: true, allowed_scopes: [] }
 
 ################################################################################
 ## gitlab-sshd
@@ -2161,6 +2162,9 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 
 ##! Shared secret used for authentication between different KAS instances in a multi-node setup
 # gitlab_kas['private_api_secret_key'] = nil # Will be generated if not set. Base64 encoded and exactly 32 bytes long.
+#
+##! Secret used for WebSocket Token signing and verification. Must be shared in multi-node setup
+# gitlab_kas['websocket_token_secret_key'] = nil # Will be generated if not set. Base64 encoded and exactly 72 bytes long.
 
 ##! Listen configuration for GitLab KAS
 # gitlab_kas['listen_address'] = 'localhost:8150'
@@ -2599,6 +2603,8 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 #  'SSL_CERT_DIR' => "/opt/gitlab/embedded/ssl/certs/",
 #  'WRAPPER_JSON_LOGGING' => true
 # }
+# gitaly['gitlab_secret'] = <secret>
+
 
 # gitaly['open_files_ulimit'] = 15000 # Maximum number of open files allowed for the gitaly process
 ##! Service name used to register Gitaly as a Consul service
@@ -2671,6 +2677,7 @@ gitlab_rails['initial_root_password'] = "$initial_password"
 #       memory_bytes: 12884901888,
 #       cpu_shares: 128,
 #       cpu_quota_us: 200000
+#       max_cgroups_per_repo: 2
 #     },
 #   },
 #   concurrency: [
