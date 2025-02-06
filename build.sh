@@ -59,6 +59,9 @@ unzip packer_1.10.3_linux_${LOCAL_ARCH}.zip
 export PATH=$PATH:$(pwd)
 cd ..
 
+# Install required plugins if missing
+packer init "apps/hetzner/${APP}/"
+
 # Check syntax
 packer validate -syntax-only apps/hetzner/${APP}/
 
