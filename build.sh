@@ -24,7 +24,7 @@ export HCLOUD_SERVER_LOCATION="fsn1"
 
 # Target architecture for the new VM created by Packer
 if [ "$ARCH" == "amd64" ]; then
-	export HCLOUD_SERVER_TYPE_BEFORE_UPSCALE="cx11"
+	export HCLOUD_SERVER_TYPE_BEFORE_UPSCALE="cpx11"
 	export HCLOUD_SERVER_TYPE="cpx21"
 fi
 if [ "$ARCH" == "arm64" ]; then
@@ -58,6 +58,9 @@ wget -q "https://releases.hashicorp.com/packer/1.10.3/packer_1.10.3_linux_${LOCA
 unzip packer_1.10.3_linux_${LOCAL_ARCH}.zip
 export PATH=$PATH:$(pwd)
 cd ..
+
+# Install required plugins if missing
+packer init "apps/hetzner/${APP}/"
 
 # Check syntax
 packer validate -syntax-only apps/hetzner/${APP}/
