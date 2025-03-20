@@ -125,7 +125,12 @@ until [ -f /etc/wireguard/wg0.conf ]
 do
   sleep 0.1
 done
-sleep 0.1
+sleep 1
+
+# The wireguard-ui has a bug which causes the login to not work correctly on the
+# first start of the service. So restart it after the configs were generated.
+# https://github.com/ngoduykhanh/wireguard-ui/issues/641
+systemctl restart wireguard-ui.service &> /dev/null
 
 # Start wireguard and watch for config changes
 systemctl enable wg-quick@wg0.service &> /dev/null
