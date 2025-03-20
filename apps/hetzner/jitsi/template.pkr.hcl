@@ -15,7 +15,7 @@ variable "hcloud_image" {
 
 variable "apt_packages" {
   type    = string
-  default = "nginx certbot python3-certbot-nginx openjdk-11-jdk debconf-utils"
+  default = "nginx certbot python3-certbot-nginx openjdk-11-jdk debconf-utils lua5.2"
 }
 
 build {
